@@ -1,0 +1,266 @@
+﻿@{
+    ViewBag.Title = "Dependency";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section style
+{
+
+}
+
+<h2>Dependency</h2>
+
+
+<form id="myform" name="myform" class="form-horizontal" method="POST">
+    <div class="form-group" >
+        <div class="col-md-6">
+            <label id="codeLabel" for="BasicInformationOfAffectedPersonNid">Basic Information Of Affected Person Nid</label>
+        </div>
+        <div class="col-md-6">
+            <input type="text" id="BasicInformationOfAffectedPersonNid" name="BasicInformationOfAffectedPersonNid" class="form-control" placeholder="Basic Information Of Affected Person Nid" value="@(ViewContext.RouteData.Values["id"])" />
+        </div>
+    </div>&nbsp;
+
+    <div class="row">
+        <div class="col-md-6">
+            <label id="codeLabel" for="Resources">Resources</label>
+        </div>
+        <div class="col-md-6">
+            <select class="form-control select" id="province" name="Resources" onchange="filterCity();">
+                <option value="1">Electronic Device</option>
+                <option value="2">Machine</option>
+                <option value="3">Vehicle</option>
+                <option value="4">House Keeping And Productive Or Commercial</option>
+                <option value="5">Service Sector</option>
+            </select>
+        </div>
+    </div>&nbsp;
+
+    <div class="row">
+        <div class="col-md-6">
+            <label id="codeLabel" for="ResourcesName">Resources Name</label>
+        </div>
+        <div class="col-md-6">
+            '<select class="form-control select" id="" name="" >'+
+                '<option value="">Select</option>+
+                '<option value="Wheat">1.Wheat</option>'+
+                '<option value="Onion">2.Onion</option>'+
+                '<option value="Garlic">3.Garlic</option>'+
+                '<option value="Tobacco">4.Tobacco</option>'+
+                '<option value="Chili">5.Chili</option>'+
+                '<option value="Jute">6.Jute</option>'+
+                '<option value="Mesta Jute">7.Mesta Jute</option>'+
+                '<option value="Dhania">8.Dhania</option>'+
+                '<option value="Maze">9.Maze</option>'+
+                '<option value="Sugarcane">10.Sugarcane</option>'+
+                '<option value="Pulse-lentil">11.Pulse-lentil</option>'+
+                '<option value="Pulse-chhola">12.Pulse-chhola</option>'+
+                '<option value="Pulse-Mugh">13.Pulse-Mugh</option>'+
+                '<option value="Oil seed-Mustard">14.Oil seed-Mustard</option>'+
+                '<option value="Oil seed-teel">15.Oil seed-teel</option>'+
+                '<option value="Oil seed-teshi">16.Oil seed-teshi</option>'+
+                '<option value="Sunflower">17.Sunflower</option>'+
+                '<option value="Potato">18.Potato</option>'+
+                '<option value="Sweet Potato">19.Sweet Potato</option>'+
+                '<option value="Peanut">20.Peanut</option>'+
+                '<option value="Kown">21.Kown</option>'+
+                '<option value="Fellow">22.Fellow</option>'+
+                '<option value="Banana">23.Banana</option>'+
+                '<option value="Egg plant">24.Egg plant</option>'+
+                '<option value="Pulse-Arahar">25.Pulse-Arahar</option>'+
+                '<option value="Turmeric">26.Turmeric</option>'+
+                '<option value="Ginger">27.Ginger</option>'+
+                '<option value="Nut">28.Nut</option>'+
+                '<option value="Summer Vegetables">29.Summer Vegetables</option>'+
+                '<option value="Winter vegetables">30.Winter vegetables</option>'+
+                '<option value="Local Boro">31.Local Boro</option>'+
+                '<option value="HYV Boro">32.HYV Boro</option>'+
+                '<option value="Local T. Aman">33.Local T. Aman</option>'+
+                '<option value="HYV T. Aman">34.HYV T. Aman</option>'+
+                '<option value="Local B. Aush">35.Local B. Aush</option>'  +             
+                '<option value="Local T. Aush">36.Local T. Aush</option>'+
+                '<option value="HYV Aush">37.HYV Aush</option>'+
+                '<option value="B. Aman">38.B. Aman</option>'+
+                '<option value="Mixed Aush-Aman">39.Mixed Aush-Aman</option>'+
+                '<option value="Other">40.Other</option>'+
+            '</select>';
+        </div>
+    </div>&nbsp;
+
+    <div class="row">
+        <div class="col-md-6">
+            <label id="codeLabel" for="Count">Count</label>
+        </div>
+        <div class="col-md-6">
+            <input type="text" id="Count" name="Count" class="form-control" placeholder="Count" />
+        </div>
+    </div>&nbsp;
+
+    <div class="row">
+        <div class="col-md-6">
+            <label id="codeLabel" for="Amount">Amount</label>
+        </div>
+        <div class="col-md-6">
+            <input type="text" id="Amount" name="Amount" class="form-control" placeholder="Amount" />
+        </div>
+    </div>&nbsp;
+
+ 
+    <div class="row">
+        <div class="col-md-8">
+        </div>
+
+        <div class="col-md-4">
+            <input type="submit" id="submit" name="submit" style="background: black" class="btn-success form-control" value="Save" />
+        </div>
+
+    </div>
+
+</form>
+
+<div class="container">
+    <h2 style="text-align: center">Home Equipment</h2><hr />
+    <form id="myform" name="myform" class="form-horizontal" method="POST">
+        <table class="table table-bordered table-responsive table-hover" id="showTable">
+            <thead style="background: black;color: white">
+                <tr>
+                    <td>NID</td>
+                    <td>Resources</td>
+                    <td>Resources Name</td>
+                    <td>Count</td>
+                    <td>Amount</td>
+                    <td>
+                        <button id="btnAdd" class="btn btn-success" type="button">+</button>
+                        <button id="btnRemove" style="padding: 4px 13px;" class="btn btn-success" type="button">-</button>
+                    </td>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-md-8">
+            </div>
+
+            <div class="col-md-4">
+                <input type="submit" id="submit" name="submit" style="background: black" class="btn-success form-control" value="Save" />
+            </div>
+
+        </div>&nbsp;
+    </form>
+</div>
+
+  
+
+    @section scripts
+{
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                addRow(0);
+                localStorage.setItem('index', 1);
+
+                $("#btnAdd").click(function () {
+                    var i = Number(localStorage.index);
+
+                    addRow(i);
+
+                    localStorage.setItem('index', i + 1);
+                });
+                $("#btnRemove").click(function () {
+                    removeRow();
+                });
+            });
+            function removeRow() {
+                var i = Number(localStorage.index) - 1;
+                if (i>0) {
+                    $("#" + i).remove();
+                }
+
+
+                localStorage.setItem('index', i);
+            }
+
+            function addRow(i) {
+                var str = '<tr id='+i+'>' +
+                    '<td><input type="text" class="form-control" placeholder="NID"/></td>' +
+                    '<td>'+
+                    '<select class="form-control select" name="data[' + i + '].Resources"  >' +
+                         '<option value="Electronic Device">Electronic Device</option>' +
+                         '<option value="Machine">Machine</option>' +
+                         '<option value="Vehicle">Vehicle</option>' +
+                         '<option value="House Keeping And Productive Or Commercial">House Keeping And Productive Or Commercial</option>' +
+                         '<option value="Service Sector">Service Sector</option>' +
+                    '</select>' +
+
+                    '</td>'+
+                    '<td id="Others">'+
+                    '<select class="form-control select" name="data[' + i + '].ResourcesName" id="city" >' +
+                    '<option value="">Select</option>'+
+                    '<option data-province="Electronic Device" value="Television">Television</option>' +
+                    '<option data-province="Electronic Device" value="Radio">Radio</option>' +
+                    '<option data-province="Electronic Device" value="Cassette">Cassette</option>' +
+                    '<option data-province="Electronic Device" value="CD">CD</option>' +
+                    '<option data-province="Electronic Device" value="Computer">Computer</option>' +
+                    '<option data-province="Electronic Device" value="Others">Others</option>' +
+
+
+                    '<option data-province="Machine" value="Sewing Machine">Sewing Machine</option>'+
+                    '<option data-province="Machine" value="Fan">Fan</option>'+
+                    '<option data-province="Machine" value="Refrigerator">Refrigerator</option>'+
+                    '<option data-province="Machine" value="Air Condition">Air Condition</option>'+
+                    '<option data-province="Machine" value="Others">Others</option>'+
+
+
+                    '<option data-province="Vehicle" value="Car">Car</option>'+
+                    '<option data-province="Vehicle" value="Motor Bike">Motor Bike</option>'+
+                    '<option data-province="Vehicle" value="Bi-Cycle">Bi-Cycle</option>'+
+                    '<option data-province="Vehicle" value="Rickshaw">Rickshaw</option>'+
+                    '<option data-province="Vehicle" value="Van">Van</option>'+
+                    '<option data-province="Vehicle" value="Nosimon">Nosimon</option>'+
+                    '<option data-province="Vehicle" value="Others">Others</option>'+
+
+
+                    '<option data-province="House Keeping And Productive Or Commercial" value="Drug">Drug</option>'+
+                    '<option data-province="House Keeping And Productive Or Commercial" value="Cow">Cow</option>'+
+                    '<option data-province="House Keeping And Productive Or Commercial" value="Goat">Goat</option>'+
+                    '<option data-province="House Keeping And Productive Or Commercial" value="Finishing Nets">Finishing Nets</option>'+
+                    '<option data-province="House Keeping And Productive Or Commercial" value="Others">Others</option>'+
+
+
+                    '<option data-province="Service Sector" value="Gas connection">Gas connection</option>'+
+                    '<option data-province="Service Sector" value="Power Connection">Power Connection</option>'+
+                    '<option data-province="Service Sector" value="Telephone Connection">Telephone Connection</option>'+
+                    '<option data-province="Service Sector" value="Mobil">Mobil</option>'+
+                    '<option data-province="Service Sector" value="Newspaper">Newspaper</option>'+
+                    '<option data-province="Service Sector" value="Others">Others</option>'+
+
+                    '</select>'+
+
+                    '</td>'+
+                    '<td><input type="text" class="form-control" name="data['+i+'].Count" placeholder="Count"/></td>'+
+                    '<td><input type="text" class="form-control" name="data[' + i + '].Amount" placeholder="Amount" /></td>' +
+
+                    '</tr>';
+                $("#tbody").append(str);
+
+            }
+        </script>
+        @*<script>
+            function filterCity(i) {
+                
+                var province = $("#province").find('option:selected').text(); // stores province
+                $("#option-container").children().appendTo("#city"+i); // moves <option> contained in #option-container back to their <select>
+                var toMove = $("#city").children("[data-province!='" + province+"']"); // selects city elements to move out
+                toMove.appendTo("#option-container"); // moves city elements in #option-container
+                $("#city"+i).removeAttr("disabled"); // enables select
+            };
+        </script>*@
+        <script>
+            $(document).ready(function () {
+
+                $("")
+            });
+        </script>
+    }

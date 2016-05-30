@@ -1,0 +1,178 @@
+﻿
+@{
+    ViewBag.Title = "HomeResources";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section style
+{
+<style>
+    label.error {
+        color: red;
+        font-style: italic;
+    }
+</style>
+
+}
+
+<h2>13. Other Assets in House</h2>
+
+
+<form id="myform" name="myform" class="form-horizontal" method="POST">
+    <div class="form-group" @*style="display: none"*@>
+        <div class="col-md-6">
+            <label id="codeLabel" for="BasicInformationOfAffectedPersonNid">Basic Information Of Affected Person Nid</label>
+        </div>
+        <div class="col-md-6">
+            <input type="text" id="BasicInformationOfAffectedPersonNid" name="BasicInformationOfAffectedPersonNid" class="form-control" placeholder="Basic Information Of Affected Person Nid" value="@(ViewContext.RouteData.Values["id"])" readonly />
+        </div>
+    </div>&nbsp;
+
+    <div class="row">
+        <div class="col-md-6">
+            <label id="codeLabel" for="Resources">Type</label>
+        </div>
+        <div class="col-md-6">
+            <select class="form-control select" id="province" name="Resources" onchange="filterCity();">
+                <option value="Information related">Information related</option>
+                <option value="Transport related">Transport related</option>
+                <option value="Machineries Related">Machineries Related</option>
+                <option value="Household / productive and trade related">Household / productive and trade related</option>
+                <option value="Service related">Service related</option>
+            </select>
+        </div>
+    </div>&nbsp;
+
+    <div class="row">
+        <div class="col-md-6">
+            <label id="codeLabel" for="ResourcesName">Resources Name</label>
+        </div>
+        <div class="col-md-6">
+            <select class="form-control select" id="city" name="ResourcesName" disabled>
+                <option value="">Select</option>
+                <option data-province="Information related" value="Television">1.Television</option>
+                <option data-province="Information related" value="Radio">2.Radio</option>
+                <option data-province="Information related" value="Cassette Player">3.Cassette Player</option>
+                <option data-province="Information related" value="CD/VCD">4.CD/VCD</option>
+                <option data-province="Information related" value="Computer">5.Computer</option>
+                <option data-province="Information related" value="Others">6.Others</option>
+
+
+                <option data-province="Machineries Related" value="Sewing Machine">7.Sewing Machine</option>
+                <option data-province="Machineries Related" value="Ceiling Fan/ Table Fan">8.Ceiling Fan/ Table Fan</option>
+                <option data-province="Machineries Related" value="Frieze">9.Refrigerator</option>
+                <option data-province="Machineries Related" value="Air Condition">10.Air Condition</option>
+                <option data-province="Machineries Related" value="Others">11.Others</option>
+
+
+                <option data-province="Transport related" value="Car">12.Car</option>
+                <option data-province="Transport related" value="Motor cycle">13.Motor cycle</option>
+                <option data-province="Transport related" value="Bi-Cycle">14.Bi-Cycle</option>
+                <option data-province="Transport related" value="Rickshaw">15.Rickshaw</option>
+                <option data-province="Transport related" value="Van">16.Van</option>
+                <option data-province="Transport related" value="Nosimon">17.Nosimon</option>
+                <option data-province="Transport related" value="Others">18.Others</option>
+
+
+                <option data-province="Household / productive and trade related" value="Duck/ Hen">19.Duck/ Hen</option>
+                <option data-province="Household / productive and trade related" value="Cattle/ Buffalo">20.Cattle/ Buffalo</option>
+                <option data-province="Household / productive and trade related" value="Goat/Ram">21.Goat/Ram</option>
+                <option data-province="Household / productive and trade related" value="Net">22.Nets</option>
+                <option data-province="Household / productive and trade related" value="Others">23.Others</option>
+
+
+                <option data-province="Service related" value="Gas Line">24.Gas Line</option>
+                <option data-province="Service related" value="Electric line">25.Electric line</option>
+                <option data-province="Service related" value="Telephone line">26.Telephone line</option>
+                <option data-province="Service related" value="Mobile">27.Mobile</option>
+                <option data-province="Service related" value="Newspaper">28.Newspaper</option>
+                <option data-province="Service related" value="Others">29.Others</option>
+
+            </select>
+        </div>
+    </div>&nbsp;
+    <div class="row" id="others" style="display: none">
+        <div class="col-md-6">
+            <label id="codeLabel" for="Others">Others Types</label>
+        </div>
+        <div class="col-md-6">
+            <input type="text" id="Count" name="Others" class="form-control" placeholder="Others" />
+        </div>
+    </div>&nbsp;
+
+    <div class="row">
+        <div class="col-md-6">
+            <label id="codeLabel" for="Count">Number</label>
+        </div>
+        <div class="col-md-6">
+            <input type="text" id="Count" name="Count" class="form-control" placeholder="nos." />
+        </div>
+    </div>&nbsp;
+
+    <div class="row">
+        <div class="col-md-6">
+            <label id="codeLabel" for="Amount">Price (taka)</label>
+        </div>
+        <div class="col-md-6">
+            <input type="text" id="Amount" name="Amount" class="form-control" placeholder="Price (taka)" />
+        </div>
+    </div>&nbsp;
+
+
+    <div class="row">
+        <div class="col-md-8">
+        </div>
+
+        <div class="col-md-4">
+            <input type="submit" id="submit" name="submit" style="background: black" class="btn-success form-control" value="Save" />
+        </div>
+
+    </div>
+
+</form>
+<label name="lable" style="background: darkblue" >@(ViewContext.RouteData.Values["message"])</label>
+
+<span id="option-container" style="visibility: hidden; position:absolute;"></span>
+
+<a href="~/BasicInformationOfAffectedPersons/BasicInformationOfAffectedPersonStepTwo/@(ViewContext.RouteData.Values["id"])" style="background: black;color: white;text-align:center; text-decoration: none" class="btn btn-success ">Next Page</a>
+  
+@section scripts
+{
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+   
+    <script>
+        function filterCity() {
+            var province = $("#province").find('option:selected').text(); // stores province
+            $("#option-container").children().appendTo("#city"); // moves <option> contained in #option-container back to their <select>
+            var toMove = $("#city").children("[data-province!='" + province + "']"); // selects city elements to move out
+            toMove.appendTo("#option-container"); // moves city elements in #option-container
+            $("#city").removeAttr("disabled"); // enables select
+        };
+    </script>
+    
+    <script>
+        $(document).ready(function() {
+            $("#city").change(function() {
+                var others = $("#city").val();
+
+                if (others == "Others") {
+                    $("#others").show();
+                } else {
+                    $("#others").hide();
+                }
+            });         
+        });
+    </script>
+
+
+}
+
+
+
+
+    
+
+
+
+

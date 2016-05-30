@@ -1,0 +1,156 @@
+﻿
+@{
+    ViewBag.Title = "IsAffectedLandUnderShare";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section style
+{
+
+    <style>
+        label.error {
+            color: red;
+            font-style: italic;
+        }
+    </style>
+}
+
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2 text-center">
+        <fieldset>
+            <legend>If affected land is under share cropped /leased/ mortgaged, then its owners name and address</legend>
+
+            <form id="myform" name="myform" class="form-horizontal" method="POST">
+                <div class="form-group" @*style="display: none"*@>
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="BasicInformationOfAffectedPersonNid">Basic Information Of Affected Person Nid</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="BasicInformationOfAffectedPersonNid" name="BasicInformationOfAffectedPersonNid" class="form-control" placeholder="Basic Information Of Affected Person Nid" value="@(ViewContext.RouteData.Values["id"])" readonly />
+                    </div>
+                </div>&nbsp;
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="A">JL No. (Khatian no.)</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="A" name="A" class="form-control" placeholder="JL No. (Khatian no.)" />
+                    </div>
+                </div>&nbsp;
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="B">Plot no/ Dag no (as RS and CS khatian) </label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="B" name="B" class="form-control" placeholder="Plot no/ Dag no (as RS and CS khatian) " />
+                    </div>
+                </div>&nbsp;
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="C">Total Acquired land (Decimal)</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="C" name="C" class="form-control" placeholder="Total Acquired land (Decimal)" />
+                    </div>
+                </div>&nbsp;
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="D"> Name of sharecropper, leaser and mortgage owner, fathers name, and address </label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="D" name="D" class="form-control" placeholder="Name of sharecropper, leaser and mortgage owner, fathers name, and address " />
+                    </div>
+                </div>&nbsp;
+
+               
+                <div class="row">
+                    <div class="col-md-8">
+                    </div>
+
+                    <div class="col-md-4">
+                        <input type="submit" id="submit" name="submit" style="background: black" class="btn-success form-control" value="Save" />
+                    </div>
+
+                </div>
+
+            </form>
+            <label name="label" style="background: darkblue"></label>
+        </fieldset>
+    </div>
+</div>
+@section scripts
+{
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#myform").validate({
+                rules: {
+                    FoodExpenditure: {
+                        required: true,
+                        min: 1
+                    },
+                    ClothExpenditure: {
+                        required: true,
+                        min: 1
+                    },
+                    ResidenceRepairingExpenditure: {
+                        required: true,
+                        min: 1
+                    },
+                    MedicalExpenditure: {
+                        required: true,
+                        min: 1
+                    },
+                    EducationalExpenditure: {
+                        required: true,
+                        min: 1
+                    },
+                    CommunicationExpenditure: {
+                        required: true,
+                        min: 1
+                    },
+                    Miscellaneous: {
+                        required: true,
+                        min: 1
+                    }
+                },
+                messages: {
+                    FoodExpenditure: {
+                        required: "Please Enter Number",
+                        min: "Please Enter Numeric Number without Negative Value"
+                    },
+                    ClothExpenditure: {
+                        required: "Please Enter Number",
+                        min: "Please Enter Numeric Number without Negative Value"
+                    },
+                    ResidenceRepairingExpenditure: {
+                        required: "Please Enter Number",
+                        min: "Please Enter Numeric Number without Negative Value"
+                    },
+                    MedicalExpenditure: {
+                        required: "Please Enter Number",
+                        min: "Please Enter Numeric Number without Negative Value"
+                    },
+                    EducationalExpenditure: {
+                        required: "Please Enter Number",
+                        min: "Please Enter Numeric Number without Negative Value"
+                    },
+                    CommunicationExpenditure: {
+                        required: "Please Enter Number",
+                        min: "Please Enter Numeric Number without Negative Value"
+                    },
+                    Miscellaneous: {
+                        required: "Please Enter Number",
+                        min: "Please Enter Numeric Number without Negative Value"
+                    }
+                }
+
+            });
+        });
+    </script>
+}

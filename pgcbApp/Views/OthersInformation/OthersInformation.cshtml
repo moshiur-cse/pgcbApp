@@ -1,0 +1,538 @@
+﻿@{
+    ViewBag.Title = "OthersInformation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string message = ViewBag.Message;
+}
+
+<style>
+    label.error {
+        color: red;
+        font-style: italic;
+    }
+</style>
+}
+
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2 text-center">
+        <fieldset>
+            <legend>Others Information</legend>
+
+            <form id="myform" name="myform" class="form-horizontal" method="POST">
+                <div class="form-group" >
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="BasicInformationOfAffectedPersonNid">Basic Information Of Affected Person Nid</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="BasicInformationOfAffectedPersonNid" name="BasicInformationOfAffectedPersonNid" class="form-control" placeholder="Basic Information Of Affected Person Nid" value="@(ViewContext.RouteData.Values["id"])"  />
+                    </div>
+                </div>&nbsp;
+
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="FamilyDrinkingWaterDetails">Family Drinking Water Details</label>
+                    </div>
+                    <div class="col-md-6">
+                        <select name="FamilyDrinkingWaterDetails" id="FamilyDrinkingWaterDetails" class="form-control">
+
+                            <option value="">Select...</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+
+                        </select>
+                    </div>
+                </div>&nbsp;
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="FamilyBathroomDetails">Family Bathroom Details</label>
+                    </div>
+                    <div class="col-md-6">
+                        <select name="FamilyBathroomDetails" id="FamilyBathroomDetails" class="form-control">
+
+                            <option value="">Select...</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+
+                        </select>
+                    </div>
+                </div>&nbsp;
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="AreYouAwareOfTheProposedProject">Are You Aware Of The Proposed Project</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="radio" name="AreYouAwareOfTheProposedProject" value="Yes" checked />Yes
+                        <input type="radio" name="AreYouAwareOfTheProposedProject" value="No"/>No
+                    </div>
+                </div>&nbsp;
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="DoYouHaveLandLease">Do you have a land lease?</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="radio" id="yes" name="DoYouHaveLandLease" value="Yes" />Yes
+                        <input type="radio" id="no" name="DoYouHaveLandLease" value="No" />No
+                    </div>
+                </div>&nbsp;
+                @*Year*@
+                <div id="year" class="row" style="display: none">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="HowManyYears">If Yes, How many years?</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="ForManyYears" name="HowManyYears" class="form-control" placeholder="How Many Years" />
+                    </div>
+                </div>&nbsp;
+
+                <div id="money" class="row" style="display: none">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="HowMuchMoney">If Yes, How Much Money</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="HowMuchMoney" name="HowMuchMoney" class="form-control" placeholder="How Much Money?" />
+                    </div>
+                </div>&nbsp;
+                
+                
+                
+                
+                
+                
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="FamilyStatus">Family status</label>
+                    </div>
+                    <div class="col-md-6">
+                        <select name="FamilyStatus" id="FamilyStatus" class="form-control">
+
+                            <option value="">Select...</option>
+                            <option value="Year deficit">Year deficit</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+                </div>&nbsp;
+
+                <div id="YearDeficit" class="row" style="display: none">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="HowDoesTheCostCarryingOut">If Year deficit, How does the cost of carrying out</label>
+                    </div>
+                    <div class="col-md-6">
+                        <select name="HowDoesTheCostCarryingOut" id="HowDoesTheCostCarryingOut" class="form-control">
+                            <option value="">Select...</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                    </div>
+                </div>&nbsp;
+
+                @*Credit Responsibility*@
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="CreditResponsibility">What is your responsibility for any credit ?</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="radio" id="CreditResponsibilitYes" name="CreditResponsibility" value="Yes" />Yes
+                        <input type="radio" id="CreditResponsibilitNo" name="CreditResponsibility" value="No" />No
+                    </div>
+                </div>&nbsp;
+
+                <div id="CreditResponsibilityName" class="row" style="display: none">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="CreditResponsibilityMoney">If Yes, How Much Money</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="CreditResponsibilityMoney" name="CreditResponsibilityMoney" class="form-control" placeholder="How Much Money?" />
+                    </div>
+                </div>&nbsp;
+
+                @*Who has been received from the loan*@
+
+                <div id="CreditResponsibilityReceivedDiv" class="row" style="display: none">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="CreditResponsibilityReceivedForm">Who has been received from the loan ?</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="a" type="checkbox" value="Bank" />Bank
+                        <input class="a" type="checkbox" value="Grameen Bank" />Grameen Bank
+                        <input class="a" type="checkbox" value="Sonali Bank" />Sonali Bank
+                        <input class="a" type="checkbox" value="ASA" />ASA
+                        <input class="a" type="checkbox" value="Krishi Bank" />Krishi Bank
+                        <input class="a" type="checkbox" value="Others" />Others
+
+                        <textarea id="CreditResponsibilityReceivedForm" name="CreditResponsibilityReceivedForm" class="form-control" placeholder="Who has been received from the loan ?"></textarea>
+                    </div>
+                </div>&nbsp;
+                @*Who has been received from the loan*@
+                
+                
+                @*If the government buys land,then  How do you want to  Compensation?*@
+                <div id="GovernmentBuysDiv" class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="GovernmentBuysCompensation">If the government buys land,then  How do you want to  Compensation?</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="b" type="checkbox" value="A" />A
+                        <input class="b" type="checkbox" value="B" />B
+                        <input class="b" type="checkbox" value="C" />C
+                        <input class="b" type="checkbox" value="Others" />Others
+
+
+                        <textarea id="GovernmentBuysCompensation" name="GovernmentBuysCompensation" class="form-control" placeholder="Who has been received from the loan ?"></textarea>
+                    </div>
+                </div>&nbsp;
+
+                <div  class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="HowCanYouCompensationMoney">আপনি ক্ষতি পুরন  এর টাকা কি মাধ্যম এ চান?</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="aHowCanYouCompensationMoney" type="checkbox" value="A" />A
+                        <input class="aHowCanYouCompensationMoney" type="checkbox" value="B" />B
+                        <input class="aHowCanYouCompensationMoney" type="checkbox" value="C" />C
+                        <input class="aHowCanYouCompensationMoney" type="checkbox" value="Others" />Others
+
+
+                        <textarea id="HowCanYouCompensationMoney" name="HowCanYouCompensationMoney" class="form-control" placeholder="Who has been received from the loan ?"></textarea>
+                    </div>
+                </div>&nbsp;
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="DoYouHaveNeedAnyCommittee">ক্ষতি পুরনের টাকা পেতে এলাকায় কোন সমস্যা প্রতিবিধানকারী কমিতটি প্রয়োজন বলে মনে করেন কি?</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="radio" id="DoYouHaveNeedAnyCommitteeYes" name="DoYouHaveNeedAnyCommittee" value="Yes" />Yes
+                        <input type="radio" id="DoYouHaveNeedAnyCommitteeNo" name="DoYouHaveNeedAnyCommittee" value="No" />No
+                    </div>
+                </div>&nbsp;
+
+                <div id="DoYouHaveNeedAnyCommitteeDiv" class="row" style="display: none">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="ListOfCommitteeMembers">উত্তর হ্যা হয়, আপনার মতে সমস্যা প্রতিবিধানকারী কমিটিতে কে কে থাকা উচিত বলে মনে করেনঃ</label>
+                    </div>
+                    <div class="col-md-6">
+
+                        <textarea id="ListOfCommittee" name="ListOfCommitteeMembers" class="form-control" placeholder="Who has been received from the loan ?"></textarea>
+                    </div>
+                </div>&nbsp;
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="MainProblemOfYouTerritory">বর্তমানে আপনার মতে এলাকায় প্রধান সমস্যা গুলি কি কি</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="A" />A
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="B" />B
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="C" />C
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="Others" />Others
+
+
+                        <textarea id="MainProblemOfYouTerritory" name="MainProblemOfYouTerritory" class="form-control" placeholder="Who has been received from the loan ?"></textarea>
+                    </div>
+                </div>&nbsp;
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="BenefitAfterCompleteProject">প্রকল্প বাস্তবায়িত হওয়ার পর কি ধরনের সুবিধা হতে পারে</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="A" />A
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="B" />B
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="C" />C
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Others" />Others
+
+
+                        <textarea id="BenefitAfterCompleteProject" name="BenefitAfterCompleteProject" class="form-control" placeholder="Who has been received from the loan ?"></textarea>
+                    </div>
+                </div>&nbsp;
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="DifficultyAfterCompleteProject">প্রকল্প বাস্তবায়িত হওয়ার পর কি ধরনের অসুবিধা হতে পারে</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="A" />A
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="B" />B
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="C" />C
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="Others" />Others
+
+
+                        <textarea id="DifficultyAfterCompleteProject" name="DifficultyAfterCompleteProject" class="form-control" placeholder="Who has been received from the loan ?"></textarea>
+                    </div>
+                </div>&nbsp;
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="AdviseToRemoveDifficulty">প্রকল্প বাস্তবায়িত হওয়ার পর সৃষ্ট  অসুবিধাগুলি দূর করেতে কি ধরনের পরামর্শ  দেবেন?</label>
+                    </div>
+                    <div class="col-md-6">
+
+
+
+                        <textarea id="AdviseToRemoveDifficulty" name="AdviseToRemoveDifficulty" class="form-control" placeholder="Who has been received from the loan ?"></textarea>
+                    </div>
+                </div>&nbsp;
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="DataCollectorFeedback">তথ্য সংগ্রহকারীর মন্তব্যঃ</label>
+                    </div>
+                    <div class="col-md-6">
+
+
+
+                        <textarea id="DataCollectorFeedback" name="DataCollectorFeedback" class="form-control" placeholder="Who has been received from the loan ?"></textarea>
+                    </div>
+                </div>&nbsp;
+                <div class="row">
+                    <div class="col-md-8">
+                    </div>
+
+                    <div class="col-md-4">
+                        <input type="submit" id="submit" name="submit" style="background: black" class="btn-success form-control" value="Save" />
+                    </div>
+
+                </div>&nbsp;
+            </form>
+            <label style="color: darkblue">@message</label>
+        </fieldset>
+    </div>
+</div>
+@section scripts
+{
+
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+@*Who has been received from the loan*@
+    <script>
+        
+        $(document).ready(function () {
+
+
+            $("#CreditResponsibilitYes").click(function () {
+                //console.log("Click");
+                $("#CreditResponsibilityName").show();
+                $("#CreditResponsibilityReceivedDiv").show();
+            });
+            $("#CreditResponsibilitNo").click(function () {
+                //   console.log("Click");
+                $("#CreditResponsibilityName").hide();
+                $("#CreditResponsibilityReceivedDiv").hide();
+            });
+            
+            $checks = $(".a");
+         
+            $checks.on('click', function () {
+               
+                var string = $checks.filter(":checked").map(function () {
+                    return this.value;
+                }).get().join(" ,");
+                $('#CreditResponsibilityReceivedForm').val(string);
+            });
+
+            $check = $(".b");
+          
+            $check.on('click', function () {
+                
+                var string = $check.filter(":checked").map(function () {
+                    return this.value;
+                }).get().join(" ,");
+                $('#GovernmentBuysCompensation').val(string);
+            });
+            //aHowCanYouCompensationMoney
+            $aHowCanYouCompensationMoney = $(".aHowCanYouCompensationMoney");
+
+            $aHowCanYouCompensationMoney.on('click', function () {
+
+                var string = $aHowCanYouCompensationMoney.filter(":checked").map(function () {
+                    return this.value;
+                }).get().join(" ,");
+                $('#HowCanYouCompensationMoney').val(string);
+            });
+
+
+            $aMainProblemOfYouTerritory = $(".aMainProblemOfYouTerritory");
+           
+            $aMainProblemOfYouTerritory.on('click', function () {
+               
+                var string = $aMainProblemOfYouTerritory.filter(":checked").map(function () {
+                    return this.value;
+                }).get().join(" ,");
+                $('#MainProblemOfYouTerritory').val(string);
+            });
+
+            //BenefitAfterCompleteProject
+            $aBenefitAfterCompleteProject = $(".aBenefitAfterCompleteProject");
+
+            $aBenefitAfterCompleteProject.on('click', function () {
+
+                var string = $aBenefitAfterCompleteProject.filter(":checked").map(function () {
+                    return this.value;
+                }).get().join(" ,");
+                $('#BenefitAfterCompleteProject').val(string);
+            });
+            //DifficultyAfterCompleteProject
+
+            $aDifficultyAfterCompleteProject = $(".aDifficultyAfterCompleteProject");
+
+            $aDifficultyAfterCompleteProject.on('click', function () {
+
+                var string = $aDifficultyAfterCompleteProject.filter(":checked").map(function () {
+                    return this.value;
+                }).get().join(" ,");
+                $('#DifficultyAfterCompleteProject').val(string);
+            });
+
+
+
+
+
+            $("#DoYouHaveNeedAnyCommitteeYes").click(function () {
+                //console.log("Click");
+                $("#DoYouHaveNeedAnyCommitteeDiv").show();
+               // $("#CreditResponsibilityReceivedDiv").show();
+            });
+            $("#DoYouHaveNeedAnyCommitteeNo").click(function () {
+                //   console.log("Click");
+                $("#DoYouHaveNeedAnyCommitteeDiv").hide();
+               // $("#CreditResponsibilityReceivedDiv").hide();
+            });
+
+
+
+            $("#DoYouHaveNeedAnyCommitteeYes").click(function () {
+                //console.log("Click");
+                $("#DoYouHaveNeedAnyCommitteeDiv").show();
+                // $("#CreditResponsibilityReceivedDiv").show();
+            });
+            $("#DoYouHaveNeedAnyCommitteeNo").click(function () {
+                //   console.log("Click");
+                $("#DoYouHaveNeedAnyCommitteeDiv").hide();
+                // $("#CreditResponsibilityReceivedDiv").hide();
+            });
+
+
+        });
+    </script>
+    @*Who has been received from the loan*@
+    
+    
+    
+    
+    @*DoYouHaveLandLease*@
+
+    <script>
+        $(document).ready(function () {
+            //  console.log("ready");
+            $("#yes").click(function () {
+                // console.log("Click");
+                $("#year").show();
+                $("#money").show();
+            });
+            $("#no").click(function () {
+                //   console.log("Click");
+                $("#year").hide();
+                $("#money").hide();
+            });
+
+
+            $("#FamilyStatus").change(function () {
+                //alert("ok");
+
+                var name = $("#FamilyStatus").val();
+                console.log(name);
+                if (name == "Year deficit") {
+                    $("#YearDeficit").show();
+                } else {
+                    $("#YearDeficit").hide();
+                }
+            });
+
+        });
+
+    </script>
+    
+    
+
+    <script>
+        $(document).ready(function () {
+                $("#myform").validate({
+                    rules: {
+                        FamilyDrinkingWaterDetails: "required",
+                        FamilyBathroomDetails: "required",
+                        AreYouAwareOfTheProposedProject: "required",
+                        DoYouHaveLandLease: "required",
+                        FamilyStatus: "required",
+                        CreditResponsibility: "required",
+                        GovernmentBuysCompensation: "required",
+                        DoYouHaveNeedAnyCommittee: "required",
+
+                        ListOfCommitteeMembers: "required",
+
+                        MainProblemOfYouTerritory: "required",
+
+                        BenefitAfterCompleteProject: "required",
+
+                        DifficultyAfterCompleteProject: "required",
+
+                        AdviseToRemoveDifficulty: "required",
+
+                        DataCollectorFeedback: "required"
+
+                   
+                   
+                },
+                messages: {
+                    FoodExpenditure: {
+                        required: "Please Enter Number",
+                        min: "Please Enter Numeric Number without Negative Value"
+                    },
+                    ClothExpenditure: {
+                        required: "Please Enter Number",
+                        min: "Please Enter Numeric Number without Negative Value"
+                    },
+                    ResidenceRepairingExpenditure: {
+                        required: "Please Enter Number",
+                        min: "Please Enter Numeric Number without Negative Value"
+                    },
+                    MedicalExpenditure: {
+                        required: "Please Enter Number",
+                        min: "Please Enter Numeric Number without Negative Value"
+                    },
+                    EducationalExpenditure: {
+                        required: "Please Enter Number",
+                        min: "Please Enter Numeric Number without Negative Value"
+                    },
+                    CommunicationExpenditure: {
+                        required: "Please Enter Number",
+                        min: "Please Enter Numeric Number without Negative Value"
+                    },
+                    Miscellaneous: {
+                        required: "Please Enter Number",
+                        min: "Please Enter Numeric Number without Negative Value"
+                    }
+                }
+
+            });
+        });
+    </script>
+}
+
+
+
+

@@ -1,0 +1,1648 @@
+﻿@using pgcbApp.Models
+
+@{
+    ViewBag.Title = "ShowDetailsInformation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string message = ViewBag.Message;
+
+    List<BasicInformationOfAffectedPerson> info = ViewBag.DetailsInfo;
+    List<IsAffectedLandUnderShare> infoIsAffectedLandUnderShares = ViewBag.AllIsAffectedLandUnderShare;
+    List<FamilyAffectedLandInformation> aFamilyAffectedLandInformation = ViewBag.FamilyAffectedLandInformation;
+
+    List<AffectedLandPresentCropsAndProductionInformation> aAffectedLandPresentCropsAndProductionInformation = ViewBag.AffectedLandPresentCropsAndProductionInformation;
+    List<SocialEconomicInformationAndData> aSocialInfoData = ViewBag.SocialEconomicInformationAndData;
+}
+
+<label style="color:darkblue">@(ViewContext.RouteData.Values["id"])</label>
+
+<h2>Show Details Information</h2>
+
+<div class="row">
+    <form class="form-horizontal" method="POST" action="~/ShowDetailsInformation/ShowDetailsInformation">
+        <div class="col-md-6">
+            <input type="text" name="id" id="id" class="form-control" />
+
+        </div>
+        <div class="col-md-6">
+            <input type="submit" value="Search" />
+        </div>
+    </form>
+    @*<a href="~/BasicInformationOfAffectedPersons/BasicInformationOfAffectedPerson" style="background: black;color: white;text-align:center; text-decoration: none" class="btn btn-success ">Go To Main Page</a>*@
+
+    @if (info != null)
+    {
+        <hr />
+
+        <form class="form-horizontal" method="POST" action="~/ShowDetailsInformation/UpdateDetailsInformation">
+            @foreach (var infos in info)
+            {
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="NameOfAffectedPerson">Unique Id</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="Id" name="Id" class="form-control" value="@infos.Id" />
+                    </div>
+
+                </div>
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <label id="codeLabel" for="HouseHoldSlNo" style="color: darkblue">HouseHold SL No</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" id="HouseHoldSlNo" name="HouseHoldSlNo" class="form-control" value="@infos.HouseHoldSlNo" />
+                    </div>
+
+                    <div class="col-md-3">
+                        <label id="codeLabel" for="NameOfSs" style="color: darkblue">Name Of SS</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" id="NameOfSs" name="NameOfSs" class="form-control" value="@infos.NameOfSs" />
+                    </div>
+
+                </div>
+                <hr />
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="NameOfAffectedPerson">1. Name of the PAPs</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" id="NameOfAffectedPerson" name="NameOfAffectedPerson" class="form-control" value="@infos.NameOfAffectedPerson" />
+                    </div>
+                    <div class="col-md-1">
+                        <label id="codeLabel" for="Date">Date</label>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" id="Date" name="Date" class="form-control" value="@infos.Date" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="NidCardNumber">2. National ID No</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" id="NidCardNumber" name="NidCardNumber" class="form-control" value="@infos.NidCardNumber" />
+                    </div>
+                    <div class="col-md-1">
+                        <label id="codeLabel" for="PhoneNo">Phone Number</label>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" id="PhoneNo" name="PhoneNo" class="form-control" value="@infos.PhoneNo" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="HusbandOrFathersNameOfAffectedPerson">3. Name of Fathers /Husbands of PAPs</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="HusbandOrFathersNameOfAffectedPerson" name="HusbandOrFathersNameOfAffectedPerson" class="form-control" value="@infos.HusbandOrFathersNameOfAffectedPerson" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="NameOfHeadOfTheFamily">4. Name of HH Head</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="NameOfHeadOfTheFamily" name="NameOfHeadOfTheFamily" class="form-control" value="@infos.NameOfHeadOfTheFamily" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="GenderNameOfHeadOfTheFamily">5. HH Head Male /Female ?      </label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="radio" id="GenderNameOfHeadOfTheFamily" name="GenderNameOfHeadOfTheFamily" value="@infos.GenderNameOfHeadOfTheFamily" checked />Male
+                        <input type="radio" id="GenderNameOfHeadOfTheFamily" name="GenderNameOfHeadOfTheFamily" value="@infos.GenderNameOfHeadOfTheFamily" />Femal
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="">6. Address</label>
+                    </div>
+                    <div class="col-md-6">
+
+                    </div>
+
+                </div>
+                <hr />
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label id="codeLabel" for="District">District</label>
+                            </div>
+                            <div class="col-md-10">
+                                <select class="form-control" name="District" id="District">
+                                    <option value="@infos.District">@infos.District</option>
+                                    @{
+                //null reference Exeption
+                try
+                {
+                    foreach (AddressInformation aDistrict in ViewBag.District)
+                    {
+                        <option value="@aDistrict.DistrictName" name="@aDistrict.DistrictName " id="@aDistrict.DistrictName">@aDistrict.DistrictName</option>
+                    }
+
+                }
+                catch (Exception)
+                {
+                }
+                                    }
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label id="codeLabel" for="Upazilla">Upazila</label>
+                            </div>
+                            <div class="col-md-10">
+                                <select class="form-control" name="Upazilla" id="Upazilla">
+                                    <option value="@infos.Upazilla">@infos.Upazilla</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label id="Label" for="">Union</label>
+                            </div>
+                            <div class="col-md-10">
+                                <select class="form-control" name="Union" id="Union">
+                                    <option value="@infos.Union">@infos.Union</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label id="Label" for="">Mauza</label>
+                            </div>
+                            <div class="col-md-10">
+                                <select class="form-control" name="Mauza" id="Mauza">
+                                    <option value="@infos.Mauza">@infos.Mauza</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label id="Label" for="">Ward</label>
+                            </div>
+                            <div class="col-md-10">
+                                <select class="form-control" name="Ward" id="Ward">
+                                    <option value="@infos.Ward">@infos.Ward</option>
+                                    <option value="Ward No 1">Ward No 1</option>
+                                    <option value="Ward No 2">Ward No 2</option>
+                                    <option value="Ward No 3">Ward No 3</option>
+                                    <option value="Ward No 4">Ward No 4</option>
+                                    <option value="Ward No 5">Ward No 5</option>
+                                    <option value="Ward No 6">Ward No 6</option>
+                                    <option value="Ward No 7">Ward No 7</option>
+                                    <option value="Ward No 8">Ward No 8</option>
+                                    <option value="Ward No 9">Ward No 9</option>
+                                    <option value="Ward No 10">Ward No 10</option>
+                                    <option value="Ward No 11">Ward No 11</option>
+                                    <option value="Ward No 12">Ward No 12</option>
+                                    <option value="Ward No 13">Ward No 13</option>
+                                    <option value="Ward No 14">Ward No 14</option>
+                                    <option value="Ward No 15">Ward No 15</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label id="Label" for="">Village</label>
+                            </div>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" id="Village" name="Village" value="@infos.Village" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <hr />
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="ProfessionOfAffectedPerson">7. Occupation of PAPs</label>
+                    </div>
+                    <div class="col-md-6">
+                        @*<input type="text" id="ProfessionOfAffectedPerson" name="ProfessionOfAffectedPerson" class="form-control" placeholder="Profession Of Affected Person" />*@
+                        <select class="form-control" name="ProfessionOfAffectedPerson" id="ProfessionOfAffectedPerson">
+
+                            <option value="@infos.ProfessionOfAffectedPerson">@infos.ProfessionOfAffectedPerson</option>
+
+                            <option value="Govt. service">1.Govt. service</option>
+
+                            <option value="Non govt. service ">2.Non govt. service </option>
+
+
+                            <option value="small traders">3.small traders  </option>
+
+                            <option value="medium traders">4. medium traders  </option>
+
+                            <option value="large traders">5.large traders  </option>
+
+                            <option value="own land cultivation">6.own land cultivation</option>
+
+                            <option value="Share cropper in">7.Share cropper in</option>
+
+                            <option value="Share cropper out">8.Share cropper out </option>
+
+                            <option value="Agro. Day labor">9.Agro. Day labor</option>
+
+                            <option value="Non agri. Day labor">10. Non agri. Day labor</option>
+
+                            <option value="Fisher">11.Fisher</option>
+
+                            <option value="Fish farmer">12.Fish farmer</option>
+
+                            <option value="Fish traders">13.Fish traders </option>
+
+                            <option value="Household work">14.Household work </option>
+                            <option value="student">15.student</option>
+                            <option value="un-employment">16.un-employment  </option>
+                            <option value="old aged">17.old aged </option>
+                            <option value="Cottage">18.Cottage </option>
+                            <option value="Self earned ">19.Self earned   </option>
+                            <option value="Others">20.Others</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="">8. Type of PAPs</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="radio" id="TypesOfAffectedPeople" name="TypesOfAffectedPeople" value="Own cultivation" checked />Own cultivation
+                        <input type="radio" id="TypesOfAffectedPeople" name="TypesOfAffectedPeople" value="Share cropper" />Share cropper
+                        <input type="radio" id="TypesOfAffectedPeople" name="TypesOfAffectedPeople" value="Lease" />Lease
+                    </div>
+                </div>
+                <div>
+
+                    <label id="codeLabel" for="">
+                        9. Socio-economic Data /Information of HH</label>
+
+
+                        <table class="table table-bordered table-responsive">
+                            <thead style="background: black;color: white">
+                                <tr>
+                                    <td style="display: none">Id</td>
+                                    <td>Name Of HH Members</td>
+                                    <td>Relation</td>
+                                    <td>Age</td>
+                                    <td>Sex</td>
+                                    <td>Education</td>
+                                    <td>Occupation(Primary)</td>
+                                    <td>Occupation(Secondary)</td>
+                                    <td>Total Income From Primary and Second Occ.</td>
+
+                                </tr>
+                            </thead>
+                            <tbody id="tbody">
+                                @foreach (var aInfo in aSocialInfoData)
+                                {
+                                    <tr>
+
+                                        <td style="display: none"><input type="text" class="form-control" id="data[@aSocialInfoData.Count].BasicInformationOfAffectedPersonNid" name="data[@aSocialInfoData.Count].BasicInformationOfAffectedPersonNid" value="@(ViewContext.RouteData.Values["id"])" /></td>
+
+                                        <td><input type="text" class="form-control" id="data[@aSocialInfoData.Count].NameOfFamilyMember" name="data[@aSocialInfoData.Count].NameOfFamilyMember" value="@aInfo.NameOfFamilyMember" /></td>
+
+                                        <td>
+
+                                            <select class="form-control" name="data[@aSocialInfoData.Count].RelationOfHeadOfTheFamily" id="data[@aSocialInfoData.Count].RelationOfHeadOfTheFamily">
+
+                                                <option value="data[@aSocialInfoData.Count].RelationOfHeadOfTheFamily">@aInfo.RelationOfHeadOfTheFamily</option>
+                                                <option value="@aInfo.RelationOfHeadOfTheFamily">@aInfo.RelationOfHeadOfTheFamily</option>
+                                                <option value="Self">1.Self</option>
+
+                                                <option value="Husband/Wife">2.Husband/Wife</option>
+
+                                                <option value="Daughter/Son">3.Daughter/Son</option>
+
+                                                <option value="son in low">4.son in low</option>
+
+                                                <option value="daoughter in low">5.daoughter in low</option>
+
+
+                                                <option value="Sister/Brother">7.Sister/Brother</option>
+
+                                                <option value="Gradson/Granddaughter">8.Gradson/Granddaughter</option>
+
+                                                <option value="hhs assistant ">9.hhs assistant </option>
+
+                                                <option value="Others">10.Others</option>
+
+                                            </select>
+
+                                        </td>
+
+                                        <td><input type="text" class="form-control" id="data[@aSocialInfoData.Count].Age" name="data[@aSocialInfoData.Count].Age" value="@aInfo.Age" /></td>
+
+                                        <td>
+
+                                            <select class="form-control" name="data[@aSocialInfoData.Count].Gender" id="data[@aSocialInfoData.Count].Gender">
+
+
+                                                <option value="@aInfo.Gender">@aInfo.Gender</option>
+
+                                                <option value="Male">1.Male</option>
+
+                                                <option value="Female">2.Female</option>
+
+
+                                            </select>
+
+                                        </td>
+
+                                        <td>
+
+                                            <select class="form-control" name="data[@aSocialInfoData.Count].Education" id="data[@aSocialInfoData.Count].Education">
+
+
+                                                <option value="@aInfo.Education">@aInfo.Education</option>
+
+                                                <option value="Illiterate">1.Illiterate</option>
+
+                                                <option value="Children">2.Children</option>
+
+                                                <option value="literate but no institutional education ">3.literate but no institutional education </option>
+
+                                                <option value="class I-V or equivalent">4.class I-V or equivalent</option>
+
+                                                <option value="Class VI-X or equivalent">5.Class VI-X or equivalent</option>
+
+                                                <option value="SSC or equivalent">6.SSC or equivalent</option>
+
+                                                <option value="HSC or equivalent ">7.HSC or equivalent </option>
+
+                                                <option value="Degree or equivalent">8.Degree or equivalent</option>
+
+                                                <option value="Master degree or equivalent ">9.Master degree or equivalent </option>
+
+                                                <option value="Hafez (Koran) ">10.Hafez (Koran) </option>
+
+                                            </select>
+
+                                        </td>
+
+                                        <td>
+
+                                            <select class="form-control" name="data[@aSocialInfoData.Count].ProfessionPrimary" id="data[@aSocialInfoData.Count].ProfessionPrimary">
+
+                                                <option value="@aInfo.ProfessionPrimary">@aInfo.ProfessionPrimary</option>
+
+                                                <option value="Govt. service">1.Govt. service</option>
+
+                                                <option value="Non govt. service ">2.Non govt. service </option>
+
+
+                                                <option value="small traders">3.small traders  </option>
+
+                                                <option value="medium traders">4. medium traders  </option>
+
+                                                <option value="large traders">5.large traders  </option>
+
+                                                <option value="own land cultivation">6.own land cultivation</option>
+
+                                                <option value="Share cropper in">7.Share cropper in</option>
+
+                                                <option value="Share cropper out">8.Share cropper out </option>
+
+                                                <option value="Agro. Day labor">9.Agro. Day labor</option>
+
+                                                <option value="Non agri. Day labor">10. Non agri. Day labor</option>
+
+                                                <option value="Fisher">11.Fisher</option>
+
+                                                <option value="Fish farmer">12.Fish farmer</option>
+
+                                                <option value="Fish traders">13.Fish traders </option>
+
+                                                <option value="Household work">14.Household work </option>
+
+                                                <option value="student">15.student</option>
+
+                                                <option value="un-employment">16.un-employment  </option>
+
+                                                <option value="old aged">17.old aged </option>
+
+
+                                                <option value="Cottage">18.Cottage </option>
+
+
+                                                <option value="Self earned ">19.Self earned   </option>
+
+
+                                                <option value="Others">20.Others</option>
+
+
+
+
+                                            </select>
+
+                                        </td>
+
+                                        <td>
+
+                                            <select class="form-control" name="data[@aSocialInfoData.Count].ProfessionSecondary" id="data[@aSocialInfoData.Count].ProfessionSecondary">
+
+
+                                                <option value="@aInfo.ProfessionSecondary">@aInfo.ProfessionSecondary</option>
+
+                                                <option value="Govt. service">1.Govt. service</option>
+                                                '
+                                                <option value="Non govt. service ">2.Non govt. service </option>
+
+
+                                                <option value="small traders">3.small traders  </option>
+
+                                                <option value="medium traders">4. medium traders  </option>
+
+                                                <option value="large traders">5.large traders  </option>
+
+                                                <option value="own land cultivation">6.own land cultivation</option>
+
+                                                <option value="Share cropper in">7.Share cropper in</option>
+
+                                                <option value="Share cropper out">8.Share cropper out </option>
+
+                                                <option value="Agro. Day labor">9.Agro. Day labor</option>
+
+                                                <option value="Non agri. Day labor">10. Non agri. Day labor</option>
+
+                                                <option value="Fisher">11.Fisher</option>
+
+                                                <option value="Fish farmer">12.Fish farmer</option>
+
+                                                <option value="Fish traders">13.Fish traders </option>
+
+                                                <option value="Household work">14.Household work </option>
+
+                                                <option value="student">15.student</option>
+
+                                                <option value="un-employment">16.un-employment  </option>
+
+                                                <option value="old aged">17.old aged </option>
+
+
+                                                <option value="Cottage">18.Cottage </option>
+
+
+                                                <option value="Self earned ">19.Self earned   </option>
+
+
+                                                <option value="Others">20.Others</option>
+
+                                            </select>
+
+                                        </td>
+
+                                        <td><input type="text" class="form-control" id="data[@aSocialInfoData.Count].TotalIncomeFromProfession" name="data[@aSocialInfoData.Count].TotalIncomeFromProfession" value="@aInfo.TotalIncomeFromProfession" /></td>
+
+
+
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+</div>
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="FamilyDrinkingWaterDetails">13.  Source of Drinking water: </label>
+                    </div>
+                    <div class="col-md-6">
+                        <select name="FamilyDrinkingWaterDetails" id="FamilyDrinkingWaterDetails" class="form-control">
+
+                            <option value="@infos.FamilyDrinkingWaterDetails">@infos.FamilyDrinkingWaterDetails</option>
+                            <option value="Motorized Tube well">Motorized Tube well</option>
+                            <option value="HTW">HTW</option>
+                            <option value="HTW 3- Pond water"> Pond water</option>
+                            <option value="Rivers Water ">Rivers Water </option>
+                            <option value="Wells water ">Wells water </option>
+                            <option value="Wells water">Deep tube well water</option>
+                            <option value="Others">Others</option>
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="FamilyBathroomDetails">14. Status of latrine</label>
+                    </div>
+                    <div class="col-md-6">
+                        <select name="FamilyBathroomDetails" id="FamilyBathroomDetails" class="form-control">
+
+                            <option value="@infos.FamilyBathroomDetails">@infos.FamilyBathroomDetails</option>
+                            <option value="Sanitary Latrine">Sanitary Latrine</option>
+                            <option value="Ring Slab">Ring Slab</option>
+                            <option value="Kanch">Kanch</option>
+                            <option value="Open">Open</option>
+                            <option value="no Facilities"></option>
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="AreYouAwareOfTheProposedProject">15. Aware about the proposed project?</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="radio" name="AreYouAwareOfTheProposedProject" value="Yes" checked />Yes
+                        <input type="radio" name="AreYouAwareOfTheProposedProject" value="No" />No
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label id="codeLabel" for="HowMuchMoney">16. Information on Acquired land of HH</label>
+                    </div>
+
+                    <table class="table table-bordered table-responsive table-hover" id="showTable">
+                        <thead style="background: black;color: white">
+                            <tr>
+                                <td style="display: none">Id</td>
+                                <td>JL No. (Khatian no.) </td>
+                                <td>Plot no/ Dag no (as RS and CS khatian) </td>
+                                <td>Total Acquired land (Decimal)</td>
+                                <td>Ownership Pattern*</td>
+                                <td>Market Price of Acquired land (taka)</td>
+                                <td>Present land use pattern *</td>
+
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                            @foreach (var aInfo in aFamilyAffectedLandInformation)
+                            {
+                                <tr>
+
+                                    <td style="display: none"><input type="text" class="form-control" id="data[@aFamilyAffectedLandInformation.Count].BasicInformationOfAffectedPersonNid" name="data[@aFamilyAffectedLandInformation.Count].BasicInformationOfAffectedPersonNid" value="@(ViewContext.RouteData.Values["id"])" /></td>
+
+                                    <td><input type="text" class="form-control" id="data[@aFamilyAffectedLandInformation.Count].JlNo" name="data[@aFamilyAffectedLandInformation.Count].JlNo" value="@aInfo.JlNo" /></td>
+                                    <td><input type="text" class="form-control" id="data[@aFamilyAffectedLandInformation.Count].PlotNo" name="data[@aFamilyAffectedLandInformation.Count].PlotNo" value="@aInfo.PlotNo" /></td>
+
+                                    <td><input type="text" class="form-control" id="data[@aFamilyAffectedLandInformation.Count].TotalAcquiedLand" name="data[@aFamilyAffectedLandInformation.Count].TotalAcquiedLand" value="@aInfo.TotalAcquiedLand" /></td>
+
+                                    <td>
+
+                                        <select class="form-control" name="data[@aFamilyAffectedLandInformation.Count].OwnershipPattern" id="data[@aFamilyAffectedLandInformation.Count].OwnershipPattern">
+
+
+                                            <option value="@aInfo.OwnershipPattern">@aInfo.OwnershipPattern</option>
+
+
+                                            <option value="Fathers land">1.Fathers land</option>
+
+
+                                            <option value="owned by buy">2.owned by buy </option>
+
+                                            <option value="Leased in">3.Leased in</option>
+
+
+                                            <option value="leased out ">4.leased out </option>
+                                        </select>
+                                    </td>
+
+
+                                    <td><input type="text" class="form-control" id="data[@aFamilyAffectedLandInformation.Count].MarketPriceOfAcquiredLand" name="data[@aFamilyAffectedLandInformation.Count].MarketPriceOfAcquiredLand" placeholder="5" /></td>
+                                    <td>
+                                        <select class="form-control" name="data[@aFamilyAffectedLandInformation.Count].PresentLandUsePattern" id="data[@aFamilyAffectedLandInformation.Count].PresentLandUsePattern">
+                                            <option value="@aInfo.PresentLandUsePattern">@aInfo.PresentLandUsePattern</option>
+
+                                            <option value="self cultivation">1.self cultivation</option>
+
+                                            <option value="share cropper out">2.share cropper out </option>
+                                            <option value="Leased out">3.Leased out</option>
+                                            <option value="Mortgage out">4.Mortgage out</option>
+                                            <option value="leased in ">5.leased in </option>
+
+
+
+                                        </select>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="DoYouHaveLandLease">17. Do you have leased /mortgaged land?</label>
+                    </div>
+                    @if (@infos.DoYouHaveLandLease == "Yes")
+                    {
+                        <div class="col-md-6">
+                            <input type="radio" id="yes" name="DoYouHaveLandLease" value="Yes" checked />Yes
+                            <input type="radio" id="no" name="DoYouHaveLandLease" value="No" />No
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-6">
+                            <input type="radio" id="yes" name="DoYouHaveLandLease" value="Yes" />Yes
+                            <input type="radio" id="no" name="DoYouHaveLandLease" value="No" checked />No
+                        </div>
+
+                    }
+                </div>
+
+                @*Year*@
+                <div id="year" class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="HowManyYears">18. If yes, for how many years? </label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="ForManyYears" name="HowManyYears" class="form-control" value="@infos.HowManyYears" />
+                    </div>
+                </div>
+
+                <div id="money" class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="HowMuchMoney">19. If yes, how much price (taka)?  </label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="HowMuchMoney" name="HowMuchMoney" class="form-control" value="@infos.HowMuchMoney" />
+                    </div>
+                </div>
+
+
+
+                <div id="IsAffectedLandUnderShare">
+                    <div class="col-md-12">
+                        <label id="codeLabel" for="HowMuchMoney">21. If affected land is under share cropped /leased/ mortgaged, then its owners name and address  </label>
+                    </div>
+                    <table class="table table-bordered table-responsive table-hover" id="showTable">
+                        <thead style="background: black;color: white">
+                            <tr>
+                                <td style="display: none">Id</td>
+                                <td>JL No. (Khatian no.)</td>
+                                <td>Plot no/ Dag no (as RS and CS khatian) </td>
+                                <td>Total Acquired land (Decimal)</td>
+                                <td>Name of sharecropper, leaser and mortgage owner, fathers name, and address</td>
+                                @*<td>
+                                        <button id="btnAdd" class="btn btn-success" type="button">+</button>
+                                        <button id="btnRemove" class="btn btn-success" type="button">-</button>
+                                    </td>*@
+
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+
+                            @foreach (var aInfo in infoIsAffectedLandUnderShares)
+                            {
+                                <tr>
+                                    <td style="display: none"><input type="text" class="form-control" id="data2[@infoIsAffectedLandUnderShares.Count].BasicInformationOfAffectedPersonNid" name="data2[@infoIsAffectedLandUnderShares.Count].BasicInformationOfAffectedPersonNid" value="@(ViewContext.RouteData.Values["id"])" /></td>
+
+
+                                    <td><input type="text" class="form-control" id="data2[@infoIsAffectedLandUnderShares.Count].JlNo" name="data2[@infoIsAffectedLandUnderShares.Count].JlNo" value="@aInfo.JlNo" /></td>
+
+
+                                    <td><input type="text" class="form-control" id="data2[@infoIsAffectedLandUnderShares.Count].PlotNo" name="data2[@infoIsAffectedLandUnderShares.Count].PlotNo" value="@aInfo.PlotNo" /></td>
+
+
+                                    <td><input type="text" class="form-control" id="data2[@infoIsAffectedLandUnderShares.Count].TotalAcquiredLand" name="data2[@infoIsAffectedLandUnderShares.Count].TotalAcquiredLand" value="@aInfo.TotalAcquiredLand" /></td>
+
+                                    <td><input type="text" class="form-control" id="data2[@infoIsAffectedLandUnderShares.Count].NameOfShareCropper" name="data2[@infoIsAffectedLandUnderShares.Count].NameOfShareCropper" value="@aInfo.NameOfShareCropper" /></td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <label id="codeLabel" for="HowMuchMoney">22. Information of standing crops and production </label>
+                    </div>
+
+                    <table class="table table-bordered table-responsive table-hover" id="showTable">
+                        <thead style="background: black;color: white">
+                            <tr>
+                                <td style="display: none">Id</td>
+                                <td>Plot no./ Dag No</td>
+                                <td>Total land (Decimal)</td>
+                                <td>Kharif –I (Falgun-Jaistha)</td>
+                                <td>Production (Kg/decimal.)</td>
+                                <td>Kharif–II (Ashar-Aswin)</td>
+                                <td>Production (Kg/decimal.)</td>
+                                <td>Robi (Kartic-Magh)</td>
+                                <td>Production (Kg/decimal.)</td>
+                                <td>Total price of total Production (taka)</td>
+                                @*<td>
+                                        <button id="btnAdd" class="btn btn-success" type="button">+</button>
+                                        <button id="btnRemove" class="btn btn-success" type="button">-</button>
+                                    </td>*@
+
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                            @foreach (var aInfo in aAffectedLandPresentCropsAndProductionInformation)
+                            {
+                                <tr>
+
+                                    <td style="display: none"><input type="text" class="form-control" id="data3[@aAffectedLandPresentCropsAndProductionInformation.Count].BasicInformationOfAffectedPersonNid" name="data3[@aAffectedLandPresentCropsAndProductionInformation.Count].BasicInformationOfAffectedPersonNid" value="@(ViewContext.RouteData.Values["id"])" /></td>
+
+
+                                    <td><input type="text" class="form-control" id="data3[@aAffectedLandPresentCropsAndProductionInformation.Count].JlNo" name="data3[@aAffectedLandPresentCropsAndProductionInformation.Count].JlNo" value="@aInfo.JlNo" /></td>
+
+
+                                    <td><input type="text" class="form-control" id="data3[@aAffectedLandPresentCropsAndProductionInformation.Count].TotalLand" name="data3[@aAffectedLandPresentCropsAndProductionInformation.Count].TotalLand" value="@aInfo.TotalLand" /></td>
+
+
+                                    <td>
+
+                                        <select class="form-control select" id="data3[@aAffectedLandPresentCropsAndProductionInformation.Count].KharifOne" name="data3[@aAffectedLandPresentCropsAndProductionInformation.Count].KharifOne">
+
+                                            <option value="@aInfo.KharifOne">@aInfo.KharifOne</option>
+
+                                            <option value="Wheat">1.Wheat</option>
+
+                                            <option value="Onion">2.Onion</option>
+
+                                            <option value="Garlic">3.Garlic</option>
+
+                                            <option value="Tobacco">4.Tobacco</option>
+
+                                            <option value="Chili">5.Chili</option>
+
+                                            <option value="Jute">6.Jute</option>
+
+                                            <option value="Mesta Jute">7.Mesta Jute</option>
+
+                                            <option value="Dhania">8.Dhania</option>
+
+                                            <option value="Maze">9.Maze</option>
+
+                                            <option value="Sugarcane">10.Sugarcane</option>
+
+                                            <option value="Pulse-lentil">11.Pulse-lentil</option>
+
+                                            <option value="Pulse-chhola">12.Pulse-chhola</option>
+
+                                            <option value="Pulse-Mugh">13.Pulse-Mugh</option>
+
+                                            <option value="Oil seed-Mustard">14.Oil seed-Mustard</option>
+
+                                            <option value="Oil seed-teel">15.Oil seed-teel</option>
+
+                                            <option value="Oil seed-teshi">16.Oil seed-teshi</option>
+
+                                            <option value="Sunflower">17.Sunflower</option>
+
+                                            <option value="Potato">18.Potato</option>
+
+                                            <option value="Sweet Potato">19.Sweet Potato</option>
+
+                                            <option value="Peanut">20.Peanut</option>
+
+                                            <option value="Kown">21.Kown</option>
+
+                                            <option value="Fellow">22.Fellow</option>
+
+                                            <option value="Banana">23.Banana</option>
+
+                                            <option value="Egg plant">24.Egg plant</option>
+
+                                            <option value="Pulse-Arahar">25.Pulse-Arahar</option>
+
+                                            <option value="Turmeric">26.Turmeric</option>
+
+                                            <option value="Ginger">27.Ginger</option>
+
+                                            <option value="Nut">28.Nut</option>
+
+                                            <option value="Summer Vegetables">29.Summer Vegetables</option>
+
+                                            <option value="Winter vegetables">30.Winter vegetables</option>
+
+                                            <option value="Local Boro">31.Local Boro</option>
+
+                                            <option value="HYV Boro">32.HYV Boro</option>
+
+                                            <option value="Local T. Aman">33.Local T. Aman</option>
+
+                                            <option value="HYV T. Aman">34.HYV T. Aman</option>
+
+                                            <option value="Local B. Aush">35.Local B. Aush</option>
+
+                                            <option value="Local T. Aush">36.Local T. Aush</option>
+
+                                            <option value="HYV Aush">37.HYV Aush</option>
+
+                                            <option value="B. Aman">38.B. Aman</option>
+
+                                            <option value="Mixed Aush-Aman">39.Mixed Aush-Aman</option>
+
+                                            <option value="Other">40.Other</option>
+
+                                        </select>
+
+
+                                    </td>
+
+
+                                    <td><input type="text" class="form-control" id="data3[@aAffectedLandPresentCropsAndProductionInformation.Count].ProductionOne" name="data3[@aAffectedLandPresentCropsAndProductionInformation.Count].ProductionOne" value="@aInfo.ProductionOne" /></td>
+
+                                    <td>
+                                        <select class="form-control select" id="data3[@aAffectedLandPresentCropsAndProductionInformation.Count].KharifTwo" name="data3[@aAffectedLandPresentCropsAndProductionInformation.Count].KharifTwo">
+
+
+                                            <option value="@aInfo.KharifTwo">@aInfo.KharifTwo</option>
+
+                                            <option value="Wheat">1.Wheat</option>
+
+                                            <option value="Onion">2.Onion</option>
+
+                                            <option value="Garlic">3.Garlic</option>
+
+                                            <option value="Tobacco">4.Tobacco</option>
+
+                                            <option value="Chili">5.Chili</option>
+
+                                            <option value="Jute">6.Jute</option>
+
+                                            <option value="Mesta Jute">7.Mesta Jute</option>
+
+                                            <option value="Dhania">8.Dhania</option>
+
+                                            <option value="Maze">9.Maze</option>
+
+                                            <option value="Sugarcane">10.Sugarcane</option>
+
+                                            <option value="Pulse-lentil">11.Pulse-lentil</option>
+
+                                            <option value="Pulse-chhola">12.Pulse-chhola</option>
+
+                                            <option value="Pulse-Mugh">13.Pulse-Mugh</option>
+
+                                            <option value="Oil seed-Mustard">14.Oil seed-Mustard</option>
+
+                                            <option value="Oil seed-teel">15.Oil seed-teel</option>
+
+                                            <option value="Oil seed-teshi">16.Oil seed-teshi</option>
+
+                                            <option value="Sunflower">17.Sunflower</option>
+
+                                            <option value="Potato">18.Potato</option>
+
+                                            <option value="Sweet Potato">19.Sweet Potato</option>
+
+                                            <option value="Peanut">20.Peanut</option>
+
+                                            <option value="Kown">21.Kown</option>
+
+                                            <option value="Fellow">22.Fellow</option>
+
+                                            <option value="Banana">23.Banana</option>
+
+                                            <option value="Egg plant">24.Egg plant</option>
+
+                                            <option value="Pulse-Arahar">25.Pulse-Arahar</option>
+
+                                            <option value="Turmeric">26.Turmeric</option>
+
+                                            <option value="Ginger">27.Ginger</option>
+
+                                            <option value="Nut">28.Nut</option>
+
+                                            <option value="Summer Vegetables">29.Summer Vegetables</option>
+
+                                            <option value="Winter vegetables">30.Winter vegetables</option>
+
+                                            <option value="Local Boro">31.Local Boro</option>
+
+                                            <option value="HYV Boro">32.HYV Boro</option>
+
+                                            <option value="Local T. Aman">33.Local T. Aman</option>
+
+                                            <option value="HYV T. Aman">34.HYV T. Aman</option>
+
+                                            <option value="Local B. Aush">35.Local B. Aush</option>
+
+                                            <option value="Local T. Aush">36.Local T. Aush</option>
+
+                                            <option value="HYV Aush">37.HYV Aush</option>
+
+                                            <option value="B. Aman">38.B. Aman</option>
+
+                                            <option value="Mixed Aush-Aman">39.Mixed Aush-Aman</option>
+
+                                            <option value="Other">40.Other</option>
+
+                                        </select>
+
+
+
+                                    </td>
+
+                                    <td><input type="text" class="form-control" id="data3[@aAffectedLandPresentCropsAndProductionInformation.Count].ProductionTwo" name="data3[@aAffectedLandPresentCropsAndProductionInformation.Count].ProductionTwo" value="@aInfo.ProductionTwo" /></td>
+
+                                    <td><input type="text" class="form-control" id="data3[@aAffectedLandPresentCropsAndProductionInformation.Count].Robi" name="data3[@aAffectedLandPresentCropsAndProductionInformation.Count].Robi" value="@aInfo.Robi" /></td>
+
+                                    <td><input type="text" class="form-control" id="data3[@aAffectedLandPresentCropsAndProductionInformation.Count].ProductionThree" name="data3[@aAffectedLandPresentCropsAndProductionInformation.Count].ProductionThree" value="@aInfo.ProductionThree" /></td>
+
+                                    <td><input type="text" class="form-control" id="data3[@aAffectedLandPresentCropsAndProductionInformation.Count].TotalPriceOfTotalProduction" name="data3[@aAffectedLandPresentCropsAndProductionInformation.Count].TotalPriceOfTotalProduction" value="@aInfo.TotalPriceOfTotalProduction" /></td>
+
+
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="FamilyStatus">23. Self assessed Poverty Analysis </label>
+                    </div>
+                    <div class="col-md-6">
+                        <select name="FamilyStatus" id="FamilyStatus" class="form-control">
+
+                            <option value="@infos.FamilyStatus">@infos.FamilyStatus</option>
+                            <option value="Year deficit">Deficit</option>
+                            <option value="Break-even">Break-even</option>
+                            <option value="Surplus">Surplus</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="YearDeficit" class="row" style="display: none">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="HowDoesTheCostCarryingOut">24. If Deficit then how bare this situation </label>
+                    </div>
+                    <div class="col-md-6">
+                        <select name="HowDoesTheCostCarryingOut" id="HowDoesTheCostCarryingOut" class="form-control">
+                            <option value="@infos.HowDoesTheCostCarryingOut">@infos.HowDoesTheCostCarryingOut</option>
+                            <option value="Sell Land ">Sell Land </option>
+                            <option value="Mortgage land ">Mortgage land </option>
+                            <option value="Borrowing">Borrowing</option>
+                            <option value="Do business ">Do business </option>
+                            <option value="Sell cattle">Sell cattle</option>
+                            <option value="Take loan from relatives">Take loan from relatives</option>
+                            <option value="Others">Others (explain… </option>
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="CreditResponsibility">25. Do you have any loan? </label>
+                    </div>
+                    @if (@infos.CreditResponsibility == "Yes")
+                    {
+                       <div class="col-md-6">
+                           <input type="radio" id="CreditResponsibilitYes" name="CreditResponsibility" value="Yes" checked />Yes
+                        <input type="radio" id="CreditResponsibilitNo" name="CreditResponsibility" value="No"  />No
+                    </div>
+                    }
+                    else
+                    {
+                    <div class="col-md-6">
+                        <input type="radio" id="CreditResponsibilitYes" name="CreditResponsibility" value="Yes" />Yes
+                        <input type="radio" id="CreditResponsibilitNo" name="CreditResponsibility" value="No" checked />No
+                    </div>
+
+                    }
+                    
+                </div>
+
+                <div id="CreditResponsibilityName" class="row" style="display: none">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="CreditResponsibilityMoney">26. If Yes, How much taka? </label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="CreditResponsibilityMoney" name="CreditResponsibilityMoney" class="form-control" value="@infos.CreditResponsibilityMoney" />
+                    </div>
+                </div>
+
+
+
+                <div id="CreditResponsibilityReceivedDiv" class="row" style="display: none">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="CreditResponsibilityReceivedForm">27. Which sources do you have get loan? </label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="a" type="checkbox" value="BRAC" />BRAC
+                        <input class="a" type="checkbox" value="Proshika" />Proshika
+                        <input class="a" type="checkbox" value="Asha" />Asha
+                        <input class="a" type="checkbox" value="TMSS" />TMSS
+                        <input class="a" type="checkbox" value="Agrani Bank" />Agrani Bank
+                        <input class="a" type="checkbox" value="Dustah health care Center" />Dustah health care Center
+                        <input class="a" type="checkbox" value="Local organization" />Local organization
+                        <input class="a" type="checkbox" value="BDRB" />BDRB
+                        <input class="a" type="checkbox" value="CARE" />CARE
+                        <input class="a" type="checkbox" value="Karitas" />Karitas
+                        <input class="a" type="checkbox" value="Krishi Bank" />Krishi Bank
+
+                        <input class="a" type="checkbox" value="Sonali Bank" />Sonali Bank
+                        <input class="a" type="checkbox" value="Janata Bank" />Janata Bank
+                        <input class="a" type="checkbox" value="Social service division" />Social service division
+                        <input class="a" type="checkbox" value="World vision" />World vision
+                        <input class="a" type="checkbox" value="Loan from relatives" />Loan from relatives
+                        <input class="a" type="checkbox" value="Loan from Mahajan" />Loan from Mahajan
+                        <input class="a" type="checkbox" value="Others" />Others
+
+
+                        <textarea id="CreditResponsibilityReceivedForm" name="CreditResponsibilityReceivedForm" class="form-control">@infos.CreditResponsibilityReceivedForm</textarea>
+                    </div>
+                </div>
+
+
+
+
+                <div id="GovernmentBuysDiv" class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="GovernmentBuysCompensation">28. If the land acquired by GoB, then how you want compensation?</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="b" type="checkbox" value="Land instead of land" />Land instead of land
+                        <input class="b" type="checkbox" value="Taka instead of land" />Taka instead of land
+                        <input class="b" type="checkbox" value="Training for rehabilitation" />Training for rehabilitation
+                        <input class="b" type="checkbox" value="Others" />Others
+
+
+                        <textarea id="GovernmentBuysCompensation" name="GovernmentBuysCompensation" class="form-control">@infos.GovernmentBuysCompensation</textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="HowCanYouCompensationMoney">29. Which medium do you prefer for compensation money payment?  </label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="aHowCanYouCompensationMoney" type="checkbox" value="Check by local bank" />Check by local bank
+                        <input class="aHowCanYouCompensationMoney" type="checkbox" value="Cash money through Union Parishad" />Cash money through Union Parishad
+                        <input class="aHowCanYouCompensationMoney" type="checkbox" value="Cash Money through Upazila Parishad" />Cash Money through Upazila Parishad
+
+                        <input class="aHowCanYouCompensationMoney" type="checkbox" value="Cash Money through Zila Parishad" />Cash Money through Zila Parishad
+                        <input class="aHowCanYouCompensationMoney" type="checkbox" value="Cash Money through PGCB; " />Cash Money through PGCB;
+                        <input class="aHowCanYouCompensationMoney" type="checkbox" value="Cash Money in open place meeting" />Cash Money in open place meeting
+
+                        <input class="aHowCanYouCompensationMoney" type="checkbox" value="Others" />Others (explain......
+
+
+                        <textarea id="HowCanYouCompensationMoney" name="HowCanYouCompensationMoney" class="form-control">@infos.HowCanYouCompensationMoney</textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="DoYouHaveNeedAnyCommittee">30. Do you think any necessity of GRC for the trouble shooting?</label>
+                    </div>
+                    @if (@infos.CreditResponsibility == "Yes")
+                    {
+                        <div class="col-md-6">
+                            <input type="radio" id="DoYouHaveNeedAnyCommitteeYes" name="DoYouHaveNeedAnyCommittee" value="Yes" checked />Yes
+                        <input type="radio" id="DoYouHaveNeedAnyCommitteeNo" name="DoYouHaveNeedAnyCommittee" value="No" />No
+                    </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-6">
+                        <input type="radio" id="DoYouHaveNeedAnyCommitteeYes" name="DoYouHaveNeedAnyCommittee" value="Yes" />Yes
+                            <input type="radio" id="DoYouHaveNeedAnyCommitteeNo" name="DoYouHaveNeedAnyCommittee" value="No" checked />No
+                    </div>
+
+                    }
+                    
+                </div>
+
+                <div id="DoYouHaveNeedAnyCommitteeDiv" class="row" style="display: none">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="ListOfCommitteeMembers">31. If yes, who will be the GRC members, suggest? </label>
+                    </div>
+                    <div class="col-md-6">
+
+                        <textarea id="ListOfCommittee" name="ListOfCommitteeMembers" class="form-control">@infos.ListOfCommitteeMembers</textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="MainProblemOfYouTerritory">32. What is the basic problem faced by you in this area?  </label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="Flood" />Flood
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="Drainage congestion" />Drainage congestion
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="River erosion" />River erosion
+
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="Sand carpeting" />Sand carpeting
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="Bad Communication  " />Bad Communication
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="Bad water quality " />Bad water quality
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="Lack of drinking water" />Lack of drinking water
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="lank of irrigation water" />lank of irrigation water
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="Crop damage" />Crop damage
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="Fish damage" />Fish damage
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="House damage" />House damage
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="Low income" />Low income
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="Cough/asthma and other diseases" />Cough/asthma and other diseases
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="Unknown" />Unknown
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="Others" />Others (explain….
+
+
+
+                        <textarea id="MainProblemOfYouTerritory" name="MainProblemOfYouTerritory" class="form-control">@infos.MainProblemOfYouTerritory </textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="BenefitAfterCompleteProject">33. What type of benefits do you expect after implementation of the project? </label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Increase business centers" />Increase business centers
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Develop road communication " />Develop road communication
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Increase land price " />Increase land price
+
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Create employment opportunities " />Create employment opportunities
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Ddevelop education facilities " />Ddevelop education facilities
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Develop health facilities" />Develop health facilities
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Create Business Facilities " />Create Business Facilities
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Develop industrial facilities" />Develop industrial facilities
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Develop water supply facilities" />Develop water supply facilities
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Develop sanitation facilities" />Develop sanitation facilities
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Create more income" />Create more income
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Develop social status" />Develop social status
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Decrease land price to some places" />Decrease land price to some places
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Others" />Others (explain.....)
+
+
+                        <textarea id="BenefitAfterCompleteProject" name="BenefitAfterCompleteProject" class="form-control">@infos.BenefitAfterCompleteProject</textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="DifficultyAfterCompleteProject">34. What type of dis-benefits do you expect after implementation of the project? </label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="Scope of employment will be reduced" />Scope of employment will be reduced
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="Un-planned town ship" />Un-planned town ship
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="Less production of crop " />Less production of crop
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="Migration to other place due to environmental degradation" />Migration to other place due to environmental degradation
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="Crop land will be reduced" />Crop land will be reduced
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="Less income in HH level" />Less income in HH level
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="Decrease land fertility 8-Decrease fish production" />Decrease land fertility 8-Decrease fish production
+
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="Bad environment" />Bad environment
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="Declining of status of poor people" />Declining of status of poor people
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="Conflict with different social party" />Conflict with different social party
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="Drainage congestion " />Drainage congestion
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="Permanent migration due to land acquire" />Permanent migration due to land acquire
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="Others" />Others (Explain...
+
+
+
+                        <textarea id="DifficultyAfterCompleteProject" name="DifficultyAfterCompleteProject" class="form-control">@infos.DifficultyAfterCompleteProject</textarea>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="AdviseToRemoveDifficulty">35. What are the suggestions to solve these problems mentioned above? </label>
+                    </div>
+                    <div class="col-md-6">
+
+                        <textarea id="AdviseToRemoveDifficulty" name="AdviseToRemoveDifficulty" class="form-control">@infos.AdviseToRemoveDifficulty </textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="DataCollectorFeedback">36. Comments from Enumerators</label>
+                    </div>
+                    <div class="col-md-6">
+
+
+
+                        <textarea id="DataCollectorFeedback" name="DataCollectorFeedback" class="form-control">@infos.DataCollectorFeedback</textarea>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-8">
+                    </div>
+
+                    <div class="col-md-4">
+                        <input type="submit" id="submit" name="submit" style="background: black" class="btn-success form-control" value="Save" />
+                    </div>
+
+                </div>
+
+
+            }
+        </form>
+    }
+    <label name="messageLabel" style="color:red ">@message</label>
+</div>
+
+
+@section scripts
+{
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+
+    <script type="text/javascript">
+
+        $('#Date').datepicker({
+            autoclose: true,
+            todayHighlight: true
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            console.log("Ok");
+            $("#District").change(function () {
+
+                var departmentId = $("#District").val();
+                var json = { districtName: departmentId };
+
+                $("#Upazilla").empty();
+                $("#Union").empty();
+                $("#Mauza").empty();
+
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetUpazilaByDistrictName", "ShowDetailsInformation")',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(json),
+                    dataType: "json",
+                    success: function (data) {
+
+                        console.log(data);
+
+                        $.each(data, function (key, value) {
+                            $("#Upazilla").append('<option value="' + value.UpazilaName + '">' + value.UpazilaName + '</option>');
+
+
+                        });
+
+                    }
+                });
+
+            });
+        });
+
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            console.log("Ok");
+            $("#Upazilla").change(function () {
+
+                var upazilaName = $("#Upazilla").val();
+                var json = { upazilaName: upazilaName };
+
+                $("#Union").empty();
+                //  $("#teacherId").append('<option value="">--Select--</option>');
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetUnionByUpazilaNmae", "ShowDetailsInformation")',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(json),
+                    dataType: "json",
+                    success: function (data) {
+
+                        console.log(data);
+
+                        $.each(data, function (key, value) {
+                            $("#Union").append('<option value="' + value.UnionName + '">' + value.UnionName + '</option>');
+
+
+                        });
+
+                    }
+                });
+
+            });
+        });
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            console.log("Ok");
+            $("#Union").change(function () {
+                var unionName = $("#Union").val();
+                var json = { unionName: unionName };
+
+                $("#Mauza").empty();
+
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetMauzaByUnionNmae", "ShowDetailsInformation")',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(json),
+                    dataType: "json",
+                    success: function (data) {
+
+                        console.log(data);
+
+                        $.each(data, function (key, value) {
+                            $("#Mauza").append('<option value="' + value.MauzaName + '">' + value.MauzaName + '</option>');
+
+
+                        });
+
+                    }
+                });
+
+            });
+        });
+
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#myform").validate({
+                rules: {
+                    NameOfAffectedPerson: "required",
+                    Date: "required",
+                    NidCardNumber: {
+                        // required: true,
+                        min: 1
+                    },
+                    PhoneNo: {
+                        // required: true,
+                        min: 1
+                    },
+                    HusbandOrFathersNameOfAffectedPerson: "required",
+                    NameOfHeadOfTheFamily: "required",
+                    GenderNameOfHeadOfTheFamily: "required",
+                    District: "required",
+                    //Upazilla: "required",
+                    // Union: "required",
+                    // Mauza: "required",
+                    Village: "required",
+                    ProfessionOfAffectedPerson: "required",
+                    TypesOfAffectedPeople: "required",
+                    FamilyDrinkingWaterDetails: "required",
+                    FamilyBathroomDetails: "required",
+                    AreYouAwareOfTheProposedProject: "required",
+                    DoYouHaveLandLease: "required",
+                    FamilyStatus: "required",
+                    CreditResponsibility: "required",
+                    GovernmentBuysCompensation: "required",
+                    DoYouHaveNeedAnyCommittee: "required",
+
+                    ListOfCommitteeMembers: "required",
+
+                    MainProblemOfYouTerritory: "required",
+
+                    BenefitAfterCompleteProject: "required",
+
+                    DifficultyAfterCompleteProject: "required",
+
+                    AdviseToRemoveDifficulty: "required",
+
+                    DataCollectorFeedback: "required"
+
+
+
+                },
+                messages: {
+                    NameOfAffectedPerson: "Please Enter Your Name",
+                    Date: "Please Select a Date",
+                    NidCardNumber: {
+                        required: "Please Enter a National Id ",
+                        min: "National Id Must Be in Correct Formate"
+                    },
+                    PhoneNo: {
+                        required: "Please Enter a Phone Number",
+                        min: "Phnone Number Must be Correct Formate"
+                    },
+                    HusbandOrFathersNameOfAffectedPerson: "Please Enter Husband Or Father's Name",
+                    NameOfHeadOfTheFamily: "Please Enter The Name of Head of Family",
+                    GenderNameOfHeadOfTheFamily: "Please Select a Gender",
+                    District: "Please Select a District",
+                    Upazilla: "Please Select a Upazilla",
+                    Union: "Please Select a union",
+                    // Mauza: "Please Select a Mauza",
+                    Village: "Please Enter a Village Name",
+                    ProfessionOfAffectedPerson: "Please Enter Profession Name",
+                    TypesOfAffectedPeople: "Please Select a Type",
+                    FoodExpenditure: {
+                        required: "Please Enter Number",
+                        min: "Please Enter Numeric Number without Negative Value"
+                    },
+                    ClothExpenditure: {
+                        required: "Please Enter Number",
+                        min: "Please Enter Numeric Number without Negative Value"
+                    },
+                    ResidenceRepairingExpenditure: {
+                        required: "Please Enter Number",
+                        min: "Please Enter Numeric Number without Negative Value"
+                    },
+                    MedicalExpenditure: {
+                        required: "Please Enter Number",
+                        min: "Please Enter Numeric Number without Negative Value"
+                    },
+                    EducationalExpenditure: {
+                        required: "Please Enter Number",
+                        min: "Please Enter Numeric Number without Negative Value"
+                    },
+                    CommunicationExpenditure: {
+                        required: "Please Enter Number",
+                        min: "Please Enter Numeric Number without Negative Value"
+                    },
+                    Miscellaneous: {
+                        required: "Please Enter Number",
+                        min: "Please Enter Numeric Number without Negative Value"
+                    }
+                }
+
+            });
+        });
+    </script>
+    <script>
+
+        $(document).ready(function () {
+            $("#CreditResponsibilitYes").click(function () {
+                //console.log("Click");
+                $("#CreditResponsibilityName").show();
+                $("#CreditResponsibilityReceivedDiv").show();
+            });
+            $("#CreditResponsibilitNo").click(function () {
+                //   console.log("Click");
+                $("#CreditResponsibilityName").hide();
+                $("#CreditResponsibilityReceivedDiv").hide();
+            });
+
+            $checks = $(".a");
+
+            $checks.on('click', function () {
+
+                var string = $checks.filter(":checked").map(function () {
+                    return this.value;
+                }).get().join(" ,");
+                $('#CreditResponsibilityReceivedForm').val(string);
+            });
+
+            $check = $(".b");
+
+            $check.on('click', function () {
+
+                var string = $check.filter(":checked").map(function () {
+                    return this.value;
+                }).get().join(" ,");
+                $('#GovernmentBuysCompensation').val(string);
+            });
+            //aHowCanYouCompensationMoney
+            $aHowCanYouCompensationMoney = $(".aHowCanYouCompensationMoney");
+
+            $aHowCanYouCompensationMoney.on('click', function () {
+
+                var string = $aHowCanYouCompensationMoney.filter(":checked").map(function () {
+                    return this.value;
+                }).get().join(" ,");
+                $('#HowCanYouCompensationMoney').val(string);
+            });
+
+
+            $aMainProblemOfYouTerritory = $(".aMainProblemOfYouTerritory");
+
+            $aMainProblemOfYouTerritory.on('click', function () {
+
+                var string = $aMainProblemOfYouTerritory.filter(":checked").map(function () {
+                    return this.value;
+                }).get().join(" ,");
+                $('#MainProblemOfYouTerritory').val(string);
+            });
+
+            //BenefitAfterCompleteProject
+            $aBenefitAfterCompleteProject = $(".aBenefitAfterCompleteProject");
+
+            $aBenefitAfterCompleteProject.on('click', function () {
+
+                var string = $aBenefitAfterCompleteProject.filter(":checked").map(function () {
+                    return this.value;
+                }).get().join(" ,");
+                $('#BenefitAfterCompleteProject').val(string);
+            });
+            //DifficultyAfterCompleteProject
+
+            $aDifficultyAfterCompleteProject = $(".aDifficultyAfterCompleteProject");
+
+            $aDifficultyAfterCompleteProject.on('click', function () {
+
+                var string = $aDifficultyAfterCompleteProject.filter(":checked").map(function () {
+                    return this.value;
+                }).get().join(" ,");
+                $('#DifficultyAfterCompleteProject').val(string);
+            });
+
+
+
+
+
+            $("#DoYouHaveNeedAnyCommitteeYes").click(function () {
+                //console.log("Click");
+                $("#DoYouHaveNeedAnyCommitteeDiv").show();
+                // $("#CreditResponsibilityReceivedDiv").show();
+            });
+            $("#DoYouHaveNeedAnyCommitteeNo").click(function () {
+                //   console.log("Click");
+                $("#DoYouHaveNeedAnyCommitteeDiv").hide();
+                // $("#CreditResponsibilityReceivedDiv").hide();
+            });
+
+
+
+            $("#DoYouHaveNeedAnyCommitteeYes").click(function () {
+                //console.log("Click");
+                $("#DoYouHaveNeedAnyCommitteeDiv").show();
+                // $("#CreditResponsibilityReceivedDiv").show();
+            });
+            $("#DoYouHaveNeedAnyCommitteeNo").click(function () {
+                //   console.log("Click");
+                $("#DoYouHaveNeedAnyCommitteeDiv").hide();
+                // $("#CreditResponsibilityReceivedDiv").hide();
+            });
+
+
+        });
+    </script>
+    @*Who has been received from the loan*@
+
+
+
+
+    @*DoYouHaveLandLease*@
+
+    <script>
+        $(document).ready(function () {
+            //  console.log("ready");
+            $("#yes").click(function () {
+                // console.log("Click");
+                $("#year").show();
+                $("#money").show();
+                $("#IsAffectedLandUnderShare").show();
+            });
+            $("#no").click(function () {
+                //   console.log("Click");
+                $("#year").hide();
+                $("#money").hide();
+                $("#IsAffectedLandUnderShare").hide();
+            });
+
+
+            $("#FamilyStatus").change(function () {
+                //alert("ok");
+
+                var name = $("#FamilyStatus").val();
+                console.log(name);
+                if (name == "Year deficit") {
+                    $("#YearDeficit").show();
+                } else {
+                    $("#YearDeficit").hide();
+                }
+            });
+
+        });
+
+    </script>
+}
+

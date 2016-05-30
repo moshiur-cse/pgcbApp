@@ -1,0 +1,83 @@
+﻿@model pgcbApp.Models.Student
+
+@{
+    ViewBag.Title = "SaveStudent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string message = ViewBag.Message;
+}
+@section style
+{
+}
+
+
+<form id="myform" name="myform" class="form-horizontal" method="POST" >
+
+    <table class="table table-bordered table-responsive table-hover" id="showTable">
+        <thead style="background: black;color: white">
+            <tr>
+                
+                <td>Name</td>
+                <td>Address</td>
+                <td><button id="btnAdd" class="btn btn-success" type="button">Add</button>
+                    <button id="btnRemove" class="btn btn-success" type="button">Remove</button>
+                </td>                             
+            </tr>
+        </thead>   
+        <tbody id="tbody">
+            @*<tr>
+                <td><input class="form-control" type="text" name="student[0].Name" id="student[0].Name" placeholder="Name" /></td>
+                <td><input class="form-control" type="text" name="student[0].Address" id="student[0].Address" placeholder="Address" /></td>
+                <td><input class="btn btn-success" onclick="add();" type="button" value="+" /></td>
+            </tr>*@
+
+
+        </tbody>
+    </table>
+    <input class="btn btn-success" type="submit" value="Save">
+</form>
+
+
+
+@section scripts
+{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            addRow(0);
+            localStorage.setItem('index', 1);
+
+            $("#btnAdd").click(function () {
+                var i = Number(localStorage.index);
+
+                addRow(i);
+
+                localStorage.setItem('index', i + 1);
+            });
+            $("#btnRemove").click(function () {
+                var i = Number(localStorage.index);
+
+                addRow(i);
+
+                localStorage.setItem('index', i-1);
+            });
+        });
+
+
+        function addRow(i) {
+            //var str = "<tr>";
+            //str += "<td><p>" + i + "</p></td>";
+            //str += "<td><input name=" + i + " type='text' /></td>";
+            //str += "<tr/>";
+
+
+            var str = '<tr>' +
+                '<td><input class="form-control" type="text" name="student[' + i + '].Name" id="student[' + i + '].Name" placeholder="Name" /></td>' +
+                '<td><input class="form-control" type="text" name="student[' + i + '].Address" id="student[0].Address" placeholder="Address" /></td>' +
+                '</tr>';
+
+            $("#tbody").append(str);
+
+        }
+</script>
+}
+

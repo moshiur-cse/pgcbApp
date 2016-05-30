@@ -1,0 +1,262 @@
+﻿@{
+    ViewBag.Title = "BasicInformationOfAffectedPersonStepThree";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@section style
+{
+    <link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" /> <link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <style>
+        label.error {
+            color: red;
+            font-style: italic;
+        }
+    </style>
+}
+
+
+
+    <div class="row">
+        <div class="col-md-8">
+        </div>
+
+        <div class="col-md-4">
+            <input type="submit" id="submit" name="submit" style="background: black" class="btn-success form-control" value="Save" />
+        </div>
+
+    </div>&nbsp;
+
+
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2 text-center">
+        <fieldset>
+            <legend>Socio-economic Status of PAPs Step 3 </legend>
+
+            <form id="myform" name="myform" class="form-horizontal" method="POST">
+                <div class="form-group">
+                <div class="col-md-6">
+                    <label id="codeLabel" for="NidCardNumber">Basic Information Of Affected Person Nid</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" id="NidCardNumber" name="NidCardNumber" class="form-control" placeholder="Nid Card Number" value="@(ViewContext.RouteData.Values["id"])" readonly />
+                </div>
+            </div>&nbsp;
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label id="codeLabel" for="DoYouHaveLandLease">18. Do you have leased /mortgaged land?</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="radio" id="yes" name="DoYouHaveLandLease" value="Yes" />Yes
+                    <input type="radio" id="no" name="DoYouHaveLandLease" value="No" />No
+                </div>
+            </div>&nbsp;
+
+            <div id="year" class="row" style="display: none">
+                <div class="col-md-6">
+                    <label id="codeLabel" for="HowManyYears">19. If yes, for how many years? </label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" id="ForManyYears" name="HowManyYears" class="form-control" placeholder="How Many Years" />
+                </div>
+            </div>&nbsp;
+
+            <div id="money" class="row" style="display: none">
+                <div class="col-md-6">
+                    <label id="codeLabel" for="HowMuchMoney">20. If yes, how much price (taka)?  </label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" id="HowMuchMoney" name="HowMuchMoney" class="form-control" placeholder="How Much Money?" />
+                </div>
+            </div>&nbsp;
+
+
+                @*IsAffectedLandUnderShare*@
+
+
+                <div id="IsAffectedLandUnderShare" style="display: none">
+                    <div class="col-md-12">
+                        <label id="codeLabel" for="HowMuchMoney">21. If affected land is under share cropped /leased/ mortgaged, then its owners name and address  </label>
+                    </div>
+                    <table class="table table-bordered table-responsive table-hover" id="showTable">
+                        <thead style="background: black;color: white">
+                            <tr>
+                                <td style="display: none">Id</td>                              
+                                <td>JL No. (Khatian no.)</td>
+                                <td>Plot no/ Dag no (as RS and CS khatian) </td>
+                                <td>Total Acquired land (Decimal)</td>
+                                <td>Name of sharecropper, leaser and mortgage owner, fathers name, and address</td>
+                                @*<td>
+                                    <button id="btnAdd" class="btn btn-success" type="button">+</button>
+                                    <button id="btnRemove" class="btn btn-success" type="button">-</button>
+                                </td>*@
+
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                           @for (int i = 0; i < 3; i++)
+                            {
+                                <tr>
+
+                                    <td style="display: none"><input type="text" class="form-control" id="data[@i].BasicInformationOfAffectedPersonNid" name="data[@i].BasicInformationOfAffectedPersonNid" value="@(ViewContext.RouteData.Values["id"])" /></td>
+
+
+                                    <td><input type="text" class="form-control" id="data[@i].JlNo" name="data[@i].JlNo" placeholder="JL No" /></td>
+
+
+                                    <td><input type="text" class="form-control" id="data[@i].PlotNo" name="data[@i].PlotNo" placeholder="Plot No" /></td>
+
+
+                                    <td><input type="text" class="form-control" id="data[@i].TotalAcquiredLand" name="data[@i].TotalAcquiredLand" placeholder="Total Acquired Land" /></td>
+
+                                    <td><input type="text" class="form-control" id="data[@i].NameOfShareCropper" name="data[@i].NameOfShareCropper" placeholder="Name Of Share Cropper" /></td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8">
+                    </div>
+
+                    <div class="col-md-4">
+                        <input type="submit" id="submit" name="submit" style="background: black" class="btn-success form-control" value="Save" />
+                    </div>
+
+                </div>&nbsp;
+
+
+            </form>
+            <label name="messageLabel" style="color:darkblue "></label>
+
+        </fieldset>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+@section scripts
+{
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            //addRow(0);
+            localStorage.setItem('index', 1);
+
+            $("#btnAdd").click(function () {
+                var i = Number(localStorage.index);
+
+                addRow(i);
+
+                localStorage.setItem('index', i + 1);
+            });
+            $("#btnRemove").click(function () {
+                removeRow();
+            });
+        });
+        function removeRow() {
+            var i = Number(localStorage.index) - 1;
+            if (i > 0) {
+                $("#" + i).remove();
+            }
+            localStorage.setItem('index', i);
+        }
+
+        function addRow(i) {
+            var str =  '<tr>'+
+
+                                    '<td style="display: none"><input type="text" class="form-control" id="data[' + i + '].BasicInformationOfAffectedPersonNid" name="data[' + i + '].BasicInformationOfAffectedPersonNid" value="@(ViewContext.RouteData.Values["id"])" /></td>' +
+
+
+                                    '<td><input type="text" class="form-control" id="data[' + i + '].A" name="data[' + i + '].A" placeholder="A" /></td>' +
+
+
+                                    '<td><input type="text" class="form-control" id="data[' + i + '].B" name="data[' + i + '].B" placeholder="B" /></td>' +
+
+
+                                    '<td><input type="text" class="form-control" id="data[' + i + '].C" name="data[' + i + '].C" placeholder="C" /></td>' +
+
+                                    '<td><input type="text" class="form-control" id="data[' + i + '].D" name="data[' + i + '].D" placeholder="D" /></td >' +
+                '</tr>';
+
+            $("#tbody").append(str);
+        }
+    </script>
+
+
+
+    <script>
+        $(document).ready(function () {
+            $("#myform").validate({
+                rules: {
+                   
+                   
+                    NidCardNumbers: {
+                        required: true,
+                        min: 1
+                    },
+
+                    DoYouHaveLandLease: "required",
+                   
+ 
+                },
+                messages: {
+                    
+                   
+                    NidCardNumber: {
+                        required: "Please Enter a National Id ",
+                        min: "National Id Must Be in Correct Formate"
+                    }
+   
+                }
+
+            });
+        });
+    </script>
+
+
+    @*DoYouHaveLandLease*@
+
+    <script>
+        $(document).ready(function () {
+            //  console.log("ready");
+            $("#yes").click(function () {
+                // console.log("Click");
+                $("#year").show();
+                $("#money").show();
+                $("#IsAffectedLandUnderShare").show();
+            });
+            $("#no").click(function () {
+                //   console.log("Click");
+                $("#year").hide();
+                $("#money").hide();
+                $("#IsAffectedLandUnderShare").hide();
+            });
+        });
+
+    </script>
+}
+
+
+
+
+
+
+
+
+

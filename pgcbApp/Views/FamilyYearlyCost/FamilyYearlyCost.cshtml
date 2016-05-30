@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "FamilyYearlyCost";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string message = ViewBag.Message;
+}
+
+@section style
+{
+    
+<style>
+    label.error {
+        color: red;
+        font-style: italic;
+    }
+</style>
+}
+
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2 text-center">
+        <fieldset>
+            <legend>10. Yearly expenditure of HH</legend>
+
+            <form id="myform" name="myform" class="form-horizontal" method="POST" >
+                <div class="form-group" @*style="display: none"*@>
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="BasicInformationOfAffectedPersonNid">Basic Information Of Affected Person Nid</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="BasicInformationOfAffectedPersonNid" name="BasicInformationOfAffectedPersonNid" class="form-control" placeholder="Basic Information Of Affected Person Nid" value="@(ViewContext.RouteData.Values["id"])" readonly/>
+                    </div>
+                </div>&nbsp;
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="FoodExpenditure">Expenditure for food</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="FoodExpenditure" name="FoodExpenditure" class="form-control" placeholder="Expenditure for food" />
+                    </div>
+                </div>&nbsp;
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="ClothExpenditure">Expenditure for cloths</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="ClothExpenditure" name="ClothExpenditure" class="form-control" placeholder="Expenditure for cloths" />
+                    </div>
+                </div>&nbsp;
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="ResidenceRepairingExpenditure">Expenditure for maintenance of house</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="ResidenceRepairingExpenditure" name="ResidenceRepairingExpenditure" class="form-control" placeholder="Expenditure for maintenance of house"  />
+                    </div>
+                </div>&nbsp;
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="Expenditure for Medical"> Medical Expenditure</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="MedicalExpenditure" name="MedicalExpenditure" class="form-control" placeholder="Expenditure for Medical" />
+                    </div>
+                </div>&nbsp;
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="EducationalExpenditure">Expenditure for Education</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="EducationalExpenditure" name="EducationalExpenditure" class="form-control" placeholder="Expenditure for Education" />
+                    </div>
+                </div>&nbsp;
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="CommunicationExpenditure">Expenditure for Transportation</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="CommunicationExpenditure" name="CommunicationExpenditure" class="form-control" placeholder="Expenditure for Transportation" />
+                    </div>
+                </div>&nbsp;
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="Miscellaneous">Expenditure for Others</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="Miscellaneous" name="Miscellaneous" class="form-control" placeholder="Expenditure for Others (Explain..." />
+                    </div>
+                </div>&nbsp;
+                <div class="row">
+                    <div class="col-md-8">
+                    </div>
+
+                    <div class="col-md-4">
+                        <input type="submit" id="submit" name="submit" style="background: black" class="btn-success form-control" value="Save" />
+                    </div>
+
+                </div>
+                
+            </form>
+            <label name="label" style="background: darkblue">@message</label>
+        </fieldset>
+    </div>
+</div>
+@section scripts
+{
+
+}

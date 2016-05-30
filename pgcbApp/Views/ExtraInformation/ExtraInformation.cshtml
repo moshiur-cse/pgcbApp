@@ -1,0 +1,112 @@
+﻿@{
+    ViewBag.Title = "ExtraInformation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ExtraInformation</h2>
+
+@*If the government buys land,then  How do you want to  Compensation?*@
+
+
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2 text-center">
+        <fieldset>
+            <legend>Others Information</legend>
+
+            <form id="myform" name="myform" class="form-horizontal" method="POST">
+                <div  class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="ReceivedLoan">If the government buys land,then  How do you want to  Compensation?</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="a" type="checkbox" value="জমির বদলে জমি" />জমির বদলে জমি
+                        <input class="a" type="checkbox" value="B" />B
+                        <input class="a" type="checkbox" value="C" />C
+
+
+                        <textarea id="GovernmentBuys" name="GovernmentBuys" class="form-control" placeholder="Who has been received from the loan ?"></textarea>
+                    </div>
+                </div>&nbsp;
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="ReceivedLoan">আপনি ক্ষতি পুরন  এর টাকা কি মাধ্যম এ চান?</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="checkbox" value="A" />স্থানিয় সরকার এর চেকের মাধ্যমে
+                        <input type="checkbox" value="B" />নগদ টাকা 
+                        <input type="checkbox" value="Others" />Others
+
+
+                        <textarea id="GovernmentBuys" name="GovernmentBuys" class="form-control" placeholder="Who has been received from the loan ?"></textarea>
+                    </div>
+                </div>&nbsp;
+
+                @*Which Media you want compensation you want 
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="ReceivedLoan">If the government buys land,then  How do you want to  Compensation?</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="checkbox" value="A" />A
+                        <input type="checkbox" value="B" />B
+                        <input type="checkbox" value="C" />C
+
+
+                        <textarea id="GovernmentBuys" name="GovernmentBuys" class="form-control" placeholder="Who has been received from the loan ?"></textarea>
+                    </div>
+                </div>&nbsp;*@
+
+                <div class="row">
+                    <div class="col-md-8">
+                    </div>
+
+                    <div class="col-md-4">
+                        <input type="submit" id="submit" name="submit" style="background: black" class="btn-success form-control" value="Save" />
+                    </div>
+
+                </div>&nbsp;
+
+            </form>
+        </fieldset>
+    </div>
+</div>
+
+@section scripts
+{
+
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    @*Who has been received from the loan*@
+    <script>
+
+        $(document).ready(function() {
+
+
+            //$("#CreditResponsibilitYes").click(function() {
+            //    //console.log("Click");
+            //    $("#CreditResponsibilityName").show();
+            //    $("#CreditResponsibilityReceivedForm").show();
+            //});
+            //$("#CreditResponsibilitNo").click(function() {
+            //    //   console.log("Click");
+            //    $("#CreditResponsibilityName").hide();
+            //    $("#CreditResponsibilityReceivedForm").hide();
+            //});
+
+            // $checks = $(":checkbox");
+            $checks = $(": checkbox");
+            $checks.on('click', function() {
+                //alert("ok");
+                var string = $checks.filter(":checked").map(function() {
+                    return this.value;
+                }).get().join(" ,");
+                $('#GovernmentBuys').val(string);
+            });
+        });
+    </script>
+    @*Who has been received from the loan*@
+
+
+
+}

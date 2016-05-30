@@ -1,0 +1,1068 @@
+﻿@using System.Drawing
+@using pgcbApp.Models
+
+@{
+    ViewBag.Title = "SaveStudent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string message = ViewBag.Message;  
+}
+@section style
+{
+<link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" /> <link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet" />
+<style>
+    label.error {
+        color: red;
+        font-style: italic;
+    }
+</style>
+}
+
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2 text-center">
+        <fieldset>
+           
+
+            <form id="myform" name="myform" class="form-horizontal" method="POST" action="">
+                <div class="row">
+                    
+                    <div class="col-md-3">
+                        <label id="codeLabel" for="HouseHoldSlNo" style="color: darkblue">HouseHold SL No</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" id="HouseHoldSlNo" name="HouseHoldSlNo" class="form-control" placeholder="House Hold SL No" />
+                    </div>
+
+                    <div class="col-md-3">
+                        <label id="codeLabel" for="NameOfSs" style="color: darkblue">Name Of SS</label>
+                    </div>
+                    <div class="col-md-3">                                            
+                        <select class="form-control" name="NameOfSs" id="NameOfSs">
+                            
+                            <option value="Mirzapur">1.Mirzapur</option>
+                            <option value="South Surma">2.South Surma</option>                           
+                            <option value="Kachua">3.Kachua</option>
+                            <option value="Shyampur">4.Shyampur</option>
+                            <option value="Dhamrai">5.Dhamrai</option>
+                        </select>
+                    </div>
+                </div>&nbsp;
+
+                <h3> Power Grid Company Of Bangladesh Ltd (PGCB)</h3>
+                <h4>Center for Environmental and Geographic Information Services (CEGIS)</h4>
+                <hr/>
+                <h4>Socio-economic Status of PAPs </h4>
+                <hr />
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="NameOfAffectedPerson">1. Name of the PAPs</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" id="NameOfAffectedPerson" name="NameOfAffectedPerson" class="form-control" placeholder="Name" />
+                    </div>
+                    <div class="col-md-1">
+                        <label id="codeLabel" for="Date">Date</label>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" id="Date" name="Date" class="form-control" placeholder="Date" />
+                    </div>
+                </div>&nbsp;
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="NidCardNumber">2. National ID No</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" id="NidCardNumber" name="NidCardNumber" class="form-control" placeholder="National ID Card No" />
+                    </div>
+                    <div class="col-md-1">
+                        <label id="codeLabel" for="PhoneNo">Phone Number</label>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" id="PhoneNo" name="PhoneNo" class="form-control" placeholder="Phone Number" />
+                    </div>
+                </div>&nbsp;
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="HusbandOrFathersNameOfAffectedPerson">3. Name of Fathers /Husbands of PAPs</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="HusbandOrFathersNameOfAffectedPerson" name="HusbandOrFathersNameOfAffectedPerson" class="form-control" placeholder="Name of Fathers /Husbands of PAPs" />
+                    </div>
+                </div>&nbsp;
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="NameOfHeadOfTheFamily">4. Name of HH Head</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="NameOfHeadOfTheFamily" name="NameOfHeadOfTheFamily" class="form-control" placeholder="Name of HH Head" />
+                    </div>
+                </div>&nbsp;
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="GenderNameOfHeadOfTheFamily">5. HH Head Male /Female ?      </label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="radio" id="GenderNameOfHeadOfTheFamily" name="GenderNameOfHeadOfTheFamily" value="Male" checked/>Male
+                        <input type="radio" id="GenderNameOfHeadOfTheFamily" name="GenderNameOfHeadOfTheFamily" value="Female" />Femal
+                    </div>
+                </div>&nbsp;
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="">6. Address</label>
+                    </div>
+                    <div class="col-md-6">
+
+                    </div>
+
+                </div>
+                <hr />
+               
+                <div class="row">
+                       
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label id="codeLabel" for="District">District</label>
+                            </div>
+                            <div class="col-md-10">
+                                <select class="form-control" name="District" id="District">
+                                    <option value="">...Select...</option>
+                                    @{                                 //null reference Exeption
+                                        try
+                                        {
+                                            foreach (AddressInformation aDistrict in ViewBag.District)
+                                            {
+                                                <option value="@aDistrict.DistrictName" name="@aDistrict.DistrictName " id="@aDistrict.DistrictName">@aDistrict.DistrictName</option>
+                                            }
+
+                                        }
+                                        catch (Exception)
+                                        {
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label id="codeLabel" for="Upazilla">Upazila</label>
+                            </div>
+                            <div class="col-md-10">
+                                <select class="form-control" name="Upazilla" id="Upazilla">
+                                    <option value="">...Select...</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label id="Label" for="">Union</label>
+                            </div>
+                            <div class="col-md-10">
+                                <select class="form-control" name="Union" id="Union">
+                                    <option value="">...Select...</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label id="Label" for="">Mauza</label>
+                            </div>
+                            <div class="col-md-10">
+                                <select class="form-control" name="Mauza" id="Mauza">
+                                    <option value="">...Select...</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label id="Label" for="">Ward</label>
+                            </div>
+                            <div class="col-md-10">
+                                <select class="form-control" name="Ward" id="Ward">
+                                    <option value="">...Select...</option>
+                                    <option value="Ward No 1">Ward No 1</option>
+                                    <option value="Ward No 2">Ward No 2</option>
+                                    <option value="Ward No 3">Ward No 3</option>
+                                    <option value="Ward No 4">Ward No 4</option>
+                                    <option value="Ward No 5">Ward No 5</option>
+                                    <option value="Ward No 6">Ward No 6</option>
+                                    <option value="Ward No 7">Ward No 7</option>
+                                    <option value="Ward No 8">Ward No 8</option>
+                                    <option value="Ward No 9">Ward No 9</option>
+                                    <option value="Ward No 10">Ward No 10</option>
+                                    <option value="Ward No 11">Ward No 11</option>
+                                    <option value="Ward No 12">Ward No 12</option>
+                                    <option value="Ward No 13">Ward No 13</option>
+                                    <option value="Ward No 14">Ward No 14</option>
+                                    <option value="Ward No 15">Ward No 15</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label id="Label" for="">Village</label>
+                            </div>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" id="Village" name="Village" placeholder="Village" />
+                            </div>
+                        </div>
+                    </div>
+                </div>&nbsp;
+                   
+                   
+ 
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="ProfessionOfAffectedPerson">7. Occupation of PAPs</label>
+                    </div>
+                    <div class="col-md-6">
+                        @*<input type="text" id="ProfessionOfAffectedPerson" name="ProfessionOfAffectedPerson" class="form-control" placeholder="Profession Of Affected Person" />*@
+                        <select class="form-control" name="ProfessionOfAffectedPerson" id="ProfessionOfAffectedPerson">
+                                
+                            <option value="">...Select...</option>
+                                
+                            <option value="Govt. service">1.Govt. service</option>
+                                
+                            <option value="Non govt. service ">2.Non govt. service </option>
+
+                                
+                            <option value="small traders">3.small traders  </option>
+                                
+                            <option value="medium traders">4. medium traders  </option>
+                                
+                            <option value="large traders">5.large traders  </option>
+                                
+                            <option value="own land cultivation">6.own land cultivation</option>
+                                
+                            <option value="Share cropper in">7.Share cropper in</option>
+                                
+                            <option value="Share cropper out">8.Share cropper out </option>
+                                
+                            <option value="Agro. Day labor">9.Agro. Day labor</option>
+                                
+                            <option value="Non agri. Day labor">10. Non agri. Day labor</option>
+                                
+                            <option value="Fisher">11.Fisher</option>
+                                
+                            <option value="Fish farmer">12.Fish farmer</option>
+                                
+                            <option value="Fish traders">13.Fish traders </option>
+                                
+                            <option value="Household work">14.Household work </option>
+                                
+                            <option value="student">15.student</option>
+                                
+                            <option value="un-employment">16.un-employment  </option>
+                                
+                            <option value="old aged">17.old aged </option>
+
+                                
+                            <option value="Cottage">18.Cottage </option>
+
+                                
+                            <option value="Self earned ">19.Self earned   </option>
+
+                                
+                            <option value="Others">20.Others</option>
+                        </select>
+                    </div>
+                </div>&nbsp;
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="">8. Type of PAPs</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="radio" id="TypesOfAffectedPeople" name="TypesOfAffectedPeople" value="Own cultivation" checked />Own cultivation	
+                        <input type="radio" id="TypesOfAffectedPeople" name="TypesOfAffectedPeople" value="Share cropper" />Share cropper
+                        <input type="radio" id="TypesOfAffectedPeople" name="TypesOfAffectedPeople" value="Lease" />Lease
+                    </div>
+                </div>&nbsp;
+                
+             
+
+                @*<div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="FamilyDrinkingWaterDetails">13.  Source of Drinking water: </label>
+                    </div>
+                    <div class="col-md-6">
+                        <select name="FamilyDrinkingWaterDetails" id="FamilyDrinkingWaterDetails" class="form-control">
+
+                            <option value="">Select...</option>
+                            <option value="Motorized Tube well">Motorized Tube well</option>
+                            <option value="HTW">HTW</option>
+                            <option value="HTW 3- Pond water"> Pond water</option>
+                            <option value="Rivers Water ">Rivers Water </option>
+                            <option value="Wells water ">Wells water </option>                            
+                            <option value="Wells water">Deep tube well water</option>
+                            <option value="Others">Others</option>
+                            
+
+                        </select>
+                    </div>
+                </div>&nbsp;
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="FamilyBathroomDetails">14. Status of latrine</label>
+                    </div>
+                    <div class="col-md-6">
+                        <select name="FamilyBathroomDetails" id="FamilyBathroomDetails" class="form-control">
+
+                            <option value="">Select...</option>
+                            <option value="Sanitary Latrine">Sanitary Latrine</option>
+                            <option value="Ring Slab">Ring Slab</option>
+                            <option value="Kanch">Kanch</option>
+                            <option value="Open">Open</option>
+                            <option value="no Facilities"></option>
+
+                        </select>
+                    </div>
+                </div>&nbsp;
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="AreYouAwareOfTheProposedProject">15. Aware about the proposed project?</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="radio" name="AreYouAwareOfTheProposedProject" value="Yes" checked />Yes
+                        <input type="radio" name="AreYouAwareOfTheProposedProject" value="No" />No
+                    </div>
+                </div>&nbsp;
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="DoYouHaveLandLease">17. Do you have leased /mortgaged land?</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="radio" id="yes" name="DoYouHaveLandLease" value="Yes" />Yes
+                        <input type="radio" id="no" name="DoYouHaveLandLease" value="No" />No
+                    </div>
+                </div>&nbsp;
+                @*Year*@
+                @*<div id="year" class="row" style="display: none">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="HowManyYears">18. If yes, for how many years? </label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="ForManyYears" name="HowManyYears" class="form-control" placeholder="How Many Years" />
+                    </div>
+                </div>&nbsp;
+
+                <div id="money" class="row" style="display: none">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="HowMuchMoney">19. If yes, how much price (taka)?  </label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="HowMuchMoney" name="HowMuchMoney" class="form-control" placeholder="How Much Money?" />
+                    </div>
+                </div>&nbsp;
+                
+                
+              
+                <div id="IsAffectedLandUnderShare"  style="display: none">
+                    <div class="col-md-12">
+                        <label id="codeLabel" for="HowMuchMoney">20. If affected land is under share cropped /leased/ mortgaged, then its owners name and address  </label>
+                        </div>
+                        <hr />
+                        <div class="row" style="margin-left: 30px">
+                            <div class="col-md-6">
+                                <label id="codeLabel" for="A">JL No. (Khatian no.)</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" id="A" name="A" class="form-control" placeholder="JL No. (Khatian no.)" />
+                            </div>
+                        </div>&nbsp;
+
+                        <div class="row" style="margin-left: 30px">
+                            <div class="col-md-6">
+                                <label id="codeLabel" for="B">Plot no/ Dag no (as RS and CS khatian) </label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" id="B" name="B" class="form-control" placeholder="Plot no/ Dag no (as RS and CS khatian) " />
+                            </div>
+                        </div>&nbsp;
+
+                        <div class="row" style="margin-left: 30px">
+                            <div class="col-md-6">
+                                <label id="codeLabel" for="C">Total Acquired land (Decimal)</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" id="C" name="C" class="form-control" placeholder="Total Acquired land (Decimal)" />
+                            </div>
+                        </div>&nbsp;
+
+                        <div class="row" style="margin-left: 30px">
+                            <div class="col-md-6">
+                                <label id="codeLabel" for="D"> Name of sharecropper, leaser and mortgage owner, fathers name, and address </label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" id="D" name="D" class="form-control" placeholder="Name of sharecropper, leaser and mortgage owner, fathers name, and address " />
+                            </div>
+                        </div>&nbsp;
+                    </div>*@
+
+                @*<div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="FamilyStatus">23. Self assessed Poverty Analysis </label>
+                    </div>
+                    <div class="col-md-6">
+                        <select name="FamilyStatus" id="FamilyStatus" class="form-control">
+
+                            <option value="">Select...</option>
+                            <option value="Year deficit">Deficit</option>
+                            <option value="Break-even">Break-even</option>
+                            <option value="Surplus">Surplus</option>
+                        </select>
+                    </div>
+                </div>&nbsp;
+
+                <div id="YearDeficit" class="row" style="display: none">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="HowDoesTheCostCarryingOut">24. If Deficit then how bare this situation </label>
+                    </div>
+                    <div class="col-md-6">
+                        <select name="HowDoesTheCostCarryingOut" id="HowDoesTheCostCarryingOut" class="form-control">
+                            <option value="">Select...</option>
+                            <option value="Sell Land ">Sell Land </option>
+                            <option value="Mortgage land ">Mortgage land </option>
+                            <option value="Borrowing">Borrowing</option>
+                            <option value="Do business ">Do business </option>
+                            <option value="Sell cattle">Sell cattle</option>
+                            <option value="Take loan from relatives">Take loan from relatives</option>
+                            <option value="Others">Others (explain… </option>
+                        </select>
+                    </div>
+                </div>&nbsp;
+
+              
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="CreditResponsibility">25. Do you have any loan? </label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="radio" id="CreditResponsibilitYes" name="CreditResponsibility" value="Yes" />Yes
+                        <input type="radio" id="CreditResponsibilitNo" name="CreditResponsibility" value="No" />No
+                    </div>
+                </div>&nbsp;
+
+                <div id="CreditResponsibilityName" class="row" style="display: none">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="CreditResponsibilityMoney">26. If Yes, How much taka? </label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="CreditResponsibilityMoney" name="CreditResponsibilityMoney" class="form-control" placeholder="How Much Money?" />
+                    </div>
+                </div>&nbsp;
+
+
+
+                <div id="CreditResponsibilityReceivedDiv" class="row" style="display: none">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="CreditResponsibilityReceivedForm">27. Which sources do you have get loan? </label>
+                    </div>
+                    <div class="col-md-6">
+                      
+                        <input class="a" type="checkbox" value="BRAC" />BRAC
+                        <input class="a" type="checkbox" value="Proshika" />Proshika
+                        <input class="a" type="checkbox" value="Asha" />Asha 
+                        <input class="a" type="checkbox" value="TMSS" />TMSS
+                        <input class="a" type="checkbox" value="Agrani Bank" />Agrani Bank  
+                        <input class="a" type="checkbox" value="Dustah health care Center" />Dustah health care Center  
+                        <input class="a" type="checkbox" value="Local organization" />Local organization
+                        <input class="a" type="checkbox" value="BDRB" />BDRB 
+                        <input class="a" type="checkbox" value="CARE" />CARE
+                        <input class="a" type="checkbox" value="Karitas" />Karitas
+                        <input class="a" type="checkbox" value="Krishi Bank" />Krishi Bank
+                        
+                        <input class="a" type="checkbox" value="Sonali Bank" />Sonali Bank 
+                        <input class="a" type="checkbox" value="Janata Bank" />Janata Bank
+                        <input class="a" type="checkbox" value="Social service division" />Social service division 
+                        <input class="a" type="checkbox" value="World vision" />World vision 
+                        <input class="a" type="checkbox" value="Loan from relatives" />Loan from relatives
+                        
+                        <input class="a" type="checkbox" value="Loan from Mahajan" />Loan from Mahajan
+                        <input class="a" type="checkbox" value="Others" />Others
+                        
+
+                        <textarea id="CreditResponsibilityReceivedForm" name="CreditResponsibilityReceivedForm" class="form-control" placeholder="Which sources do you have get loan? "></textarea>
+                    </div>
+                </div>&nbsp;
+                             
+                <div id="GovernmentBuysDiv" class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="GovernmentBuysCompensation">28. If the land acquired by GoB, then how you want compensation?</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="b" type="checkbox" value="Land instead of land" />Land instead of land
+                        <input class="b" type="checkbox" value="Taka instead of land" />Taka instead of land
+                        <input class="b" type="checkbox" value="Training for rehabilitation" />Training for rehabilitation
+                        <input class="b" type="checkbox" value="Others" />Others
+
+
+                        <textarea id="GovernmentBuysCompensation" name="GovernmentBuysCompensation" class="form-control" placeholder="If the land acquired by GoB, then how you want compensation?"></textarea>
+                    </div>
+                </div>&nbsp;
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="HowCanYouCompensationMoney">29. Which medium do you prefer for compensation money payment?  </label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="aHowCanYouCompensationMoney" type="checkbox" value="Check by local bank" />Check by local bank
+                        <input class="aHowCanYouCompensationMoney" type="checkbox" value="Cash money through Union Parishad" />Cash money through Union Parishad
+                        <input class="aHowCanYouCompensationMoney" type="checkbox" value="Cash Money through Upazila Parishad" />Cash Money through Upazila Parishad
+                        
+                        <input class="aHowCanYouCompensationMoney" type="checkbox" value="Cash Money through Zila Parishad" />Cash Money through Zila Parishad
+                        <input class="aHowCanYouCompensationMoney" type="checkbox" value="Cash Money through PGCB; " />Cash Money through PGCB; 
+                        <input class="aHowCanYouCompensationMoney" type="checkbox" value="Cash Money in open place meeting" />Cash Money in open place meeting
+
+                        <input class="aHowCanYouCompensationMoney" type="checkbox" value="Others" />Others (explain......
+
+
+                        <textarea id="HowCanYouCompensationMoney" name="HowCanYouCompensationMoney" class="form-control" placeholder="Which medium do you prefer for compensation money payment?"></textarea>
+                    </div>
+                </div>&nbsp;
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="DoYouHaveNeedAnyCommittee">30. Do you think any necessity of GRC for the trouble shooting?</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="radio" id="DoYouHaveNeedAnyCommitteeYes" name="DoYouHaveNeedAnyCommittee" value="Yes" />Yes
+                        <input type="radio" id="DoYouHaveNeedAnyCommitteeNo" name="DoYouHaveNeedAnyCommittee" value="No" />No
+                    </div>
+                </div>&nbsp;
+
+                <div id="DoYouHaveNeedAnyCommitteeDiv" class="row" style="display: none">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="ListOfCommitteeMembers">31. If yes, who will be the GRC members, suggest? </label>
+                    </div>
+                    <div class="col-md-6">
+
+                        <textarea id="ListOfCommittee" name="ListOfCommitteeMembers" class="form-control" placeholder="Who has been received from the loan ?"></textarea>
+                    </div>
+                </div>&nbsp;
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="MainProblemOfYouTerritory">32. What is the basic problem faced by you in this area?  </label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="Flood" />Flood
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="Drainage congestion" />Drainage congestion
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="River erosion" />River erosion
+
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="Sand carpeting" />Sand carpeting
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="Bad Communication  " />Bad Communication  
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="Bad water quality " />Bad water quality 
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="Lack of drinking water" />Lack of drinking water
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="lank of irrigation water" />lank of irrigation water
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="Crop damage" />Crop damage
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="Fish damage" />Fish damage
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="House damage" />House damage
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="Low income" />Low income
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="Cough/asthma and other diseases" />Cough/asthma and other diseases
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="Unknown" />Unknown
+                        <input class="aMainProblemOfYouTerritory" type="checkbox" value="Others" />Others (explain…. 
+                        
+
+
+                        <textarea id="MainProblemOfYouTerritory" name="MainProblemOfYouTerritory" class="form-control" placeholder="What is the basic problem faced by you in this area?  "></textarea>
+                    </div>
+                </div>&nbsp;
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="BenefitAfterCompleteProject">33. What type of benefits do you expect after implementation of the project? </label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Increase business centers" />Increase business centers
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Develop road communication " />Develop road communication 
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Increase land price " />Increase land price 
+
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Create employment opportunities " />Create employment opportunities 
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Ddevelop education facilities " />Ddevelop education facilities 
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Develop health facilities" />Develop health facilities 
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Create Business Facilities " />Create Business Facilities 
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Develop industrial facilities" />Develop industrial facilities
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Develop water supply facilities" />Develop water supply facilities
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Develop sanitation facilities" />Develop sanitation facilities
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Create more income" />Create more income
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Develop social status" />Develop social status 
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Decrease land price to some places" />Decrease land price to some places
+                        <input class="aBenefitAfterCompleteProject" type="checkbox" value="Others" />Others (explain.....)
+
+
+                        <textarea id="BenefitAfterCompleteProject" name="BenefitAfterCompleteProject" class="form-control" placeholder="What type of benefits do you expect after implementation of the project?" ></textarea>
+                    </div>
+                </div>&nbsp;
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="DifficultyAfterCompleteProject">34. What type of dis-benefits do you expect after implementation of the project? </label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="Scope of employment will be reduced" />Scope of employment will be reduced
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="Un-planned town ship" />Un-planned town ship
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="Less production of crop " />Less production of crop 
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="Migration to other place due to environmental degradation" />Migration to other place due to environmental degradation
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="Crop land will be reduced" />Crop land will be reduced
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="Less income in HH level" />Less income in HH level
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="Decrease land fertility 8-Decrease fish production" />Decrease land fertility 8-Decrease fish production
+
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="Bad environment" />Bad environment 
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="Declining of status of poor people" />Declining of status of poor people
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="Conflict with different social party" />Conflict with different social party
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="Drainage congestion " />Drainage congestion 
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="Permanent migration due to land acquire" />Permanent migration due to land acquire
+                        <input class="aDifficultyAfterCompleteProject" type="checkbox" value="Others" />Others (Explain...    
+
+
+                        <textarea id="DifficultyAfterCompleteProject" name="DifficultyAfterCompleteProject" class="form-control" placeholder="What type of dis-benefits do you expect after implementation of the project?"></textarea>
+                    </div>
+                </div>&nbsp;
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="AdviseToRemoveDifficulty">35. What are the suggestions to solve these problems mentioned above? </label>
+                    </div>
+                    <div class="col-md-6">
+
+                        <textarea id="AdviseToRemoveDifficulty" name="AdviseToRemoveDifficulty" class="form-control" placeholder="What are the suggestions to solve these problems mentioned above? "></textarea>
+                    </div>
+                </div>&nbsp;
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="DataCollectorFeedback">36. Comments from Enumerators</label>
+                    </div>
+                    <div class="col-md-6">
+
+
+
+                        <textarea id="DataCollectorFeedback" name="DataCollectorFeedback" class="form-control" placeholder="Comments from Enumerators?"></textarea>
+                    </div>
+                </div>&nbsp;*@
+       
+                <div class="row">
+                    <div class="col-md-8">
+                    </div>
+
+                    <div class="col-md-4">
+                        <input type="submit" id="submit" name="submit" style="background: black" class="btn-success form-control" value="Save" />
+                    </div>
+
+                </div>&nbsp;
+                
+                <label name="messageLabel" style="color:red ">@message</label>
+            </form>
+
+        </fieldset>
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+
+    <script type="text/javascript">
+
+        $('#Date').datepicker({
+            autoclose: true,
+            todayHighlight: true
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            console.log("Ok");
+            $("#District").change(function () {
+               
+                var departmentId = $("#District").val();
+                var json = { districtName: departmentId };
+
+                $("#Upazilla").empty();
+                $("#Union").empty();
+                $("#Mauza").empty();
+
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetUpazilaByDistrictName", "BasicInformationOfAffectedPersons")',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(json),
+                    dataType: "json",
+                    success: function (data) {
+
+                        console.log(data);
+
+                        $.each(data, function (key, value) {
+                            $("#Upazilla").append('<option value="'+value.UpazilaName+'">' + value.UpazilaName + '</option>');
+
+
+                        });
+
+                    }
+                });
+
+            });
+        });
+
+       
+    </script>
+    
+    <script>
+        $(document).ready(function () {
+            console.log("Ok");
+            $("#Upazilla").change(function () {
+            
+                var upazilaName = $("#Upazilla").val();
+                var json = { upazilaName: upazilaName };
+
+                $("#Union").empty();
+                //  $("#teacherId").append('<option value="">--Select--</option>');
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetUnionByUpazilaNmae", "BasicInformationOfAffectedPersons")',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(json),
+                    dataType: "json",
+                    success: function (data) {
+
+                        console.log(data);
+
+                        $.each(data, function (key, value) {
+                            $("#Union").append('<option value="'+value.UnionName+'">' + value.UnionName + '</option>');
+
+
+                        });
+
+                    }
+                });
+
+            });
+        });
+       
+    </script>
+
+<script>
+    $(document).ready(function () {
+        console.log("Ok");
+        $("#Union").change(function () {           
+            var unionName = $("#Union").val();
+            var json = { unionName: unionName };
+
+            $("#Mauza").empty();
+          
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetMauzaByUnionNmae", "BasicInformationOfAffectedPersons")',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(json),
+                dataType: "json",
+                success: function (data) {
+
+                    console.log(data);
+
+                    $.each(data, function (key, value) {
+                        $("#Mauza").append('<option value="'+value.MauzaName+'">' + value.MauzaName + '</option>');
+
+
+                    });
+
+                }
+            });
+
+        });
+    });
+
+   
+</script>
+
+    <script>
+    $(document).ready(function () {
+            $("#myform").validate({
+                rules: {
+                    HouseHoldSlNo: "required",
+                    NameOfSs: "required",
+                NameOfAffectedPerson: "required",
+                Date: "required",
+                NidCardNumber: {
+                   
+                    min:1
+                },
+                PhoneNo: {
+                   
+                    min: 1
+                },
+                HusbandOrFathersNameOfAffectedPerson: "required",
+                NameOfHeadOfTheFamily: "required",
+                GenderNameOfHeadOfTheFamily: "required",
+                District: "required",
+                //Upazilla: "required",
+               // Union: "required",
+               // Mauza: "required",
+                Village: "required",
+                ProfessionOfAffectedPerson: "required",
+                TypesOfAffectedPeople: "required",
+                FamilyDrinkingWaterDetails: "required",
+                FamilyBathroomDetails: "required",
+                AreYouAwareOfTheProposedProject: "required",
+                DoYouHaveLandLease: "required",
+                FamilyStatus: "required",
+                CreditResponsibility: "required",
+                GovernmentBuysCompensation: "required",
+                DoYouHaveNeedAnyCommittee: "required",
+
+                ListOfCommitteeMembers: "required",
+
+                MainProblemOfYouTerritory: "required",
+
+                BenefitAfterCompleteProject: "required",
+
+                DifficultyAfterCompleteProject: "required",
+
+                AdviseToRemoveDifficulty: "required",
+
+                DataCollectorFeedback: "required"
+
+
+
+            },
+            messages: {
+
+                HouseHoldSlNo: "Please Enter No",
+                required:"Select Selcet a SS",
+                NameOfAffectedPerson: "Please Enter Your Name",
+                Date: "Please Select a Date",
+                NidCardNumber: {
+                    required: "Please Enter a National Id ",
+                    min:"National Id Must Be in Correct Formate"
+                },
+                PhoneNo: {
+                    required: "Please Enter a Phone Number",
+                    min: "Phnone Number Must be Correct Formate"
+                },
+                HusbandOrFathersNameOfAffectedPerson: "Please Enter Husband Or Father's Name",
+                NameOfHeadOfTheFamily: "Please Enter The Name of Head of Family",
+                GenderNameOfHeadOfTheFamily: "Please Select a Gender",
+                District: "Please Select a District",
+                Upazilla: "Please Select a Upazilla",
+                Union: "Please Select a union",
+               // Mauza: "Please Select a Mauza",
+                Village: "Please Enter a Village Name",
+                ProfessionOfAffectedPerson: "Please Enter Profession Name",
+                TypesOfAffectedPeople: "Please Select a Type",
+                FoodExpenditure: {
+                    required: "Please Enter Number",
+                    min: "Please Enter Numeric Number without Negative Value"
+                },
+                ClothExpenditure: {
+                    required: "Please Enter Number",
+                    min: "Please Enter Numeric Number without Negative Value"
+                },
+                ResidenceRepairingExpenditure: {
+                    required: "Please Enter Number",
+                    min: "Please Enter Numeric Number without Negative Value"
+                },
+                MedicalExpenditure: {
+                    required: "Please Enter Number",
+                    min: "Please Enter Numeric Number without Negative Value"
+                },
+                EducationalExpenditure: {
+                    required: "Please Enter Number",
+                    min: "Please Enter Numeric Number without Negative Value"
+                },
+                CommunicationExpenditure: {
+                    required: "Please Enter Number",
+                    min: "Please Enter Numeric Number without Negative Value"
+                },
+                Miscellaneous: {
+                    required: "Please Enter Number",
+                    min: "Please Enter Numeric Number without Negative Value"
+                }
+            }
+
+        });
+    });
+</script>
+<script>
+
+    $(document).ready(function () {
+
+
+        $("#CreditResponsibilitYes").click(function () {
+            //console.log("Click");
+            $("#CreditResponsibilityName").show();
+            $("#CreditResponsibilityReceivedDiv").show();
+        });
+        $("#CreditResponsibilitNo").click(function () {
+            //   console.log("Click");
+            $("#CreditResponsibilityName").hide();
+            $("#CreditResponsibilityReceivedDiv").hide();
+        });
+
+        $checks = $(".a");
+
+        $checks.on('click', function () {
+
+            var string = $checks.filter(":checked").map(function () {
+                return this.value;
+            }).get().join(" ,");
+            $('#CreditResponsibilityReceivedForm').val(string);
+        });
+
+        $check = $(".b");
+
+        $check.on('click', function () {
+
+            var string = $check.filter(":checked").map(function () {
+                return this.value;
+            }).get().join(" ,");
+            $('#GovernmentBuysCompensation').val(string);
+        });
+        //aHowCanYouCompensationMoney
+        $aHowCanYouCompensationMoney = $(".aHowCanYouCompensationMoney");
+
+        $aHowCanYouCompensationMoney.on('click', function () {
+
+            var string = $aHowCanYouCompensationMoney.filter(":checked").map(function () {
+                return this.value;
+            }).get().join(" ,");
+            $('#HowCanYouCompensationMoney').val(string);
+        });
+
+
+        $aMainProblemOfYouTerritory = $(".aMainProblemOfYouTerritory");
+
+        $aMainProblemOfYouTerritory.on('click', function () {
+
+            var string = $aMainProblemOfYouTerritory.filter(":checked").map(function () {
+                return this.value;
+            }).get().join(" ,");
+            $('#MainProblemOfYouTerritory').val(string);
+        });
+
+        //BenefitAfterCompleteProject
+        $aBenefitAfterCompleteProject = $(".aBenefitAfterCompleteProject");
+
+        $aBenefitAfterCompleteProject.on('click', function () {
+
+            var string = $aBenefitAfterCompleteProject.filter(":checked").map(function () {
+                return this.value;
+            }).get().join(" ,");
+            $('#BenefitAfterCompleteProject').val(string);
+        });
+        //DifficultyAfterCompleteProject
+
+        $aDifficultyAfterCompleteProject = $(".aDifficultyAfterCompleteProject");
+
+        $aDifficultyAfterCompleteProject.on('click', function () {
+
+            var string = $aDifficultyAfterCompleteProject.filter(":checked").map(function () {
+                return this.value;
+            }).get().join(" ,");
+            $('#DifficultyAfterCompleteProject').val(string);
+        });
+
+
+
+
+
+        $("#DoYouHaveNeedAnyCommitteeYes").click(function () {
+            //console.log("Click");
+            $("#DoYouHaveNeedAnyCommitteeDiv").show();
+            // $("#CreditResponsibilityReceivedDiv").show();
+        });
+        $("#DoYouHaveNeedAnyCommitteeNo").click(function () {
+            //   console.log("Click");
+            $("#DoYouHaveNeedAnyCommitteeDiv").hide();
+            // $("#CreditResponsibilityReceivedDiv").hide();
+        });
+
+
+
+        $("#DoYouHaveNeedAnyCommitteeYes").click(function () {
+            //console.log("Click");
+            $("#DoYouHaveNeedAnyCommitteeDiv").show();
+            // $("#CreditResponsibilityReceivedDiv").show();
+        });
+        $("#DoYouHaveNeedAnyCommitteeNo").click(function () {
+            //   console.log("Click");
+            $("#DoYouHaveNeedAnyCommitteeDiv").hide();
+            // $("#CreditResponsibilityReceivedDiv").hide();
+        });
+
+
+    });
+</script>
+@*Who has been received from the loan*@
+
+
+
+
+@*DoYouHaveLandLease*@
+
+<script>
+    $(document).ready(function () {
+        //  console.log("ready");
+        $("#yes").click(function () {
+            // console.log("Click");
+            $("#year").show();
+            $("#money").show();
+            $("#IsAffectedLandUnderShare").show();
+        });
+        $("#no").click(function () {
+            //   console.log("Click");
+            $("#year").hide();
+            $("#money").hide();
+            $("#IsAffectedLandUnderShare").hide();
+        });
+
+
+        $("#FamilyStatus").change(function () {
+            //alert("ok");
+
+            var name = $("#FamilyStatus").val();
+            console.log(name);
+            if (name == "Year deficit") {
+                $("#YearDeficit").show();
+            } else {
+                $("#YearDeficit").hide();
+            }
+        });
+
+    });
+
+</script>
+
+
+
+}
+
+
+
+
+

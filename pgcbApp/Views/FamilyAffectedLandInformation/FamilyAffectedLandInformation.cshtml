@@ -1,0 +1,125 @@
+﻿@{
+    ViewBag.Title = "FamilyAffectedLandInformation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>17. Information on Acquired land of HH</h2>
+
+<form id="myform" name="myform" class="form-horizontal" method="POST">
+
+    <table class="table table-bordered table-responsive table-hover" id="showTable">
+        <thead style="background: black;color: white">
+            <tr>
+                <td style="display: none">Id</td>
+                <td>JL No. (Khatian no.) </td>
+                <td>Plot no/ Dag no (as RS and CS khatian) </td>
+                <td>Total Acquired land (Decimal)</td>
+                <td>Ownership Pattern*</td>
+                <td>Market Price of Acquired land (taka)</td>
+                <td>Present land use pattern *</td>
+                <td>
+                    <button id="btnAdd" class="btn btn-success" type="button">+</button>
+                    <button id="btnRemove" class="btn btn-success" type="button">-</button>
+                </td>
+
+            </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-8">
+        </div>
+        <div class="col-md-4">
+            <input type="submit" id="submit" name="submit" style="background: black" class="btn-success form-control" value="Save" />
+        </div>
+
+    </div>&nbsp;
+
+    @*<label name="messageLabel" style="color:darkblue ">@message</label>*@
+</form>
+
+
+@section scripts
+{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            addRow(0);
+            localStorage.setItem('index', 1);
+
+            $("#btnAdd").click(function () {
+                var i = Number(localStorage.index);
+
+                addRow(i);
+
+                localStorage.setItem('index', i + 1);
+            });
+            $("#btnRemove").click(function () {
+                removeRow();
+            });
+        });
+        function removeRow() {
+            var i = Number(localStorage.index) - 1;
+            if (i > 0) {
+                $("#" + i).remove();
+            }
+
+
+            localStorage.setItem('index', i);
+        }
+
+        function addRow(i) {
+            var str = '<tr id=' + i + '>' +
+                        '<td style="display: none"><input type="text" class="form-control" id="data[' + i + '].BasicInformationOfAffectedPersonNid" name="data[' + i + '].BasicInformationOfAffectedPersonNid" value="@(ViewContext.RouteData.Values["id"])" /></td>' +
+
+
+
+                        '<td><input type="text" class="form-control" id="data[' + i + '].JlNo" name="data[' + i + '].JlNo" placeholder="1" /></td>' +
+
+                        '<td><input type="text" class="form-control" id="data[' + i + '].PlotNo" name="data[' + i + '].PlotNo" placeholder="2" /></td>' +
+                 '<td><input type="text" class="form-control" id="data[' + i + '].TotalAcquiedLand" name="data[' + i + '].TotalAcquiedLand" placeholder="3" /></td>' +
+                        '<td>' +
+                        '<select class="form-control" name="data[' + i + '].OwnershipPattern" id="data[' + i + '].OwnershipPattern">' +
+                                '<option value="">...Select...</option>' +
+
+                                '<option value="Fathers land">1.Fathers land</option>' +
+
+                                '<option value="owned by buy">2.owned by buy </option>' +
+                                '<option value="Leased in">3.Leased in</option>' +
+
+                                '<option value="leased out ">4.leased out </option>' +
+                                
+
+
+                       '</select>' +
+
+                '</td >' +
+
+
+
+                      
+                        '</td>' +
+                        '<td><input type="text" class="form-control" id="data[' + i + '].MarketPriceOfAcquiredLand" name="data[' + i + '].MarketPriceOfAcquiredLand" placeholder="5" /></td >' +
+                        '<td>' +
+                        '<select class="form-control" name="data[' + i + '].PresentLandUsePattern" id="data[' + i + '].PresentLandUsePattern">' +
+                                '<option value="">...Select...</option>' +
+
+                                '<option value="self cultivation">1.self cultivation</option>' +
+
+                                '<option value="share cropper out">2.share cropper out </option>' +
+                                '<option value="Leased out">3.Leased out</option>' +
+                                '<option value="Mortgage out">4.Mortgage out</option>' +
+                                '<option value="leased in ">5.leased in </option>' +
+                                
+
+
+                         '</select>' +
+                    '</td >' +
+                '</tr>';
+
+
+            $("#tbody").append(str);
+
+        }
+    </script>
+}

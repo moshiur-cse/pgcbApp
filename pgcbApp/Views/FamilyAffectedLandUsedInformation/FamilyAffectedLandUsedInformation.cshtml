@@ -1,0 +1,155 @@
+﻿
+@{
+    ViewBag.Title = "FamilyAffectedLandUsedInformation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>22. Land use of affected land  </h2>
+
+
+<form id="myform" name="myform" class="form-horizontal" method="POST">
+
+    <table class="table table-bordered table-responsive table-hover" id="showTable">
+        <thead style="background: black;color: white">
+            <tr>
+                <td style="display: none">Id</td>
+                <td>JL No. (Khatian no.)</td>
+                <td>Plot no/ Dag no (as RS and CS khatian) </td>
+                <td>Land Elevation*</td>
+                <td>Land Use*</td>
+                <td>Price of others assets /trees excepts crops (taka)</td>
+                <td>
+                    <button id="btnAdd" class="btn btn-success" type="button">+</button>
+                    <button id="btnRemove" class="btn btn-success" type="button">-</button>
+                </td>
+
+            </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-8">
+        </div>
+
+        <div class="col-md-4">
+            <input type="submit" id="submit" name="submit" style="background: black" class="btn-success form-control" value="Save" />
+        </div>
+
+    </div>&nbsp;
+    @*<label name="messageLabel" style="color:darkblue ">@message</label>*@
+</form>
+
+
+@section scripts
+{
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+        addRow(0);
+        localStorage.setItem('index', 1);
+
+        $("#btnAdd").click(function () {
+            var i = Number(localStorage.index);
+
+            addRow(i);
+
+            localStorage.setItem('index', i + 1);
+        });
+        $("#btnRemove").click(function () {
+            removeRow();
+        });
+    });
+    function removeRow() {
+        var i = Number(localStorage.index) - 1;
+        if (i>0) {
+            $("#" + i).remove();
+        }
+
+
+        localStorage.setItem('index', i);
+    }
+
+    function addRow(i) {
+        var str = '<tr id=' + i + '>' +
+                    '<td style="display: none"><input type="text" class="form-control" id="data['+i+'].BasicInformationOfAffectedPersonNid" name="data['+i+'].BasicInformationOfAffectedPersonNid" value="@(ViewContext.RouteData.Values["id"])" /></td>'+
+
+
+
+                    '<td><input type="text" class="form-control" id="data[' + i + '].JlNo" name="data[' + i + '].JlNo" placeholder="" /></td>' +
+
+                    '<td><input type="text" class="form-control" id="data[' + i + '].PlotNo" name="data[' + i + '].PlotNo" placeholder="" /></td>' +
+
+                    '<td>' +
+                        '<select class="form-control" name="data[' + i + '].LandElevation" id="data[' + i + '].LandElevation">' +
+                                '<option value="">...Select...</option>' +
+
+                                '<option value="High land (not inundated during normal inundation)   ">1.High land (not inundated during normal inundation)   </option>' +
+
+                                '<option value="Medium High land (in normal flood 1-3 feet inundation) ">2.Medium High land (in normal flood 1-3 feet inundation) </option>' +
+                                '<option value="Medium low land (in normal flood 3-6 feet inundation)  ">3.Medium low land (in normal flood 3-6 feet inundation)  </option>' +
+
+                                '<option value="Low and (in normal flood 6-10 feet inundation)">4.Low and (in normal flood 6-10 feet inundation)</option>' +
+                                '<option value="Very low and (in normal flood 10 feet plus inundation)">5.Very low and (in normal flood 10 feet plus inundation)</option>' +
+
+
+
+                       '</select>' +
+
+                 '</td >' +
+                    '<td>' +
+                        '<select class="form-control" name="data[' + i + '].LandUse" id="data[' + i + '].LandUse">' +
+                                '<option value="">...Select...</option>' +
+
+                                '<option value="Agricultural land">1.Agricultural land</option>' +
+
+                                '<option value="Fellow land">2.Fellow land</option>' +
+                                '<option value="Homesteads">3.Homesteads</option>' +
+
+                                '<option value="Kancha house">4.Kancha house</option>' +
+
+
+                                '<option value="Tin sheed">5.Tin sheed</option>' +
+                                 '<option value="Semi pucca">6.Semi pucca</option>' +
+                                  '<option value="Pucca -1 storied">7.Pucca -1 storied</option>' +
+                                   '<option value="Pucca -2 stories">8.Pucca -2 stories</option>' +
+                                    '<option value="Pucca – 3 storied">9.Pucca – 3 storied</option>' +
+                                     '<option value="Shops">10.Shops</option>' +
+                                      '<option value="Bazar /market">11.Bazar /market</option>' +
+                                       '<option value="Industries">12.Industries</option>' +
+                                        '<option value="Canal">13.Canal</option>' +
+                                         '<option value="Trees">14.Trees</option>' +
+                                          '<option value="Cattle firm">15.Cattle firm</option>' +
+                                           '<option value="Poultry">16.Poultry</option>' +
+                                            '<option value="Ditch">17.Ditch</option>' +
+                                             '<option value="Pond">18.Pond</option>' +
+                                              '<option value="Godown">19.Godown</option>' +
+                                               '<option value="Graveyard">20.Graveyard</option>' +
+                                                '<option value="Burning place">21.Burning place</option>' +
+                                                 '<option value="Eidgah">22.Eidgah</option>' +
+                                                  '<option value="Mosque">23.Mosque</option>' +
+                                                   '<option value="Temple">24.Temple</option>' +
+                                                   '<option value="Orchard">25.Churcho</option>' +
+                                                   
+                                                    '<option value="Fruits garden">26.Fruits garden</option>' +
+                                                    '<option value="Ghat">27.Orchard.Ghat</option>' +
+                                                     
+                                                      '<option value="Ghat">28.Ghat</option>' +
+                                                       '<option value="Others">Others</option>' +
+
+
+
+
+                       '</select>' +
+
+                '</td >' +
+                    '<td><input type="text" class="form-control" id="data[' + i + '].PriceOfOthersAssets" name="data[' + i + '].PriceOfOthersAssets" placeholder="" /></td >' +
+                    
+            '</tr>';
+
+
+        $("#tbody").append(str);
+
+    }
+    </script>
+}
+

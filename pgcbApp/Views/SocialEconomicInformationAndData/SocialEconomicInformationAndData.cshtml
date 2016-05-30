@@ -1,0 +1,487 @@
+﻿@using System.Threading
+@{
+    ViewBag.Title = "SocialEconomicInformationAndData";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string message = ViewBag.Message;
+    
+   
+}
+@{
+    var count = 5;
+}
+@section style
+{
+
+    <style>
+        label.error {
+            color: red;
+            font-style: italic;
+        }
+    </style>
+
+}
+
+
+<h2></h2>
+<div class="container">
+    <h2 style="text-align: center">9. Socio-economic Data /Information of HH</h2><hr />
+    <h4>HH member, relation, sex, education, occupation and income</h4>
+
+
+    <form id="myform" name="myform" class="form-horizontal" method="POST">
+
+        <table class="table table-bordered table-responsive table-hover" id="showTable">
+            <thead style="background: black;color: white">
+                <tr>
+                    <td style="display: none">Id</td>
+                    <td>Name Of HH Members</td>
+                    <td>Relation</td>
+                    <td>Age</td>
+                    <td>Sex</td>
+                    <td>Education</td>
+                    <td>Occupation(Primary)</td>
+                    <td>Occupation(Secondary)</td>
+                    <td>Total Income From Primary and Second Occ.</td>
+                    <td>
+                        <button id="btnAdd" class="btn btn-success" type="button">+</button>
+                        <button id="btnRemove" style="padding: 4px 13px;" class="btn btn-success" type="button">-</button>
+                    </td>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+               
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-md-8">
+            </div>
+
+            <div class="col-md-4">
+                <input type="submit" id="submit" name="submit" style="background: black" class="btn-success form-control"  value="Save" />
+            </div>
+
+        </div>&nbsp;
+        <label name="messageLabel" style="color:darkblue ">@message</label>
+    </form>
+    
+
+
+
+</div>
+<a href="~/SocialEconomicInformationAndData/SocialEconomicInformationAndDataUpdate/@(ViewContext.RouteData.Values["id"])" style="background: black;color: white;text-align:center; text-decoration: none" class="btn btn-success ">Go To Main Page</a>
+
+@*<form id="myform" name="myform" class="form-horizontal" method="POST">
+    
+    <h3>Upadate Informatation</h3>
+    
+    <table class="table table-bordered table-responsive table-hover" id="showTable">
+        <thead style="background: black;color: white">
+            <tr>
+                <td style="display: none">Id</td>
+                <td>Name Of HH Members</td>
+                <td>Relation</td>
+                <td>Age</td>
+                <td>Sex</td>
+                <td>Education</td>
+                <td>Occupation(Primary)</td>
+                <td>Occupation(Secondary)</td>
+                <td>Total Income From Primary and Second Occ.</td>
+                <td>
+                    <button id="btnAdd" class="btn btn-success" type="button">+</button>
+                    <button id="btnRemove" style="padding: 4px 13px;" class="btn btn-success" type="button">-</button>
+                </td>
+            </tr>
+        </thead>
+
+        <tbody >
+            @for (int i=0;i<4;i++)
+            {
+                <tr >
+                
+                    <td style="display: none"><input type="text" class="form-control" id="data[@i].BasicInformationOfAffectedPersonNid" name="data[@i].BasicInformationOfAffectedPersonNid" value="@(ViewContext.RouteData.Values["id"])" /></td>
+                
+                    <td><input type="text" class="form-control  ggg" id="data[@i].NameOfFamilyMember" name="data[@i].NameOfFamilyMember" value="Model[@i].NameOfFamilyMember" /></td>
+                
+                    <td>
+                    
+                        <select class="form-control" name="data[@i].RelationOfHeadOfTheFamily" id="data[@i].RelationOfHeadOfTheFamily">
+                       
+                            <option value="Model[@i].RelationOfHeadOfTheFamily">Model[@i].RelationOfHeadOfTheFamily</option>
+                        
+                            <option value="Self">1.Self</option>
+                        
+                            <option value="Husband/Wife">2.Husband/Wife</option>
+                        
+                            <option value="Daughter/Son">3.Daughter/Son</option>
+                        
+                            <option value="son in low">4.son in low</option>
+                        
+                            <option value="daoughter in low">5.daoughter in low</option>
+                        
+                        
+                            <option value="Sister/Brother">7.Sister/Brother</option>
+                        
+                            <option value="Gradson/Granddaughter">8.Gradson/Granddaughter</option>
+                        
+                            <option value="hhs assistant ">9.hhs assistant </option>
+                        
+                            <option value="Others">10.Others</option>
+                        
+                        </select>
+                   
+                    </td>
+                
+                    <td><input type="text" class="form-control" id="data[@i].Age" name="data[@i].Age" placeholder="Age" /></td>
+                
+                    <td>
+                    
+                        <select class="form-control" name="data[@i].Gender" id="data[@i].Gender">
+                        
+                        
+                            <option value="">Select</option>
+                        
+                            <option value="Male">1.Male</option>
+                        
+                            <option value="Female">2.Female</option>
+
+                        
+                        </select>
+                    
+                    </td>
+                
+                    <td>
+                    
+                        <select class="form-control" name="data[@i].Education" id="data[@i].Education">
+                        
+                        
+                            <option value="">...Select...</option>
+                        
+                            <option value="Illiterate">1.Illiterate</option>
+                        
+                            <option value="Children">2.Children</option>
+                        
+                            <option value="literate but no institutional education ">3.literate but no institutional education </option>
+                        
+                            <option value="class I-V or equivalent">4.class I-V or equivalent</option>
+                        
+                            <option value="Class VI-X or equivalent">5.Class VI-X or equivalent</option>
+                        
+                            <option value="SSC or equivalent">6.SSC or equivalent</option>
+                        
+                            <option value="HSC or equivalent ">7.HSC or equivalent </option>
+                        
+                            <option value="Degree or equivalent">8.Degree or equivalent</option>
+                        
+                            <option value="Master degree or equivalent ">9.Master degree or equivalent </option>
+                        
+                            <option value="Hafez (Koran) ">10.Hafez (Koran) </option>
+                        
+                        </select>
+                   
+                    </td>
+                
+                    <td>
+                    
+                        <select class="form-control" name="data[@i].ProfessionPrimary" id="data[@i].ProfessionPrimary">
+                        
+                            <option value="">...Select...</option>
+                        
+                            <option value="Govt. service">1.Govt. service</option>
+                        
+                            <option value="Non govt. service ">2.Non govt. service </option>
+
+                        
+                            <option value="small traders">3.small traders  </option>
+                        
+                            <option value="medium traders">4. medium traders  </option>
+                        
+                            <option value="large traders">5.large traders  </option>
+                        
+                            <option value="own land cultivation">6.own land cultivation</option>
+                        
+                            <option value="Share cropper in">7.Share cropper in</option>
+                        
+                            <option value="Share cropper out">8.Share cropper out </option>
+                        
+                            <option value="Agro. Day labor">9.Agro. Day labor</option>
+                        
+                            <option value="Non agri. Day labor">10. Non agri. Day labor</option>
+                        
+                            <option value="Fisher">11.Fisher</option>
+                        
+                            <option value="Fish farmer">12.Fish farmer</option>
+                        
+                            <option value="Fish traders">13.Fish traders </option>
+                        
+                            <option value="Household work">14.Household work </option>
+                        
+                            <option value="student">15.student</option>
+                        
+                            <option value="un-employment">16.un-employment  </option>
+                        
+                            <option value="old aged">17.old aged </option>
+
+                        
+                            <option value="Cottage">18.Cottage </option>
+
+                        
+                            <option value="Self earned ">19.Self earned   </option>
+
+                        
+                            <option value="Others">20.Others</option>
+
+
+
+                        
+                        </select>
+                    
+                    </td>
+                
+                    <td>
+                    
+                        <select class="form-control" name="data[@i].ProfessionSecondary" id="data[@i].ProfessionSecondary">
+                        
+                        
+                            <option value="">...Select...</option>
+                        
+                            <option value="Govt. service">1.Govt. service</option>
+                            '
+                            <option value="Non govt. service ">2.Non govt. service </option>
+
+                        
+                            <option value="small traders">3.small traders  </option>
+                        
+                            <option value="medium traders">4. medium traders  </option>
+                        
+                            <option value="large traders">5.large traders  </option>
+                        
+                            <option value="own land cultivation">6.own land cultivation</option>
+                        
+                            <option value="Share cropper in">7.Share cropper in</option>
+                        
+                            <option value="Share cropper out">8.Share cropper out </option>
+                        
+                            <option value="Agro. Day labor">9.Agro. Day labor</option>
+                        
+                            <option value="Non agri. Day labor">10. Non agri. Day labor</option>
+                        
+                            <option value="Fisher">11.Fisher</option>
+                        
+                            <option value="Fish farmer">12.Fish farmer</option>
+                        
+                            <option value="Fish traders">13.Fish traders </option>
+                        
+                            <option value="Household work">14.Household work </option>
+                        
+                            <option value="student">15.student</option>
+                        
+                            <option value="un-employment">16.un-employment  </option>
+                        
+                            <option value="old aged">17.old aged </option>
+
+                        
+                            <option value="Cottage">18.Cottage </option>
+
+                        
+                            <option value="Self earned ">19.Self earned   </option>
+
+                        
+                            <option value="Others">20.Others</option>
+                        
+                        </select>
+                    
+                    </td>
+                
+                    <td><input type="text" class="form-control" id="data[@i].TotalIncomeFromProfession" name="data[@i].TotalIncomeFromProfession" placeholder="Total Income From Profession" /></td>
+
+
+                
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-8">
+        </div>
+
+        <div class="col-md-4">
+            <input type="submit" id="submit" name="submit" style="background: black" class="btn-success form-control" value="Save" />
+        </div>
+
+    </div>&nbsp;
+   
+</form>*@
+
+
+@section scripts
+    {
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    
+
+    <script>
+        $(document).ready(function () {
+            //$("#myform").validate({
+
+            //    jQuery.validator.addClassRules('myClassName', {
+            //        required: true 
+       
+            //    });
+
+               
+
+
+        });
+    </script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        addRow(0);
+        localStorage.setItem('index', 1);
+
+        $("#btnAdd").click(function () {
+            var i = Number(localStorage.index);
+
+            addRow(i);
+
+            localStorage.setItem('index', i + 1);
+        });
+        $("#btnRemove").click(function () {
+            removeRow();
+        });
+    });
+    function removeRow() {
+        var i = Number(localStorage.index) - 1;
+        if (i>0) {
+           $("#" + i).remove();  
+        }
+       
+
+        localStorage.setItem('index', i);
+    }
+
+    function addRow(i) {
+        //var str = "<tr>";
+        //str += "<td><p>" + i + "</p></td>";
+        //str += "<td><input name=" + i + " type='text' /></td>";
+        //str += "<tr/>";
+
+
+        //var str = '<tr>' +
+        //    '<td><input class="form-control" type="text" name="student[' + i + '].Name" id="student[' + i + '].Name" placeholder="Name" /></td>' +
+        //    '<td><input class="form-control" type="text" name="student[' + i + '].Address" id="student[0].Address" placeholder="Address" /></td>' +
+        //    '</tr>';
+        var str=  '<tr id='+i+'>'+
+                        '<td style="display: none"><input type="text" class="form-control" id="data[' + i + '].BasicInformationOfAffectedPersonNid" name="data[' + i + '].BasicInformationOfAffectedPersonNid" value="@(ViewContext.RouteData.Values["id"])" /></td>' +
+                        '<td><input type="text" class="form-control  ggg" id="data[' + i + '].NameOfFamilyMember" name="data[' + i + '].NameOfFamilyMember" placeholder="Name Of Family Member" /></td>' +
+                        '<td>'+
+                            '<select class="form-control" name="data['+i+'].RelationOfHeadOfTheFamily" id="data['+i+'].RelationOfHeadOfTheFamily">'+
+                                '<option value="">...Select...</option>'+
+                                '<option value="Self">1.Self</option>' +
+                                 '<option value="Husband/Wife">2.Husband/Wife</option>'+
+                                '<option value="Daughter/Son">3.Daughter/Son</option>'+
+                                '<option value="son in low">4.son in low</option>' +
+                                '<option value="daoughter in low">5.daoughter in low</option>' +
+                                '<option value="Father/Mother">6.Father/Mother</option>'+
+                                '<option value="Sister/Brother">7.Sister/Brother</option>'+
+                                '<option value="Gradson/Granddaughter">8.Gradson/Granddaughter</option>'+
+                                '<option value="hhs assistant ">9.hhs assistant </option>' +
+                                '<option value="Others">10.Others</option>'+
+                            '</select>'
+                        +'</td>'+
+                        '<td><input type="text" class="form-control" id="data['+i+'].Age" name="data['+i+'].Age" placeholder="Age" /></td>'+
+                        '<td>'+
+                            '<select class="form-control" name="data['+i+'].Gender" id="data['+i+'].Gender">'+
+                                '<option value="">Select</option>'+
+                                '<option value="Male">1.Male</option>'+
+                                '<option value="Female">2.Female</option>'+
+
+                            '</select>'+
+                        '</td>'+
+                        '<td>'+
+                            '<select class="form-control" name="data['+i+'].Education" id="data['+i+'].Education">'+
+                                '<option value="">...Select...</option>' +
+                                '<option value="Illiterate">1.Illiterate</option>' +
+                                '<option value="Children">2.Children</option>' +
+                                '<option value="literate but no institutional education ">3.literate but no institutional education </option>' +
+                                '<option value="class I-V or equivalent">4.class I-V or equivalent</option>' +
+                                '<option value="Class VI-X or equivalent">5.Class VI-X or equivalent</option>' +
+                                '<option value="SSC or equivalent">6.SSC or equivalent</option>' +
+                                '<option value="HSC or equivalent ">7.HSC or equivalent </option>' +
+                                '<option value="Degree or equivalent">8.Degree or equivalent</option>' +
+                                '<option value="Master degree or equivalent ">9.Master degree or equivalent </option>' +
+                                '<option value="Hafez (Koran) ">10.Hafez (Koran) </option>' +
+                                '<option value="Others">20.Others</option>' +
+                            '</select>'+
+                        '</td>'+
+                        '<td>'+
+                            '<select class="form-control" name="data[' + i + '].ProfessionPrimary" id="data[' + i + '].ProfessionPrimary">' +
+                                '<option value="">...Select...</option>'+
+                                '<option value="Govt. service">1.Govt. service</option>' +
+                                '<option value="Non govt. service ">2.Non govt. service </option>' +
+
+                                '<option value="small traders">3.small traders  </option>' +
+                                '<option value="medium traders">4. medium traders  </option>' +
+                                '<option value="large traders">5.large traders  </option>' +
+                                '<option value="own land cultivation">6.own land cultivation</option>' +
+                                '<option value="Share cropper in">7.Share cropper in</option>' +
+                                '<option value="Share cropper out">8.Share cropper out </option>' +
+                                '<option value="Agro. Day labor">9.Agro. Day labor</option>' +
+                                '<option value="Non agri. Day labor">10. Non agri. Day labor</option>' +
+                                '<option value="Fisher">11.Fisher</option>' +
+                                '<option value="Fish farmer">12.Fish farmer</option>' +
+                                '<option value="Fish traders">13.Fish traders </option>' +
+                                '<option value="Household work">14.Household work </option>' +
+                                '<option value="student">15.student</option>' +
+                                '<option value="un-employment">16.un-employment  </option>' +
+                                '<option value="old aged">17.old aged </option>' +
+
+                                '<option value="Cottage">18.Cottage </option>' +
+
+                                '<option value="Self earned ">19.Self earned   </option>' +
+
+                                '<option value="Others">20.Others</option>' +
+
+
+
+                            '</select>'+
+                        '</td>' +
+                        '<td>' +
+                            '<select class="form-control" name="data[' + i + '].ProfessionSecondary" id="data[' + i + '].ProfessionSecondary">' +
+                              '<option value="">...Select...</option>' +
+                                '<option value="Govt. service">1.Govt. service</option>' +
+                                '<option value="Non govt. service ">2.Non govt. service </option>' +
+
+                                '<option value="small traders">3.small traders  </option>' +
+                                '<option value="medium traders">4. medium traders  </option>' +
+                                '<option value="large traders">5.large traders  </option>' +
+                                '<option value="own land cultivation">6.own land cultivation</option>' +
+                                '<option value="Share cropper in">7.Share cropper in</option>' +
+                                '<option value="Share cropper out">8.Share cropper out </option>' +
+                                '<option value="Agro. Day labor">9.Agro. Day labor</option>' +
+                                '<option value="Non agri. Day labor">10. Non agri. Day labor</option>' +
+                                '<option value="Fisher">11.Fisher</option>' +
+                                '<option value="Fish farmer">12.Fish farmer</option>' +
+                                '<option value="Fish traders">13.Fish traders </option>' +
+                                '<option value="Household work">14.Household work </option>' +
+                                '<option value="student">15.student</option>' +
+                                '<option value="un-employment">16.un-employment  </option>' +
+                                '<option value="old aged">17.old aged </option>' +
+
+                                '<option value="Cottage">18.Cottage </option>' +
+
+                                '<option value="Self earned ">19.Self earned   </option>' +
+
+                                '<option value="Others">20.Others</option>' +
+                            '</select>' +
+                        '</td>' +
+                        '<td><input type="text" class="form-control" id="data['+i+'].TotalIncomeFromProfession" name="data['+i+'].TotalIncomeFromProfession" placeholder="Total Income From Profession" /></td>'+
+                        
+
+        '</tr>';
+        $("#tbody").append(str);
+
+    }
+</script>
+
+}

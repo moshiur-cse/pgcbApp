@@ -1,0 +1,26 @@
+Table: OthersInformation
+
+BasicInformationOfAffectedPersonNid
+
+FamilyDrinkingWaterDetails
+
+FamilyBathroomDetails
+
+AreYouAwareOfTheProposedProject
+
+DoYouHaveLandLease
+
+HowManyYears
+
+HowMuchMoney
+
+FamilyStatus
+
+HowDoesTheCostCarryingOut
+
+
+CreditResponsibility
+
+CreditResponsibilityMoney
+
+ReceivedLoan

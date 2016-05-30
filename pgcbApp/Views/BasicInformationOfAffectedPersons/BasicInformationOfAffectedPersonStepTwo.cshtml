@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "BasicInformationOfAffectedPersonStepTwo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2 text-center">
+        <fieldset>
+            <legend>Socio-economic Status of PAPs Step 2 </legend>
+            
+            <form id="myform" name="myform" class="form-horizontal" method="POST" action="">
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="NidCardNumber">Basic Information Of Affected Person Nid</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="NidCardNumber" name="NidCardNumber" class="form-control" placeholder="Nid Card Number" value="@(ViewContext.RouteData.Values["id"])" readonly/>
+                    </div>
+                </div>&nbsp;
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="FamilyDrinkingWaterDetails">14.  Source of Drinking water: </label>
+                    </div>
+                    <div class="col-md-6">
+                        <select name="FamilyDrinkingWaterDetails" id="FamilyDrinkingWaterDetails" class="form-control">
+
+                            <option value="">Select...</option>
+                            <option value="Motorized Tube well">1.Motorized Tube well</option>
+                            <option value="HTW">2.HTW</option>
+                            <option value="HTW 3- Pond water">3.Pond water</option>
+                            <option value="Rivers Water ">4.Rivers Water </option>
+                            <option value="Wells water ">5.Wells water </option>
+                            <option value="Wells water">6.Deep tube well water</option>
+                            <option value="Khals Water">7.Khals Water</option>
+                            <option value="Rain Water">8.Rain Water</option>
+
+
+                        </select>
+                    </div>
+                </div>&nbsp;
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="FamilyBathroomDetails">15. Status of latrine</label>
+                    </div>
+                    <div class="col-md-6">
+                        <select name="FamilyBathroomDetails" id="FamilyBathroomDetails" class="form-control">
+
+                            <option value="">Select...</option>
+                            <option value="Sanitary Latrine">1.Sanitary Latrine</option>
+                            <option value="Ring Slab">2.Ring Slab</option>
+                            <option value="Kanch">3.Kanch</option>
+                            <option value="Open">4.Open</option>
+                            <option value="no Facilities">5. No Facilities</option>
+
+                        </select>
+                    </div>
+                </div>&nbsp;
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label id="codeLabel" for="AreYouAwareOfTheProposedProject">16. Aware about the proposed project?</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="radio" name="AreYouAwareOfTheProposedProject" value="Yes" checked />1.Yes
+                        <input type="radio" name="AreYouAwareOfTheProposedProject" value="No" />2.No
+                    </div>
+                </div>&nbsp;
+                <div class="row">
+                    <div class="col-md-8">
+                    </div>
+
+                    <div class="col-md-4">
+                        <input type="submit" id="submit" name="submit" style="background: black" class="btn-success form-control" value="Save" />
+                    </div>
+
+                </div>&nbsp;
+            </form>
+            <label name="messageLabel" style="color:darkblue "></label>
+               
+</fieldset>
+    </div>
+</div>
