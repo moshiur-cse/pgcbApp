@@ -11,6 +11,16 @@
 
     List<AffectedLandPresentCropsAndProductionInformation> aAffectedLandPresentCropsAndProductionInformation = ViewBag.AffectedLandPresentCropsAndProductionInformation;
     List<SocialEconomicInformationAndData> aSocialInfoData = ViewBag.SocialEconomicInformationAndData;
+
+    List<HouseholdYearlyExpenditure> aHouseholdYearlyExpenditure = ViewBag.HouseholdYearlyExpenditure;
+
+    List<DomesticImmovableAssets> aDomesticImmovableAssets = ViewBag.DomesticImmovableAssets;
+
+    List<DomesticMovableAssets> aDomesticMovableAssets = ViewBag.DomesticMovableAssets;
+
+    List<HomeResources> aHomeResources = ViewBag.HomeResources;
+
+    List<FamilyAffectedLandUsedInformation> aFamilyAffectedLandUsedInformation = ViewBag.FamilyAffectedLandUsedInformation;
 }
 
 <label style="color:darkblue">@(ViewContext.RouteData.Values["id"])</label>
@@ -302,238 +312,485 @@
                 <div>
 
                     <label id="codeLabel" for="">
-                        9. Socio-economic Data /Information of HH</label>
+                        9. Socio-economic Data /Information of HH
+                    </label>
 
 
-                        <table class="table table-bordered table-responsive">
-                            <thead style="background: black;color: white">
+                    <table class="table table-bordered table-responsive">
+                        <thead style="background: black;color: white">
+                            <tr>
+                                <td style="display: none">Id</td>
+                                <td>Name Of HH Members</td>
+                                <td>Relation</td>
+                                <td>Age</td>
+                                <td>Sex</td>
+                                <td>Education</td>
+                                <td>Occupation(Primary)</td>
+                                <td>Occupation(Secondary)</td>
+                                <td>Total Income From Primary and Second Occ.</td>
+
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                            @foreach (var aInfo in aSocialInfoData)
+                            {
                                 <tr>
-                                    <td style="display: none">Id</td>
-                                    <td>Name Of HH Members</td>
-                                    <td>Relation</td>
-                                    <td>Age</td>
-                                    <td>Sex</td>
-                                    <td>Education</td>
-                                    <td>Occupation(Primary)</td>
-                                    <td>Occupation(Secondary)</td>
-                                    <td>Total Income From Primary and Second Occ.</td>
+
+                                    <td style="display: none"><input type="text" class="form-control" id="data[@aSocialInfoData.Count].BasicInformationOfAffectedPersonNid" name="data[@aSocialInfoData.Count].BasicInformationOfAffectedPersonNid" value="@(ViewContext.RouteData.Values["id"])" /></td>
+
+                                    <td><input type="text" class="form-control" id="data[@aSocialInfoData.Count].NameOfFamilyMember" name="data[@aSocialInfoData.Count].NameOfFamilyMember" value="@aInfo.NameOfFamilyMember" /></td>
+
+                                    <td>
+
+                                        <select class="form-control" name="data[@aSocialInfoData.Count].RelationOfHeadOfTheFamily" id="data[@aSocialInfoData.Count].RelationOfHeadOfTheFamily">
+
+                                            <option value="data[@aSocialInfoData.Count].RelationOfHeadOfTheFamily">@aInfo.RelationOfHeadOfTheFamily</option>
+                                            <option value="@aInfo.RelationOfHeadOfTheFamily">@aInfo.RelationOfHeadOfTheFamily</option>
+                                            <option value="Self">1.Self</option>
+
+                                            <option value="Husband/Wife">2.Husband/Wife</option>
+
+                                            <option value="Daughter/Son">3.Daughter/Son</option>
+
+                                            <option value="son in low">4.son in low</option>
+
+                                            <option value="daoughter in low">5.daoughter in low</option>
+
+
+                                            <option value="Sister/Brother">7.Sister/Brother</option>
+
+                                            <option value="Gradson/Granddaughter">8.Gradson/Granddaughter</option>
+
+                                            <option value="hhs assistant ">9.hhs assistant </option>
+
+                                            <option value="Others">10.Others</option>
+
+                                        </select>
+
+                                    </td>
+
+                                    <td><input type="text" class="form-control" id="data[@aSocialInfoData.Count].Age" name="data[@aSocialInfoData.Count].Age" value="@aInfo.Age" /></td>
+
+                                    <td>
+
+                                        <select class="form-control" name="data[@aSocialInfoData.Count].Gender" id="data[@aSocialInfoData.Count].Gender">
+
+
+                                            <option value="@aInfo.Gender">@aInfo.Gender</option>
+
+                                            <option value="Male">1.Male</option>
+
+                                            <option value="Female">2.Female</option>
+
+
+                                        </select>
+
+                                    </td>
+
+                                    <td>
+
+                                        <select class="form-control" name="data[@aSocialInfoData.Count].Education" id="data[@aSocialInfoData.Count].Education">
+
+
+                                            <option value="@aInfo.Education">@aInfo.Education</option>
+
+                                            <option value="Illiterate">1.Illiterate</option>
+
+                                            <option value="Children">2.Children</option>
+
+                                            <option value="literate but no institutional education ">3.literate but no institutional education </option>
+
+                                            <option value="class I-V or equivalent">4.class I-V or equivalent</option>
+
+                                            <option value="Class VI-X or equivalent">5.Class VI-X or equivalent</option>
+
+                                            <option value="SSC or equivalent">6.SSC or equivalent</option>
+
+                                            <option value="HSC or equivalent ">7.HSC or equivalent </option>
+
+                                            <option value="Degree or equivalent">8.Degree or equivalent</option>
+
+                                            <option value="Master degree or equivalent ">9.Master degree or equivalent </option>
+
+                                            <option value="Hafez (Koran) ">10.Hafez (Koran) </option>
+
+                                        </select>
+
+                                    </td>
+
+                                    <td>
+
+                                        <select class="form-control" name="data[@aSocialInfoData.Count].ProfessionPrimary" id="data[@aSocialInfoData.Count].ProfessionPrimary">
+
+                                            <option value="@aInfo.ProfessionPrimary">@aInfo.ProfessionPrimary</option>
+
+                                            <option value="Govt. service">1.Govt. service</option>
+
+                                            <option value="Non govt. service ">2.Non govt. service </option>
+
+
+                                            <option value="small traders">3.small traders  </option>
+
+                                            <option value="medium traders">4. medium traders  </option>
+
+                                            <option value="large traders">5.large traders  </option>
+
+                                            <option value="own land cultivation">6.own land cultivation</option>
+
+                                            <option value="Share cropper in">7.Share cropper in</option>
+
+                                            <option value="Share cropper out">8.Share cropper out </option>
+
+                                            <option value="Agro. Day labor">9.Agro. Day labor</option>
+
+                                            <option value="Non agri. Day labor">10. Non agri. Day labor</option>
+
+                                            <option value="Fisher">11.Fisher</option>
+
+                                            <option value="Fish farmer">12.Fish farmer</option>
+
+                                            <option value="Fish traders">13.Fish traders </option>
+
+                                            <option value="Household work">14.Household work </option>
+
+                                            <option value="student">15.student</option>
+
+                                            <option value="un-employment">16.un-employment  </option>
+
+                                            <option value="old aged">17.old aged </option>
+
+
+                                            <option value="Cottage">18.Cottage </option>
+
+
+                                            <option value="Self earned ">19.Self earned   </option>
+
+
+                                            <option value="Others">20.Others</option>
+
+
+
+
+                                        </select>
+
+                                    </td>
+
+                                    <td>
+
+                                        <select class="form-control" name="data[@aSocialInfoData.Count].ProfessionSecondary" id="data[@aSocialInfoData.Count].ProfessionSecondary">
+
+
+                                            <option value="@aInfo.ProfessionSecondary">@aInfo.ProfessionSecondary</option>
+
+                                            <option value="Govt. service">1.Govt. service</option>
+                                            '
+                                            <option value="Non govt. service ">2.Non govt. service </option>
+
+
+                                            <option value="small traders">3.small traders  </option>
+
+                                            <option value="medium traders">4. medium traders  </option>
+
+                                            <option value="large traders">5.large traders  </option>
+
+                                            <option value="own land cultivation">6.own land cultivation</option>
+
+                                            <option value="Share cropper in">7.Share cropper in</option>
+
+                                            <option value="Share cropper out">8.Share cropper out </option>
+
+                                            <option value="Agro. Day labor">9.Agro. Day labor</option>
+
+                                            <option value="Non agri. Day labor">10. Non agri. Day labor</option>
+
+                                            <option value="Fisher">11.Fisher</option>
+
+                                            <option value="Fish farmer">12.Fish farmer</option>
+
+                                            <option value="Fish traders">13.Fish traders </option>
+
+                                            <option value="Household work">14.Household work </option>
+
+                                            <option value="student">15.student</option>
+
+                                            <option value="un-employment">16.un-employment  </option>
+
+                                            <option value="old aged">17.old aged </option>
+
+
+                                            <option value="Cottage">18.Cottage </option>
+
+
+                                            <option value="Self earned ">19.Self earned   </option>
+
+
+                                            <option value="Others">20.Others</option>
+
+                                        </select>
+
+                                    </td>
+
+                                    <td><input type="text" class="form-control" id="data[@aSocialInfoData.Count].TotalIncomeFromProfession" name="data[@aSocialInfoData.Count].TotalIncomeFromProfession" value="@aInfo.TotalIncomeFromProfession" /></td>
+
+
 
                                 </tr>
-                            </thead>
-                            <tbody id="tbody">
-                                @foreach (var aInfo in aSocialInfoData)
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+                <fieldset>
+                    <legend>10. Yearly expenditure of HH</legend>
+
+                    @foreach (var aData in aHouseholdYearlyExpenditure)
+                    {
+
+
+                        <div class="form-group" style="display: none">
+                            <div class="col-md-6">
+                                <label id="codeLabel" for="BasicInformationOfAffectedPersonNid">Basic Information Of Affected Person Nid</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" id="BasicInformationOfAffectedPersonNid" name="BasicInformationOfAffectedPersonNid" class="form-control" placeholder="Basic Information Of Affected Person Nid" value="@(ViewContext.RouteData.Values["id"])" readonly />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label id="codeLabel" for="FoodExpenditure">Expenditure for food</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" id="FoodExpenditure" name="FoodExpenditure" class="form-control" value="@aData.FoodExpenditure" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label id="codeLabel" for="ClothExpenditure">Expenditure for cloths</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" id="ClothExpenditure" name="ClothExpenditure" class="form-control" value="@aData.ClothExpenditure" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label id="codeLabel" for="ResidenceRepairingExpenditure">Expenditure for maintenance of house</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" id="ResidenceRepairingExpenditure" name="ResidenceRepairingExpenditure" class="form-control" value="@aData.ResidenceRepairingExpenditure" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label id="codeLabel" for="Expenditure for Medical"> Medical Expenditure</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" id="MedicalExpenditure" name="MedicalExpenditure" class="form-control" value="@aData.MedicalExpenditure" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label id="codeLabel" for="EducationalExpenditure">Expenditure for Education</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" id="EducationalExpenditure" name="EducationalExpenditure" class="form-control" value="@aData.EducationalExpenditure" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label id="codeLabel" for="CommunicationExpenditure">Expenditure for Transportation</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" id="CommunicationExpenditure" name="CommunicationExpenditure" class="form-control" value="@aData.CommunicationExpenditure" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label id="codeLabel" for="Miscellaneous">Expenditure for Others</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" id="Miscellaneous" name="Miscellaneous" class="form-control" value="@aData.Miscellaneous" />
+                            </div>
+                        </div>
+                    }
+
+
+                </fieldset>
+                <hr>
+
+                <div>
+                    <label>11. Permanent resources of HH</label>
+
+                    <table class="table table-bordered table-responsive table-hover" id="showTable">
+                        <thead style="background: black;color: white">
+                            <tr>
+                                <td style="display: none">Id</td>
+                                <td>Land Type </td>
+                                <td>owned(In Decimal unit)</td>
+                                <td>Share/lease(In Decimal unit)</td>
+                                <td>Approximate value (Taka)</td>
+                                <td>Total production value (yearly )Taka</td>
+                                @*<td>
+                                        <button id="btnAdd" class="btn btn-success" type="button">+</button>
+                                        <button id="btnRemove" class="btn btn-success" type="button">-</button>
+                                    </td>*@
+
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+
+                            @foreach (var aInfo in aDomesticImmovableAssets)
+                            {
+                                <tr>
+
+                                    <td style="display: none"><input type="text" class="form-control" id="data[@aDomesticImmovableAssets.Count].BasicInformationOfAffectedPersonNid" name="data[@aDomesticImmovableAssets.Count].BasicInformationOfAffectedPersonNid" value="@(ViewContext.RouteData.Values["id"])" /></td>
+
+                                    <td>
+
+                                        <select class="form-control" name="data[@aDomesticImmovableAssets.Count].SocioEconomicData" id="data[@aDomesticImmovableAssets.Count].SocioEconomicData">
+
+                                            <option value="@aInfo.SocioEconomicData">@aInfo.SocioEconomicData</option>
+
+                                            <option value="Agricultural land">Agricultural land</option>
+
+                                            <option value="Homestead land">Homestead land</option>
+
+                                            <option value="Orchard">Orchard</option>
+
+
+                                            <option value="Pond">Pond</option>
+
+                                            <option value="Fallow land">Fallow land</option>
+                                            @*<option value="Total">Total</option>*@
+
+
+                                        </select>
+
+                                    </td>
+
+
+
+                                    <td><input type="text" class="form-control" id="data[@aDomesticImmovableAssets.Count].AmountOwn" name="data[@aDomesticImmovableAssets.Count].AmountOwn" value="@aInfo.AmountOwn" /></td>
+
+
+                                    <td><input type="text" class="form-control" id="data[@aDomesticImmovableAssets.Count].Lease" name="data[@aDomesticImmovableAssets.Count].Lease" value="@aInfo.Lease" /></td>
+
+
+                                    <td><input type="text" class="form-control" id="data[@aDomesticImmovableAssets.Count].TentativeAmount" name="data[@aDomesticImmovableAssets.Count].TentativeAmount" value="@aInfo.TentativeAmount" /></td>
+
+                                    <td><input type="text" class="form-control" id="data[@aDomesticImmovableAssets.Count].TotalProducedAmount" name="data[@aDomesticImmovableAssets.Count].TotalProducedAmount" value="@aInfo.TotalProducedAmount" /></td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+                <div>
+                    <label>12. Intangible Assets</label>
+                    <table class="table table-bordered table-responsive table-hover" id="showTable">
+                        <thead style="background: black;color: white">
+                            <tr>
+                                <td style="display: none">Id</td>
+                                <td>Type </td>
+                                <td>Number</td>
+                                <td>Approximate value (Taka)</td>
+                                <td>
+                                    <button id="btnAdd" class="btn btn-success" type="button">+</button>
+                                    <button id="btnRemove" class="btn btn-success" type="button">-</button>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                            @foreach (var aInfo in aDomesticMovableAssets)
+                            {
+                                <tr>
+
+                                    <td style="display: none"><input type="text" class="form-control" id="data[@aDomesticMovableAssets.Count].BasicInformationOfAffectedPersonNid" name="data[@aDomesticMovableAssets.Count].BasicInformationOfAffectedPersonNid" value="@(ViewContext.RouteData.Values["id"])" readonly /></td>
+
+                                    <td>
+                                        <select class="form-control" name="data[@aDomesticMovableAssets.Count].InstitutionTypes" id="data[@aDomesticMovableAssets.Count].InstitutionTypes">
+
+                                            <option value="@aInfo.InstitutionTypes">@aInfo.InstitutionTypes</option>
+
+                                            <option value="Kancha house">Kancha house</option>
+
+                                            <option value="CI sheets House">CI sheets House</option>
+
+                                            <option value="Semi Pucca House">Semi Pucca House</option>
+
+                                            <option value="Pucca House – one storied">Pucca House – one storied</option>
+
+                                            <option value="Pucca House – two storied">Pucca House – two storied</option>
+
+                                            <option value="Pucca House – three storied">Pucca House – three storied</option>
+
+                                            <option value="Shops">Shops</option>
+
+                                            <option value="Industries">Industries</option>
+
+                                            <option value="Others">Others</option>
+
+                                        </select>
+
+                                    </td>
+
+                                    <td><input type="text" class="form-control" id="data[@aDomesticMovableAssets.Count].Numbers" name="data[@aDomesticMovableAssets.Count].Numbers" value="@aInfo.Numbers" /></td>
+
+                                    <td><input type="text" class="form-control" id="data[@aDomesticMovableAssets.Count].TentativeAmount" name="data[@aDomesticMovableAssets.Count].TentativeAmount" value="@aInfo.TentativeAmount" /></td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <div>
+                    <label>13. Other Assests in House</label>
+                    <table class="table table-bordered table-responsive table-hover" id="showTable">
+                        <thead style="background: black;color: white">
+                            <tr>
+                                <td style="display: none">Id</td>
+                                <td>Type </td>
+                                <td>Number</td>
+                                <td>Approximate value (Taka)</td>
+                                @*<td>
+                                        <button id="btnAdd" class="btn btn-success" type="button">+</button>
+                                        <button id="btnRemove" class="btn btn-success" type="button">-</button>
+                                    </td>*@
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                            @foreach (var aInfo in aHomeResources)
+                            {
+                                if (aInfo.ResourcesName != "" && aInfo.ResourcesName != null)
                                 {
                                     <tr>
 
-                                        <td style="display: none"><input type="text" class="form-control" id="data[@aSocialInfoData.Count].BasicInformationOfAffectedPersonNid" name="data[@aSocialInfoData.Count].BasicInformationOfAffectedPersonNid" value="@(ViewContext.RouteData.Values["id"])" /></td>
+                                        <td style="display: none"><input type="text" class="form-control" id="data[@aHomeResources.Count].BasicInformationOfAffectedPersonNid" name="data[@aHomeResources.Count].BasicInformationOfAffectedPersonNid" value="@(ViewContext.RouteData.Values["id"])" readonly /></td>
 
-                                        <td><input type="text" class="form-control" id="data[@aSocialInfoData.Count].NameOfFamilyMember" name="data[@aSocialInfoData.Count].NameOfFamilyMember" value="@aInfo.NameOfFamilyMember" /></td>
+                                        <td><input type="text" class="form-control" id="data[@aHomeResources.Count].ResourcesName" name="data[@aHomeResources.Count].ResourcesName" value="@aInfo.ResourcesName" /></td>
 
-                                        <td>
-
-                                            <select class="form-control" name="data[@aSocialInfoData.Count].RelationOfHeadOfTheFamily" id="data[@aSocialInfoData.Count].RelationOfHeadOfTheFamily">
-
-                                                <option value="data[@aSocialInfoData.Count].RelationOfHeadOfTheFamily">@aInfo.RelationOfHeadOfTheFamily</option>
-                                                <option value="@aInfo.RelationOfHeadOfTheFamily">@aInfo.RelationOfHeadOfTheFamily</option>
-                                                <option value="Self">1.Self</option>
-
-                                                <option value="Husband/Wife">2.Husband/Wife</option>
-
-                                                <option value="Daughter/Son">3.Daughter/Son</option>
-
-                                                <option value="son in low">4.son in low</option>
-
-                                                <option value="daoughter in low">5.daoughter in low</option>
-
-
-                                                <option value="Sister/Brother">7.Sister/Brother</option>
-
-                                                <option value="Gradson/Granddaughter">8.Gradson/Granddaughter</option>
-
-                                                <option value="hhs assistant ">9.hhs assistant </option>
-
-                                                <option value="Others">10.Others</option>
-
-                                            </select>
-
-                                        </td>
-
-                                        <td><input type="text" class="form-control" id="data[@aSocialInfoData.Count].Age" name="data[@aSocialInfoData.Count].Age" value="@aInfo.Age" /></td>
-
-                                        <td>
-
-                                            <select class="form-control" name="data[@aSocialInfoData.Count].Gender" id="data[@aSocialInfoData.Count].Gender">
-
-
-                                                <option value="@aInfo.Gender">@aInfo.Gender</option>
-
-                                                <option value="Male">1.Male</option>
-
-                                                <option value="Female">2.Female</option>
-
-
-                                            </select>
-
-                                        </td>
-
-                                        <td>
-
-                                            <select class="form-control" name="data[@aSocialInfoData.Count].Education" id="data[@aSocialInfoData.Count].Education">
-
-
-                                                <option value="@aInfo.Education">@aInfo.Education</option>
-
-                                                <option value="Illiterate">1.Illiterate</option>
-
-                                                <option value="Children">2.Children</option>
-
-                                                <option value="literate but no institutional education ">3.literate but no institutional education </option>
-
-                                                <option value="class I-V or equivalent">4.class I-V or equivalent</option>
-
-                                                <option value="Class VI-X or equivalent">5.Class VI-X or equivalent</option>
-
-                                                <option value="SSC or equivalent">6.SSC or equivalent</option>
-
-                                                <option value="HSC or equivalent ">7.HSC or equivalent </option>
-
-                                                <option value="Degree or equivalent">8.Degree or equivalent</option>
-
-                                                <option value="Master degree or equivalent ">9.Master degree or equivalent </option>
-
-                                                <option value="Hafez (Koran) ">10.Hafez (Koran) </option>
-
-                                            </select>
-
-                                        </td>
-
-                                        <td>
-
-                                            <select class="form-control" name="data[@aSocialInfoData.Count].ProfessionPrimary" id="data[@aSocialInfoData.Count].ProfessionPrimary">
-
-                                                <option value="@aInfo.ProfessionPrimary">@aInfo.ProfessionPrimary</option>
-
-                                                <option value="Govt. service">1.Govt. service</option>
-
-                                                <option value="Non govt. service ">2.Non govt. service </option>
-
-
-                                                <option value="small traders">3.small traders  </option>
-
-                                                <option value="medium traders">4. medium traders  </option>
-
-                                                <option value="large traders">5.large traders  </option>
-
-                                                <option value="own land cultivation">6.own land cultivation</option>
-
-                                                <option value="Share cropper in">7.Share cropper in</option>
-
-                                                <option value="Share cropper out">8.Share cropper out </option>
-
-                                                <option value="Agro. Day labor">9.Agro. Day labor</option>
-
-                                                <option value="Non agri. Day labor">10. Non agri. Day labor</option>
-
-                                                <option value="Fisher">11.Fisher</option>
-
-                                                <option value="Fish farmer">12.Fish farmer</option>
-
-                                                <option value="Fish traders">13.Fish traders </option>
-
-                                                <option value="Household work">14.Household work </option>
-
-                                                <option value="student">15.student</option>
-
-                                                <option value="un-employment">16.un-employment  </option>
-
-                                                <option value="old aged">17.old aged </option>
-
-
-                                                <option value="Cottage">18.Cottage </option>
-
-
-                                                <option value="Self earned ">19.Self earned   </option>
-
-
-                                                <option value="Others">20.Others</option>
-
-
-
-
-                                            </select>
-
-                                        </td>
-
-                                        <td>
-
-                                            <select class="form-control" name="data[@aSocialInfoData.Count].ProfessionSecondary" id="data[@aSocialInfoData.Count].ProfessionSecondary">
-
-
-                                                <option value="@aInfo.ProfessionSecondary">@aInfo.ProfessionSecondary</option>
-
-                                                <option value="Govt. service">1.Govt. service</option>
-                                                '
-                                                <option value="Non govt. service ">2.Non govt. service </option>
-
-
-                                                <option value="small traders">3.small traders  </option>
-
-                                                <option value="medium traders">4. medium traders  </option>
-
-                                                <option value="large traders">5.large traders  </option>
-
-                                                <option value="own land cultivation">6.own land cultivation</option>
-
-                                                <option value="Share cropper in">7.Share cropper in</option>
-
-                                                <option value="Share cropper out">8.Share cropper out </option>
-
-                                                <option value="Agro. Day labor">9.Agro. Day labor</option>
-
-                                                <option value="Non agri. Day labor">10. Non agri. Day labor</option>
-
-                                                <option value="Fisher">11.Fisher</option>
-
-                                                <option value="Fish farmer">12.Fish farmer</option>
-
-                                                <option value="Fish traders">13.Fish traders </option>
-
-                                                <option value="Household work">14.Household work </option>
-
-                                                <option value="student">15.student</option>
-
-                                                <option value="un-employment">16.un-employment  </option>
-
-                                                <option value="old aged">17.old aged </option>
-
-
-                                                <option value="Cottage">18.Cottage </option>
-
-
-                                                <option value="Self earned ">19.Self earned   </option>
-
-
-                                                <option value="Others">20.Others</option>
-
-                                            </select>
-
-                                        </td>
-
-                                        <td><input type="text" class="form-control" id="data[@aSocialInfoData.Count].TotalIncomeFromProfession" name="data[@aSocialInfoData.Count].TotalIncomeFromProfession" value="@aInfo.TotalIncomeFromProfession" /></td>
-
+                                        <td><input type="text" class="form-control" id="data[@aHomeResources.Count].Count" name="data[@aHomeResources.Count].Count" value="@aInfo.Count" /></td>
+                                        <td><input type="text" class="form-control" id="data[@aHomeResources.Count].Amount" name="data[@aHomeResources.Count].Amount" value="@aInfo.Amount" /></td>
 
 
                                     </tr>
                                 }
-
-                            </tbody>
-                        </table>
-</div>
-
+                            }
+                        </tbody>
+                    </table>
+                </div>
 
                 <div class="row">
                     <div class="col-md-6">
-                        <label id="codeLabel" for="FamilyDrinkingWaterDetails">13.  Source of Drinking water: </label>
+                        <label id="codeLabel" for="FamilyDrinkingWaterDetails">14.  Source of Drinking water: </label>
                     </div>
                     <div class="col-md-6">
                         <select name="FamilyDrinkingWaterDetails" id="FamilyDrinkingWaterDetails" class="form-control">
@@ -553,7 +810,7 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <label id="codeLabel" for="FamilyBathroomDetails">14. Status of latrine</label>
+                        <label id="codeLabel" for="FamilyBathroomDetails">15. Status of latrine</label>
                     </div>
                     <div class="col-md-6">
                         <select name="FamilyBathroomDetails" id="FamilyBathroomDetails" class="form-control">
@@ -571,7 +828,7 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <label id="codeLabel" for="AreYouAwareOfTheProposedProject">15. Aware about the proposed project?</label>
+                        <label id="codeLabel" for="AreYouAwareOfTheProposedProject">16. Aware about the proposed project?</label>
                     </div>
                     <div class="col-md-6">
                         <input type="radio" name="AreYouAwareOfTheProposedProject" value="Yes" checked />Yes
@@ -580,7 +837,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <label id="codeLabel" for="HowMuchMoney">16. Information on Acquired land of HH</label>
+                        <label id="codeLabel" for="HowMuchMoney">17. Information on Acquired land of HH</label>
                     </div>
 
                     <table class="table table-bordered table-responsive table-hover" id="showTable">
@@ -653,7 +910,7 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <label id="codeLabel" for="DoYouHaveLandLease">17. Do you have leased /mortgaged land?</label>
+                        <label id="codeLabel" for="DoYouHaveLandLease">18. Do you have leased /mortgaged land?</label>
                     </div>
                     @if (@infos.DoYouHaveLandLease == "Yes")
                     {
@@ -675,7 +932,7 @@
                 @*Year*@
                 <div id="year" class="row">
                     <div class="col-md-6">
-                        <label id="codeLabel" for="HowManyYears">18. If yes, for how many years? </label>
+                        <label id="codeLabel" for="HowManyYears">19. If yes, for how many years? </label>
                     </div>
                     <div class="col-md-6">
                         <input type="text" id="ForManyYears" name="HowManyYears" class="form-control" value="@infos.HowManyYears" />
@@ -684,7 +941,7 @@
 
                 <div id="money" class="row">
                     <div class="col-md-6">
-                        <label id="codeLabel" for="HowMuchMoney">19. If yes, how much price (taka)?  </label>
+                        <label id="codeLabel" for="HowMuchMoney">20. If yes, how much price (taka)?  </label>
                     </div>
                     <div class="col-md-6">
                         <input type="text" id="HowMuchMoney" name="HowMuchMoney" class="form-control" value="@infos.HowMuchMoney" />
@@ -737,10 +994,152 @@
                     </table>
 
                 </div>
+    <div>
+        <label>22. Land use of affected land  </label>
+
+        <table class="table table-bordered table-responsive table-hover" id="showTable">
+            <thead style="background: black;color: white">
+                <tr>
+                    <td style="display: none">Id</td>
+                    <td>JL No. (Khatian no.)</td>
+                    <td>Plot no/ Dag no (as RS and CS khatian) </td>
+                    <td>Land Elevation*</td>
+                    <td>Land Use*</td>
+                    <td>Price of others assets /trees excepts crops (taka)</td>
+                    @*<td>
+                        <button id="btnAdd" class="btn btn-success" type="button">+</button>
+                        <button id="btnRemove" class="btn btn-success" type="button">-</button>
+                    </td>*@
+
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                @foreach (var aInfo in aFamilyAffectedLandUsedInformation)
+                {
+                    
+                
+                <tr>
+                    
+                    <td style="display: none"><input type="text" class="form-control" id="data[@aFamilyAffectedLandUsedInformation.Count].BasicInformationOfAffectedPersonNid" name="data[@aFamilyAffectedLandUsedInformation.Count].BasicInformationOfAffectedPersonNid" value="@(ViewContext.RouteData.Values["id"])" /></td>
+
+
+
+                    
+                    <td><input type="text" class="form-control" id="data[@aFamilyAffectedLandUsedInformation.Count].JlNo" name="data[@aFamilyAffectedLandUsedInformation.Count].JlNo" value="@aInfo.JlNo" /></td>
+
+                    
+                    <td><input type="text" class="form-control" id="data[@aFamilyAffectedLandUsedInformation.Count].PlotNo" name="data[@aFamilyAffectedLandUsedInformation.Count].PlotNo" value="@aInfo.PlotNo" /></td>
+
+                    
+                    <td>
+                        <select class="form-control" name="data[@aFamilyAffectedLandUsedInformation.Count].LandElevation" id="data[@aFamilyAffectedLandUsedInformation.Count].LandElevation">
+
+                            <option value="@aInfo.LandElevation">@aInfo.LandElevation</option>
+
+
+                            <option value="High land (not inundated during normal inundation)   ">1.High land (not inundated during normal inundation)   </option>
+
+
+                            <option value="Medium High land (in normal flood 1-3 feet inundation) ">2.Medium High land (in normal flood 1-3 feet inundation) </option>
+
+                            <option value="Medium low land (in normal flood 3-6 feet inundation)  ">3.Medium low land (in normal flood 3-6 feet inundation)  </option>
+
+
+                            <option value="Low and (in normal flood 6-10 feet inundation)">4.Low and (in normal flood 6-10 feet inundation)</option>
+
+                            <option value="Very low and (in normal flood 10 feet plus inundation)">5.Very low and (in normal flood 10 feet plus inundation)</option>
+
+
+
+
+                        </select>
+
+                        
+                    </td>
+                    
+                    <td>
+                        
+                        <select class="form-control" name="data[@aFamilyAffectedLandUsedInformation.Count].LandUse" id="data[@aFamilyAffectedLandUsedInformation.Count].LandUse">
+
+                            <option value="@aInfo.LandUse">@aInfo.LandUse</option>
+
+
+                            <option value="Agricultural land">1.Agricultural land</option>
+
+
+                            <option value="Fellow land">2.Fellow land</option>
+
+                            <option value="Homesteads">3.Homesteads</option>
+
+
+                            <option value="Kancha house">4.Kancha house</option>
+
+                            <option value="Tin sheed">5.Tin sheed</option>
+
+                            <option value="Semi pucca">6.Semi pucca</option>
+
+                            <option value="Pucca -1 storied">7.Pucca -1 storied</option>
+
+                            <option value="Pucca -2 stories">8.Pucca -2 stories</option>
+
+                            <option value="Pucca – 3 storied">9.Pucca – 3 storied</option>
+
+                            <option value="Shops">10.Shops</option>
+
+                            <option value="Bazar /market">11.Bazar /market</option>
+
+                            <option value="Industries">12.Industries</option>
+
+                            <option value="Canal">13.Canal</option>
+
+                            <option value="Trees">14.Trees</option>
+
+                            <option value="Cattle firm">15.Cattle firm</option>
+
+                            <option value="Poultry">16.Poultry</option>
+
+                            <option value="Ditch">17.Ditch</option>
+
+                            <option value="Pond">18.Pond</option>
+
+                            <option value="Godown">19.Godown</option>
+
+                            <option value="Graveyard">20.Graveyard</option>
+
+                            <option value="Burning place">21.Burning place</option>
+
+                            <option value="Eidgah">22.Eidgah</option>
+
+                            <option value="Mosque">23.Mosque</option>
+
+                            <option value="Temple">24.Temple</option>
+
+                            <option value="Orchard">25.Churcho</option>
+
+
+                            <option value="Fruits garden">26.Fruits garden</option>
+
+                            <option value="Ghat">27.Orchard.Ghat</option>
+
+
+                            <option value="Ghat">28.Ghat</option>
+
+                            <option value="Others">Others</option>
+                        </select>
+
+                        
+                    </td>
+                  
+                    <td><input type="text" class="form-control" id="data[@aFamilyAffectedLandUsedInformation.Count].PriceOfOthersAssets" name="data[@aFamilyAffectedLandUsedInformation.Count].PriceOfOthersAssets" value="@aInfo.PriceOfOthersAssets" /></td>                  
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 
                 <div class="row">
                     <div class="col-md-12">
-                        <label id="codeLabel" for="HowMuchMoney">22. Information of standing crops and production </label>
+                        <label id="codeLabel" for="HowMuchMoney">23. Information of standing crops and production </label>
                     </div>
 
                     <table class="table table-bordered table-responsive table-hover" id="showTable">
@@ -983,7 +1382,7 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <label id="codeLabel" for="FamilyStatus">23. Self assessed Poverty Analysis </label>
+                        <label id="codeLabel" for="FamilyStatus">24. Self assessed Poverty Analysis </label>
                     </div>
                     <div class="col-md-6">
                         <select name="FamilyStatus" id="FamilyStatus" class="form-control">
@@ -998,7 +1397,7 @@
 
                 <div id="YearDeficit" class="row" style="display: none">
                     <div class="col-md-6">
-                        <label id="codeLabel" for="HowDoesTheCostCarryingOut">24. If Deficit then how bare this situation </label>
+                        <label id="codeLabel" for="HowDoesTheCostCarryingOut">25. If Deficit then how bare this situation </label>
                     </div>
                     <div class="col-md-6">
                         <select name="HowDoesTheCostCarryingOut" id="HowDoesTheCostCarryingOut" class="form-control">
@@ -1018,29 +1417,29 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <label id="codeLabel" for="CreditResponsibility">25. Do you have any loan? </label>
+                        <label id="codeLabel" for="CreditResponsibility">26. Do you have any loan? </label>
                     </div>
                     @if (@infos.CreditResponsibility == "Yes")
                     {
-                       <div class="col-md-6">
-                           <input type="radio" id="CreditResponsibilitYes" name="CreditResponsibility" value="Yes" checked />Yes
-                        <input type="radio" id="CreditResponsibilitNo" name="CreditResponsibility" value="No"  />No
-                    </div>
+                        <div class="col-md-6">
+                            <input type="radio" id="CreditResponsibilitYes" name="CreditResponsibility" value="Yes" checked />Yes
+                            <input type="radio" id="CreditResponsibilitNo" name="CreditResponsibility" value="No" />No
+                        </div>
                     }
                     else
                     {
-                    <div class="col-md-6">
-                        <input type="radio" id="CreditResponsibilitYes" name="CreditResponsibility" value="Yes" />Yes
-                        <input type="radio" id="CreditResponsibilitNo" name="CreditResponsibility" value="No" checked />No
-                    </div>
+                        <div class="col-md-6">
+                            <input type="radio" id="CreditResponsibilitYes" name="CreditResponsibility" value="Yes" />Yes
+                            <input type="radio" id="CreditResponsibilitNo" name="CreditResponsibility" value="No" checked />No
+                        </div>
 
                     }
-                    
+
                 </div>
 
                 <div id="CreditResponsibilityName" class="row" style="display: none">
                     <div class="col-md-6">
-                        <label id="codeLabel" for="CreditResponsibilityMoney">26. If Yes, How much taka? </label>
+                        <label id="codeLabel" for="CreditResponsibilityMoney">27. If Yes, How much taka? </label>
                     </div>
                     <div class="col-md-6">
                         <input type="text" id="CreditResponsibilityMoney" name="CreditResponsibilityMoney" class="form-control" value="@infos.CreditResponsibilityMoney" />
@@ -1051,7 +1450,7 @@
 
                 <div id="CreditResponsibilityReceivedDiv" class="row" style="display: none">
                     <div class="col-md-6">
-                        <label id="codeLabel" for="CreditResponsibilityReceivedForm">27. Which sources do you have get loan? </label>
+                        <label id="codeLabel" for="CreditResponsibilityReceivedForm">28. Which sources do you have get loan? </label>
                     </div>
                     <div class="col-md-6">
                         <input class="a" type="checkbox" value="BRAC" />BRAC
@@ -1084,7 +1483,7 @@
 
                 <div id="GovernmentBuysDiv" class="row">
                     <div class="col-md-6">
-                        <label id="codeLabel" for="GovernmentBuysCompensation">28. If the land acquired by GoB, then how you want compensation?</label>
+                        <label id="codeLabel" for="GovernmentBuysCompensation">29. If the land acquired by GoB, then how you want compensation?</label>
                     </div>
                     <div class="col-md-6">
                         <input class="b" type="checkbox" value="Land instead of land" />Land instead of land
@@ -1099,7 +1498,7 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <label id="codeLabel" for="HowCanYouCompensationMoney">29. Which medium do you prefer for compensation money payment?  </label>
+                        <label id="codeLabel" for="HowCanYouCompensationMoney">30. Which medium do you prefer for compensation money payment?  </label>
                     </div>
                     <div class="col-md-6">
                         <input class="aHowCanYouCompensationMoney" type="checkbox" value="Check by local bank" />Check by local bank
@@ -1119,29 +1518,29 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <label id="codeLabel" for="DoYouHaveNeedAnyCommittee">30. Do you think any necessity of GRC for the trouble shooting?</label>
+                        <label id="codeLabel" for="DoYouHaveNeedAnyCommittee">31. Do you think any necessity of GRC for the trouble shooting?</label>
                     </div>
                     @if (@infos.CreditResponsibility == "Yes")
                     {
                         <div class="col-md-6">
                             <input type="radio" id="DoYouHaveNeedAnyCommitteeYes" name="DoYouHaveNeedAnyCommittee" value="Yes" checked />Yes
-                        <input type="radio" id="DoYouHaveNeedAnyCommitteeNo" name="DoYouHaveNeedAnyCommittee" value="No" />No
-                    </div>
+                            <input type="radio" id="DoYouHaveNeedAnyCommitteeNo" name="DoYouHaveNeedAnyCommittee" value="No" />No
+                        </div>
                     }
                     else
                     {
                         <div class="col-md-6">
-                        <input type="radio" id="DoYouHaveNeedAnyCommitteeYes" name="DoYouHaveNeedAnyCommittee" value="Yes" />Yes
+                            <input type="radio" id="DoYouHaveNeedAnyCommitteeYes" name="DoYouHaveNeedAnyCommittee" value="Yes" />Yes
                             <input type="radio" id="DoYouHaveNeedAnyCommitteeNo" name="DoYouHaveNeedAnyCommittee" value="No" checked />No
-                    </div>
+                        </div>
 
                     }
-                    
+
                 </div>
 
                 <div id="DoYouHaveNeedAnyCommitteeDiv" class="row" style="display: none">
                     <div class="col-md-6">
-                        <label id="codeLabel" for="ListOfCommitteeMembers">31. If yes, who will be the GRC members, suggest? </label>
+                        <label id="codeLabel" for="ListOfCommitteeMembers">32. If yes, who will be the GRC members, suggest? </label>
                     </div>
                     <div class="col-md-6">
 
@@ -1151,7 +1550,7 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <label id="codeLabel" for="MainProblemOfYouTerritory">32. What is the basic problem faced by you in this area?  </label>
+                        <label id="codeLabel" for="MainProblemOfYouTerritory">33. What is the basic problem faced by you in this area?  </label>
                     </div>
                     <div class="col-md-6">
                         <input class="aMainProblemOfYouTerritory" type="checkbox" value="Flood" />Flood
@@ -1179,7 +1578,7 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <label id="codeLabel" for="BenefitAfterCompleteProject">33. What type of benefits do you expect after implementation of the project? </label>
+                        <label id="codeLabel" for="BenefitAfterCompleteProject">34. What type of benefits do you expect after implementation of the project? </label>
                     </div>
                     <div class="col-md-6">
                         <input class="aBenefitAfterCompleteProject" type="checkbox" value="Increase business centers" />Increase business centers
@@ -1205,7 +1604,7 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <label id="codeLabel" for="DifficultyAfterCompleteProject">34. What type of dis-benefits do you expect after implementation of the project? </label>
+                        <label id="codeLabel" for="DifficultyAfterCompleteProject">35. What type of dis-benefits do you expect after implementation of the project? </label>
                     </div>
                     <div class="col-md-6">
                         <input class="aDifficultyAfterCompleteProject" type="checkbox" value="Scope of employment will be reduced" />Scope of employment will be reduced
@@ -1235,7 +1634,7 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <label id="codeLabel" for="AdviseToRemoveDifficulty">35. What are the suggestions to solve these problems mentioned above? </label>
+                        <label id="codeLabel" for="AdviseToRemoveDifficulty">36. What are the suggestions to solve these problems mentioned above? </label>
                     </div>
                     <div class="col-md-6">
 
@@ -1245,7 +1644,7 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <label id="codeLabel" for="DataCollectorFeedback">36. Comments from Enumerators</label>
+                        <label id="codeLabel" for="DataCollectorFeedback">37. Comments from Enumerators</label>
                     </div>
                     <div class="col-md-6">
 

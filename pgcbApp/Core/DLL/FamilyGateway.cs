@@ -22,44 +22,45 @@ namespace pgcbApp.Core.DLL
             return isRowAffected;
         }
 
-        //public List<HouseholdYearlyExpenditure> GetAllHouseholdYearlyExpenditure(int qid)
-        //{
-        //    List<HouseholdYearlyExpenditure> aInfo = new List<HouseholdYearlyExpenditure>();
-        //    Query = "SELECT * FROM HouseholdYearlyExpenditure WHERE BasicInformationOfAffectedPersonNid='" + qid + "'";
+        public List<HouseholdYearlyExpenditure> GetAllHouseholdYearlyExpenditure(int qid)
+        {
+            List<HouseholdYearlyExpenditure> aInfo = new List<HouseholdYearlyExpenditure>();
+            Query = "SELECT * FROM HouseholdYearlyExpenditure WHERE BasicInformationOfAffectedPersonNid='" + qid + "'";
 
-        //    Connection.Open();
+            Connection.Open();
 
-        //    Command.CommandText = Query;
-        //    Reader = Command.ExecuteReader();
-        //    while (Reader.Read())
-        //    {
-        //        long id = Convert.ToInt64(Reader["BasicInformationOfAffectedPersonNid"]);
-        //        string name = Reader["FoodExpenditure"].ToString();
-        //        string relation = Reader["ClothExpenditure"].ToString();
-        //        int age = Convert.ToInt32(Reader["ResidenceRepairingExpenditure"]);
-        //        string gender = Reader["MedicalExpenditure"].ToString();
-        //        string education = Reader["EducationalExpenditure"].ToString();
-        //        string professionPrimary = Reader["CommunicationExpenditure"].ToString();
-        //        string professionSecondary = Reader["Miscellaneous"].ToString();
-        //        double totalIncomeFromProfession = Convert.ToInt64(Reader["TotalExpenditure"]);
+            Command.CommandText = Query;
+            Reader = Command.ExecuteReader();
+            while (Reader.Read())
+            {
+                long id = Convert.ToInt64(Reader["BasicInformationOfAffectedPersonNid"]);
+                int  name = Convert.ToInt32(Reader["FoodExpenditure"]);
+                int relation = Convert.ToInt32(Reader["ClothExpenditure"]);
+                int age = Convert.ToInt32(Reader["ResidenceRepairingExpenditure"]);
+                int gender = Convert.ToInt32(Reader["MedicalExpenditure"]);
+                int education = Convert.ToInt32(Reader["EducationalExpenditure"]);
+                int professionPrimary = Convert.ToInt32(Reader["CommunicationExpenditure"]);
+                int professionSecondary = Convert.ToInt32(Reader["Miscellaneous"]);
+                int totalIncomeFromProfession = Convert.ToInt32(Reader["TotalExpenditure"]);
 
-        //        SocialEconomicInformationAndData aData = new SocialEconomicInformationAndData();
+                HouseholdYearlyExpenditure aData = new HouseholdYearlyExpenditure();
 
-        //        aData.BasicInformationOfAffectedPersonNid = id;
-        //        aData.FoodExpenditure = name;
-        //        aData.ClothExpenditure = relation;
-        //        aData.ResidenceRepairingExpenditure = age;
-        //        aData.MedicalExpenditure = gender;
-        //        aData.EducationalExpenditure = education;
-        //        aData.CommunicationExpenditure = professionPrimary;
-        //        aData.Miscellaneous = professionSecondary;
-        //        aData.TotalExpenditure = totalIncomeFromProfession;
-        //        aInfo.Add(aData);
+                aData.BasicInformationOfAffectedPersonNid = id;
+                aData.FoodExpenditure = name;
+                aData.ClothExpenditure= relation;
+                aData.ResidenceRepairingExpenditure = age;
+                aData.MedicalExpenditure = gender;
+                aData.EducationalExpenditure = education;
+                aData.CommunicationExpenditure = professionPrimary;
+                aData.Miscellaneous = professionSecondary;
+                aData.TotalExpenditure = totalIncomeFromProfession;
+                aInfo.Add(aData);
 
 
-        //    }
-        //    return aInfo;
-        //}
+            }
+            Connection.Close();
+            return aInfo;
+        }
         public int SaveDomesticImmovableAssets(DomesticImmovableAssets aData)
         {
             //double total = aData.ClothExpenditure + aData.FoodExpenditure + aData.ResidenceRepairingExpenditure + aData.MedicalExpenditure + aData.EducationalExpenditure + aData.CommunicationExpenditure + aData.Miscellaneous;
@@ -72,6 +73,41 @@ namespace pgcbApp.Core.DLL
             Connection.Close();
             return isRowAffected;
         }
+        public List<DomesticImmovableAssets> GetAllDomesticImmovableAssets(int qid)
+        {
+            List<DomesticImmovableAssets> aInfo = new List<DomesticImmovableAssets>();
+            Query = "SELECT * FROM DomesticImmovableAssets WHERE BasicInformationOfAffectedPersonNid='" + qid + "'";
+
+            Connection.Open();
+
+            Command.CommandText = Query;
+            Reader = Command.ExecuteReader();
+            while (Reader.Read())
+            {
+                long id = Convert.ToInt64(Reader["BasicInformationOfAffectedPersonNid"]);
+
+                string education = Reader["SocioEconomicData"].ToString();
+                int name = Convert.ToInt32(Reader["AmountOwn"]);
+                int relation = Convert.ToInt32(Reader["Lease"]);
+                int age = Convert.ToInt32(Reader["TentativeAmount"]);
+                int gender = Convert.ToInt32(Reader["TotalProducedAmount"]);
+              
+                DomesticImmovableAssets aData = new DomesticImmovableAssets();
+
+                aData.BasicInformationOfAffectedPersonNid = id;
+                aData.SocioEconomicData = education;
+                aData.AmountOwn = name;
+                aData.Lease = relation;
+                aData.TentativeAmount = age;
+                aData.TotalProducedAmount = gender;
+                
+                aInfo.Add(aData);
+
+
+            }
+            Connection.Close();
+            return aInfo;
+        }
         public int SaveDomesticMovableAssets(DomesticMovableAssets aData)
         {
             Query = @"INSERT INTO DomesticMovableAssets(BasicInformationOfAffectedPersonNid,InstitutionTypes,Numbers,TentativeAmount) 
@@ -82,6 +118,37 @@ namespace pgcbApp.Core.DLL
             Connection.Close();
             return isRowAffected;
         }
+        public List<DomesticMovableAssets> GetAllDomesticMovableAssetss(int qid)
+        {
+            List<DomesticMovableAssets> aInfo = new List<DomesticMovableAssets>();
+            Query = "SELECT * FROM DomesticMovableAssets WHERE BasicInformationOfAffectedPersonNid='" + qid + "'";
+
+            Connection.Open();
+
+            Command.CommandText = Query;
+            Reader = Command.ExecuteReader();
+            while (Reader.Read())
+            {
+                long id = Convert.ToInt64(Reader["BasicInformationOfAffectedPersonNid"]);
+
+                string education = Reader["InstitutionTypes"].ToString();
+                int name = Convert.ToInt32(Reader["Numbers"]);
+                int relation = Convert.ToInt32(Reader["TentativeAmount"]);
+
+
+                DomesticMovableAssets aData = new DomesticMovableAssets();
+
+                aData.BasicInformationOfAffectedPersonNid = id;
+                aData.InstitutionTypes = education;
+                aData.Numbers = name;
+                aData.TentativeAmount = relation;
+                aInfo.Add(aData);
+
+
+            }
+            Connection.Close();
+            return aInfo;
+        }
         public int SaveHomeResources(HomeResources aData)
         {
             Query = @"INSERT INTO HomeResources(BasicInformationOfAffectedPersonNid,Resources,ResourcesName,Others,Counts,Amounts) 
@@ -91,6 +158,40 @@ namespace pgcbApp.Core.DLL
             int isRowAffected = Command.ExecuteNonQuery();
             Connection.Close();
             return isRowAffected;
+        }
+
+
+        public List<HomeResources> GetAllHomeResources(int qid)
+        {
+            List<HomeResources> aInfo = new List<HomeResources>();
+            Query = "SELECT * FROM HomeResources WHERE BasicInformationOfAffectedPersonNid='" + qid + "'";
+
+            Connection.Open();
+
+            Command.CommandText = Query;
+            Reader = Command.ExecuteReader();
+            while (Reader.Read())
+            {
+                long id = Convert.ToInt64(Reader["BasicInformationOfAffectedPersonNid"]);
+
+                string resources = Reader["Resources"].ToString();
+                string resourcesName = Reader["ResourcesName"].ToString();
+                string others = Reader["Others"].ToString();
+
+                int counts = Convert.ToInt32(Reader["Counts"]);
+                long amounts = Convert.ToInt64(Reader["Amounts"]);
+                HomeResources aData = new HomeResources();
+                aData.BasicInformationOfAffectedPersonNid = id;
+                aData.Resources = resources;
+                aData.ResourcesName = resourcesName;
+                aData.Others = others;
+
+                aData.Count = counts;
+                aData.Amount = amounts;
+                aInfo.Add(aData);
+            }
+            Connection.Close();
+            return aInfo;
         }
          public int SaveFamilyAffectedLandInformation(FamilyAffectedLandInformation aData)
         {
@@ -146,6 +247,41 @@ namespace pgcbApp.Core.DLL
             int isRowAffected = Command.ExecuteNonQuery();
             Connection.Close();
             return isRowAffected;
+        }
+        public List<FamilyAffectedLandUsedInformation> GetAllFamilyAffectedLandUsedInformation(int qid)
+        {
+            List<FamilyAffectedLandUsedInformation> aList = new List<FamilyAffectedLandUsedInformation>();
+
+            Query = @"SELECT * FROM FamilyAffectedLandUsedInformation WHERE BasicInformationOfAffectedPersonNid='" + qid + "'";
+
+
+            Connection.Open();
+            Command.CommandText = Query;
+            Reader = Command.ExecuteReader();
+
+            while (Reader.Read())
+            {
+                long id = Convert.ToInt64(Reader["BasicInformationOfAffectedPersonNid"]);
+                string jlNo = Reader["JlNo"].ToString();
+                string plotNo = Reader["PlotNo"].ToString();
+                string totalAcquiedLand = Reader["LandElevation"].ToString();
+                string ownershipPattern = Reader["LandUse"].ToString();
+                string marketPriceOfAcquiredLand = Reader["PriceOfOthersAssets"].ToString();
+             
+
+                FamilyAffectedLandUsedInformation aData = new FamilyAffectedLandUsedInformation();
+
+                aData.BasicInformationOfAffectedPersonNid = id;
+                aData.JlNo = jlNo;
+                aData.PlotNo = plotNo;
+                aData.LandElevation = totalAcquiedLand;
+                aData.LandUse = ownershipPattern;
+                aData.PriceOfOthersAssets = marketPriceOfAcquiredLand;
+                
+                aList.Add(aData);
+            }
+            Connection.Close();
+            return aList;
         }
          public int SaveAffectedLandPresentCropsAndProductionInformation(AffectedLandPresentCropsAndProductionInformation aData)
         {

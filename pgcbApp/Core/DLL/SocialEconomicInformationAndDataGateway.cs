@@ -56,8 +56,6 @@ namespace pgcbApp.Core.DLL
                 aData.ProfessionSecondary = professionSecondary;
                 aData.TotalIncomeFromProfession = totalIncomeFromProfession;
                 aInfo.Add(aData);
-
-
             }
            return aInfo;
         }

@@ -34,6 +34,12 @@ namespace pgcbApp.Controllers
             var aFamilyAffectedLandInformation = aFamilyManager.GetAllFamilyAffectedLandInformation(id);
             var aAffectedLandPresentCropsAndProductionInformation = aFamilyManager.GetAllAffectedLandPresentCropsAndProductionInformation(id);
             var aSocialEconomicInformationAndData = andDataManager.GetAllSocialEconomicInformationAndData(id);
+            var aHouseholdYearlyExpenditure = aFamilyManager.GetAllHouseholdYearlyExpenditure(id);
+            var aDomesticImmovableAssets = aFamilyManager.GetAllDomesticImmovableAssets(id);
+
+            var aDomesticMovableAsset = aFamilyManager.GetAllDomesticMovableAssetss(id);
+            var aHomeResources = aFamilyManager.GetAllHomeResources(id);
+            var aFamilyAffectedLandUsedInformation = aFamilyManager.GetAllFamilyAffectedLandUsedInformation(id);
             
             if (info.Count==0)
             {
@@ -45,7 +51,11 @@ namespace pgcbApp.Controllers
             ViewBag.FamilyAffectedLandInformation = aFamilyAffectedLandInformation;
             ViewBag.AffectedLandPresentCropsAndProductionInformation = aAffectedLandPresentCropsAndProductionInformation;
             ViewBag.SocialEconomicInformationAndData = aSocialEconomicInformationAndData;
-
+            ViewBag.HouseholdYearlyExpenditure = aHouseholdYearlyExpenditure;
+            ViewBag.DomesticImmovableAssets = aDomesticImmovableAssets;
+            ViewBag.DomesticMovableAssets = aDomesticMovableAsset;
+            ViewBag.HomeResources = aHomeResources;
+            ViewBag.FamilyAffectedLandUsedInformation = aFamilyAffectedLandUsedInformation;
             return View();
         }
         [HttpPost]

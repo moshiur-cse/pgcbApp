@@ -14,20 +14,35 @@ namespace pgcbApp.Core.DAL
         {
             return aFamilyGateway.SaveHouseholdYearlyExpenditure(aData);
         }
+        public List<HouseholdYearlyExpenditure> GetAllHouseholdYearlyExpenditure(int qid)
+        {
+            return aFamilyGateway.GetAllHouseholdYearlyExpenditure(qid);
+        }
 
         public int SaveDomesticImmovableAssets(DomesticImmovableAssets aData)
         {
             return aFamilyGateway.SaveDomesticImmovableAssets(aData);
+        }
+        public List<DomesticImmovableAssets> GetAllDomesticImmovableAssets(int qid)
+        {
+            return aFamilyGateway.GetAllDomesticImmovableAssets(qid);
         }
 
         public int SaveDomesticMovableAssets(DomesticMovableAssets aData)
         {
             return aFamilyGateway.SaveDomesticMovableAssets(aData);
         }
-
+        public List<DomesticMovableAssets> GetAllDomesticMovableAssetss(int qid)
+        {
+            return aFamilyGateway.GetAllDomesticMovableAssetss(qid);
+        }
         public int SaveHomeResources(HomeResources aData)
         {
             return aFamilyGateway.SaveHomeResources(aData);
+        }
+        public List<HomeResources> GetAllHomeResources(int qid)
+        {
+            return aFamilyGateway.GetAllHomeResources(qid);
         }
 
         public int SaveFamilyAffectedLandInformation(FamilyAffectedLandInformation aData)
@@ -43,6 +58,10 @@ namespace pgcbApp.Core.DAL
         public int SaveFamilyAffectedLandUsedInformation(FamilyAffectedLandUsedInformation aData)
         {
             return aFamilyGateway.SaveFamilyAffectedLandUsedInformation(aData);
+        }
+        public List<FamilyAffectedLandUsedInformation> GetAllFamilyAffectedLandUsedInformation(int qid)
+        {
+            return aFamilyGateway.GetAllFamilyAffectedLandUsedInformation(qid);
         }
 
         public int SaveAffectedLandPresentCropsAndProductionInformation(AffectedLandPresentCropsAndProductionInformation aData)
